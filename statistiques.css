@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Josefin Sans", sans-serif;
+    background-color: #EEF0F2;
+    color: #393E41;
+}
+
+header {
+    display: flex;
+    background-color: #B79D94;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header p {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #393E41;
+}
+
+header nav a {
+    padding: 10px;
+    color: #393E41;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 680px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #453750;
+    text-align: center;
+}
+
+/* Cartes communes avec la page paramètres */
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #875C74;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Style du graphique SVG */
+.chart-container {
+    width: 100%;
+    margin-top: 10px;
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.line-chart {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Style du tableau détaillé */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.stats-table th {
+    background-color: #BBCDE5;
+    color: #393E41;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 700;
+}
+
+.stats-table th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.stats-table th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.stats-table td {
+    padding: 15px;
+    border-bottom: 1px solid #EEF0F2;
+    color: #393E41;
+}
+
+.stats-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.stats-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.stats-table tbody tr:hover {
+    background-color: #EEF0F2;
+    border-radius: 8px;
+}
+
+.stats-table strong {
+    color: #453750;
+}
+
+footer {
+    height: 40px;
+}
