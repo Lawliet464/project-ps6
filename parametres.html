@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Memo — Paramètres</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="parametres.css">
+</head>
+<body>
+
+<header>
+    <p>Memo</p>
+    <nav>
+        <a href="jeu.html">Jouer</a>
+        <a href="statistiques.html">Statistiques</a>
+        <a href="parametres.html">Paramètres</a>
+        <a href="index.html">Accueil</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Paramètres</h1>
+
+    <div class="param-card">
+        <span class="param-label">Taille de la police</span>
+        <div class="param-row">
+            <span class="param-description">Ajuste la taille du texte dans le jeu.</span>
+            <span class="param-value" id="font-value">16px</span>
+        </div>
+        <div class="slider-wrapper">
+            <span class="slider-icon">A</span>
+            <input type="range" id="font-size" min="12" max="24" value="16" step="1"
+                   oninput="updateSlider('font-size', 'font-value', 'px')">
+            <span class="slider-icon" style="font-size:1.4rem">A</span>
+        </div>
+    </div>
+
+    <div class="param-card">
+        <span class="param-label">Volume du son</span>
+        <div class="param-row">
+            <span class="param-description">Volume des effets sonores pendant la partie.</span>
+            <span class="param-value" id="volume-value">70%</span>
+        </div>
+        <div class="slider-wrapper">
+            <span class="slider-icon">🔈</span>
+            <input type="range" id="volume" min="0" max="100" value="70" step="5"
+                   oninput="updateSlider('volume', 'volume-value', '%')">
+            <span class="slider-icon">🔊</span>
+        </div>
+    </div>
+
+    <div class="param-card">
+        <span class="param-label">Fréquence d'aide</span>
+        <div class="param-row">
+            <span class="param-description">Recevoir une aide toutes les <strong id="aide-inline">3</strong> erreurs.</span>
+            <div class="number-control">
+                <button onclick="changeAide(-1)">−</button>
+                <input type="number" id="aide-frequence" value="3" min="1" max="10"
+                       oninput="syncAide()">
+                <button onclick="changeAide(1)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="param-card">
+        <span class="param-label">Taille du plateau</span>
+        <div class="radio-group">
+
+            <div class="radio-option">
+                <input type="radio" name="plateau" id="p4x3" value="4x3">
+                <label for="p4x3">
+                    <div class="grid-preview" style="grid-template-columns: repeat(4,8px)">
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    </div>
+                    4 × 3
+                </label>
+            </div>
+
+            <div class="radio-option">
+                <input type="radio" name="plateau" id="p4x4" value="4x4" checked>
+                <label for="p4x4">
+                    <div class="grid-preview" style="grid-template-columns: repeat(4,8px)">
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    </div>
+                    4 × 4
+                </label>
+            </div>
+
+            <div class="radio-option">
+                <input type="radio" name="plateau" id="p5x4" value="5x4">
+                <label for="p5x4">
+                    <div class="grid-preview" style="grid-template-columns: repeat(5,8px)">
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    </div>
+                    5 × 4
+                </label>
+            </div>
+
+            <div class="radio-option">
+                <input type="radio" name="plateau" id="p6x5" value="6x5">
+                <label for="p6x5">
+                    <div class="grid-preview" style="grid-template-columns: repeat(6,8px)">
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                    </div>
+                    6 × 5
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="btn-save" onclick="sauvegarder()">Sauvegarder les paramètres</button>
+</main>
+
+<footer></footer>
+
+<div id="toast">✓ Paramètres sauvegardés !</div>
+
+<script src="parametres.js"></script>
+
+</body>
+</html>
