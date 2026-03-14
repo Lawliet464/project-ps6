@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+:root {
+    --font-size-base: 16px;
+}
+
 body {
     font-family: "Josefin Sans", sans-serif;
     background-color: #EEF0F2;

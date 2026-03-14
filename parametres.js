@@ -12,6 +12,10 @@ function parseTemplate(htmlString) {
 const paramSliderTemplate = `
 <template>
     <link rel="stylesheet" href="parametres.css">
+    <style>
+        .param-label { font-size: var(--font-size-base); }
+        .param-value { font-size: var(--font-size-base); }
+    </style>
     <div class="param-card">
         <div class="param-row">
             <span class="param-label"></span>
@@ -45,6 +49,10 @@ class ParamSlider extends HTMLElement {
         input.addEventListener('input', () => {
             const unit = this.getAttribute('unit') || '';
             display.textContent = input.value + unit;
+            if (this.getAttribute('label') === 'Taille de la police') {
+                document.documentElement.style.setProperty('--font-size-base', input.value + 'px');
+            }
+
             this.dispatchEvent(new CustomEvent('change', {
                 bubbles: true, composed: true,
                 detail: { value: input.value }
@@ -88,6 +96,12 @@ customElements.define('param-slider', ParamSlider);
 const paramCounterTemplate = `
 <template>
     <link rel="stylesheet" href="parametres.css">
+    <style>
+        .param-label                { font-size: var(--font-size-base); }
+        .param-description          { font-size: var(--font-size-base); }
+        .number-control input       { font-size: var(--font-size-base); }
+        .number-control button      { font-size: var(--font-size-base); }
+    </style>
     <div class="param-card">
         <span class="param-label"></span>
         <div class="param-row">
@@ -175,6 +189,10 @@ customElements.define('param-counter', ParamCounter);
 const paramQCMTemplate = `
 <template>
     <link rel="stylesheet" href="parametres.css">
+    <style>
+        .param-label  { font-size: var(--font-size-base); }
+        .qcm-option label { font-size: var(--font-size-base); }
+    </style>
     <div class="param-card">
         <span class="param-label"></span>
         <div class="qcm-group"></div>
@@ -219,17 +237,17 @@ class ParamQCM extends HTMLElement {
         `).join('');
 
         group.querySelectorAll('input').forEach(input => {
-    input.addEventListener('change', () => {
-        if (this.getSelected().length === 0) {
-            input.checked = true;
-            return;
-        }
-        this.dispatchEvent(new CustomEvent('change', {
-            bubbles: true, composed: true,
-            detail: { value: this.getSelected() }
-        }));
-    });
-});
+            input.addEventListener('change', () => {
+                if (this.getSelected().length === 0) {
+                    input.checked = true;
+                    return;
+                }
+                this.dispatchEvent(new CustomEvent('change', {
+                    bubbles: true, composed: true,
+                    detail: { value: this.getSelected() }
+                }));
+            });
+        });
     }
 
     getSelected() {
@@ -244,6 +262,10 @@ customElements.define('param-qcm', ParamQCM);
 const paramPlateauTemplate = `
 <template>
     <link rel="stylesheet" href="parametres.css">
+    <style>
+        .param-label        { font-size: var(--font-size-base); }
+        .radio-option label { font-size: var(--font-size-base); }
+    </style>
     <div class="param-card">
         <span class="param-label"></span>
         <div class="radio-group"></div>
@@ -322,5 +344,8 @@ customElements.define('param-plateau', ParamPlateau);
 function sauvegarder() {
     const toast = document.getElementById('toast');
     toast.classList.add('visible');
-    setTimeout(() => toast.classList.remove('visible'), 2500);
+    setTimeout(() => {
+        toast.classList.remove('visible');
+        window.location.href = 'simulation_changement_de_parametres.html';
+    }, 2500);
 }
