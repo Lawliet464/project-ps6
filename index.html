@@ -1,62 +1,117 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <title>Memo</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Jeux de mémoire pour les séniors">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <header>
-            <p>Memo</p>
-            <nav>
-                <a href="jeu.html">Jouer</a>
-                <a href="statistiques.html">Statistiques</a>
-                <a href="parametres.html">Paramètres</a>
-            </nav>
-        </header>
-        <main>
-            <div id="accueil">
-                <span class="badge">🧠</span>   
-                <h1>Bienvenue sur Memo!! Fortifiez votre mémoire.</h1>
-                <p class="slogan">Entraîne ta mémoire chaque jour</p>
-                <button id="btnCommencer">Commencer le jeu</button>
-                <div class="stats">
-                    <div class="etape">
-                        <span>2</span>
-                        <p>Parties Jouées</p>
-                    </div>
-                    <div class="etape">
-                        <span>7</span>
-                        <p>Meilleur score</p>
-                    </div>
-                    <div class="etape">
-                        <span>🔥2</span>
-                        <p>Série en cours</p>
-                    </div>
-                </div>
-                <div class="comment-jouer">
-                    <div class="etape">
-                        <span>🃏</span>
-                        <p>Retournez une carte</p>
-                    </div>
-                    <div class="etape">
-                        <span>🔍 </span>
-                        <p>Cherchez sa paire</p> 
-                    </div>
-                    <div class="etape">
-                        <span>🏆</span>
-                        <p>Trouvez toutes les paires!</p> 
-                    </div>
-                </div>
-            </div>
-        </main>
-        <footer>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jeu de mémoire pour les seniors — Luttons contre l'Alzheimer">
+  <title>Memo — Fortifiez votre mémoire</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
 
-        </footer>
-    </body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">🧠 Memo</div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="jeu.html">Jouer</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="parametres.html">Paramètres</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Entraînement cognitif
+      </div>
+      <h1 class="hero-title">
+        Fortifiez votre<br>
+        <em>mémoire</em><br>
+        chaque jour
+      </h1>
+      <p class="hero-sub">
+        Un jeu de paires doux et progressif, conçu pour stimuler la mémoire et ralentir les effets de l'oubli.
+      </p>
+      <button class="btn-principal" onclick="window.location.href='jeu.html'">
+        Commencer le jeu
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-top">
+        <span class="progress-icon">🧠</span>
+        <div class="progress-label">VOTRE PROGRESSION</div>
+      </div>
+      <div class="progress-sub">Continuez — 5 jours d'affilée !</div>
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-val">42</span>
+          <span class="stat-lbl">🃏 Parties</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">78%</span>
+          <span class="stat-lbl">✅ Réussite</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">1:48</span>
+          <span class="stat-lbl">⏱️ Meilleur</span>
+        </div>
+      </div>
+      <div class="streak">
+        <div class="streak-text">
+          <strong>🔥 5 jours</strong>
+          de suite — bravo !
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-senior">
+    <div class="senior-image">
+        <img src="seniors.jpg" alt="Seniors souriant jouant à Memo">
+    </div>
+    <div class="senior-texte">
+        <h2>Jouez, souvenez-vous, souriez</h2>
+        <p>Des études montrent que les jeux de mémoire ralentissent les effets de l'oubli. Memo vous accompagne chaque jour, à votre rythme, en toute douceur.</p>
+    </div>
+  </section>
+  <!-- COMMENT JOUER -->
+  <div class="section-wrap">
+    <hr class="divider">
+    <div class="section-eyebrow">COMMENT JOUER</div>
+    <h2 class="section-title">Simple, <em>apaisant</em>, efficace.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-emoji">🃏</span>
+        <div class="step-num">ÉTAPE 01</div>
+        <div class="step-title">Retournez une carte</div>
+        <div class="step-desc">Cliquez sur n'importe quelle carte pour la révéler. Prenez le temps de bien mémoriser.</div>
+      </div>
+      <div class="step">
+        <span class="step-emoji">🔍</span>
+        <div class="step-num">ÉTAPE 02</div>
+        <div class="step-title">Cherchez sa paire</div>
+        <div class="step-desc">Retournez une seconde carte. Si les deux correspondent, elles restent visibles.</div>
+      </div>
+      <div class="step">
+        <span class="step-emoji">🏆</span>
+        <div class="step-num">ÉTAPE 03</div>
+        <div class="step-title">Complétez le plateau</div>
+        <div class="step-desc">Trouvez toutes les paires pour terminer. Plus vous jouez, plus votre mémoire s'améliore.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Memo &copy; 2025 — Conçu avec soin pour les seniors
+  </footer>
+
+</body>
 </html>
