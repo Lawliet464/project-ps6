@@ -189,7 +189,7 @@ function retournerMoitiePaires() {
     let paires = {};
 
     cartes.forEach(c => {
-        let val = c.querySelector(".face").textContent;
+        let val = c.querySelector(".face").classList[1];
         if (!paires[val]) paires[val] = [];
         paires[val].push(c);
     });
@@ -216,7 +216,7 @@ function surbrillanceUnePaire() {
     let cartes = Array.from(document.querySelectorAll(".carte:not(.retournee)"));
     for (let i = 0; i < cartes.length; i++) {
         for (let j = i + 1; j < cartes.length; j++) {
-            if (cartes[i].querySelector(".face").textContent === cartes[j].querySelector(".face").textContent) {
+            if (cartes[i].querySelector(".face").classList[1] === cartes[j].querySelector(".face").classList[1]) {
                 cartes[i].classList.add("surbrillance");
                 cartes[j].classList.add("surbrillance");
                 setTimeout(() => {
