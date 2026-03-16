@@ -25,8 +25,10 @@ cartes.forEach(function(carte){
       else {
          deuxiemeCarte = carte;
          estBloque = true; 
-         if(premiereCarte.querySelector(".face").textContent ==
-         deuxiemeCarte.querySelector(".face").textContent){
+         let type1 = premiereCarte.querySelector(".face").classList[1];
+         let type2 = deuxiemeCarte.querySelector(".face").classList[1];
+
+         if(type1 === type2){
             console.log("Bonne paire!!");
             premiereCarte = null;
             deuxiemeCarte = null;
@@ -148,7 +150,7 @@ function verifierFinAssociation(zone) {
 function afficherMessage(message, texte) {
     message.textContent = texte;
     message.style.display = "block";
-    setTimeout(() => message.style.display = "none", 1000);
+    setTimeout(() => message.style.display = "none", 1500);
 }
 
 // Termine le jeu et revient à l'accueil
@@ -158,11 +160,9 @@ function terminerJeu() {
     felicitation.style.display = "block";
 
     setTimeout(() => {
-        // Masquer association, reset jeu
         felicitation.style.display = "none"
         document.getElementById("accueil").style.display = "block";
 
-        // Réinitialiser variables et éléments
         ordreCorrect = [];
         objetGlisse = null;
         let elemsAvecId = document.querySelectorAll(".elem[id]");
