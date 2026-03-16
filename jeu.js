@@ -1,11 +1,12 @@
+
 let compteurErreurs = 0;
-const SEUIL_AIDE = 8; 
+const SEUIL_AIDE = 8;
 
 
 let premiereCarte = null;
 let deuxiemeCarte = null;
 let estBloque = false;
- 
+
 let button = document.getElementById("btnCommencer");
 button.addEventListener("click", function(){
     let accueil = document.getElementById("accueil");
@@ -13,46 +14,48 @@ button.addEventListener("click", function(){
     accueil.style.display ="none";
     jeu.style.display = "block";
 
- })
+})
 
 
 let cartes = document.querySelectorAll(".carte");
 cartes.forEach(function(carte){
-   carte.addEventListener("click", function(){
-      if(estBloque == true) return;
-      carte.classList.add("retournee");
-      if (premiereCarte == null) premiereCarte = carte;
-      else {
-         deuxiemeCarte = carte;
-         estBloque = true; 
-         if(premiereCarte.querySelector(".face").textContent ==
-         deuxiemeCarte.querySelector(".face").textContent){
-            console.log("Bonne paire!!");
-            premiereCarte = null;
-            deuxiemeCarte = null;
-            estBloque = false;
-            
-            verifierFinMemory();
-         } 
-         else {
-            compteurErreurs++;
-            console.log("mauvaise paire !");
-            
-            if(compteurErreurs >= SEUIL_AIDE) {
-               aideMemo.click();
-               compteurErreurs = 0;
+    carte.addEventListener("click", function(){
+        if(estBloque == true) return;
+        carte.classList.add("retournee");
+        if (premiereCarte == null) premiereCarte = carte;
+        else {
+            deuxiemeCarte = carte;
+            estBloque = true;
+            let type1 = premiereCarte.querySelector(".face").classList[1];
+            let type2 = deuxiemeCarte.querySelector(".face").classList[1];
+
+            if(type1 === type2){
+                console.log("Bonne paire!!");
+                premiereCarte = null;
+                deuxiemeCarte = null;
+                estBloque = false;
+
+                verifierFinMemory();
             }
-            setTimeout(function(){
-            premiereCarte.classList.remove("retournee");
-            deuxiemeCarte.classList.remove("retournee");
-            premiereCarte = null;
-            deuxiemeCarte = null;
-            estBloque = false;
-            } , 1000);
-   }
-      }
-           
-   })
+            else {
+                compteurErreurs++;
+                console.log("mauvaise paire !");
+
+                if(compteurErreurs >= SEUIL_AIDE) {
+                    aideMemo.click();
+                    compteurErreurs = 0;
+                }
+                setTimeout(function(){
+                    premiereCarte.classList.remove("retournee");
+                    deuxiemeCarte.classList.remove("retournee");
+                    premiereCarte = null;
+                    deuxiemeCarte = null;
+                    estBloque = false;
+                } , 1000);
+            }
+        }
+
+    })
 })
 
 let startAssocia = document.getElementById("passerAAssociation");
@@ -148,7 +151,7 @@ function verifierFinAssociation(zone) {
 function afficherMessage(message, texte) {
     message.textContent = texte;
     message.style.display = "block";
-    setTimeout(() => message.style.display = "none", 1000);
+    setTimeout(() => message.style.display = "none", 1500);
 }
 
 // Termine le jeu et revient à l'accueil
@@ -158,11 +161,9 @@ function terminerJeu() {
     felicitation.style.display = "block";
 
     setTimeout(() => {
-        // Masquer association, reset jeu
         felicitation.style.display = "none"
         document.getElementById("accueil").style.display = "block";
 
-        // Réinitialiser variables et éléments
         ordreCorrect = [];
         objetGlisse = null;
         let elemsAvecId = document.querySelectorAll(".elem[id]");
