@@ -11,146 +11,149 @@
     <link rel="stylesheet" href="jeu.css">
 </head>
 <body>
-<header>
-    <p>MemoLink</p>
-    <nav>
-        <a href="statistiques.html">Statistiques</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="index.html">Accueil</a>
-    </nav>
-</header>
-<main>
-    <div id="accueil">
-        <h1>Faites de votre mieux !</h1>
-        <button id="btnCommencer">Commencer le jeu</button>
-    </div>
-    <div id="jeu">
-        <div id="plateau">
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face t-shirt">
-                    <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
-                    <p>T-shirt</p>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">MemoLink</div>
+        <nav>
+            <a href="statistiques.html">Statistiques</a>
+            <a href="parametres.html">Paramètres</a>
+            <a href="index.html">Accueil</a>
+        </nav>
+    </header>
+    <main>
+        <div id="accueil">
+            <h1>Faites de votre mieux !</h1>
+            <button id="btnCommencer">Commencer le jeu</button>
+        </div>
+        <div id="jeu">
+            <div id="plateau">
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face t-shirt">
+                        <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                        <p>T-shirt</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face brosse">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                        <p>Brosse à dents</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face dentifrice">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                        <p>Dentifrice</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face t-shirt">
+                        <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                        <p>T-shirt</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face brosse">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                        <p>Brosse à dents</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face dentifrice">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                        <p>Dentifrice</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face soleil">
+                        <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                        <p>Ensoleillé</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face bonnet">
+                        <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                        <p>Bonnet</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face parapluie">
+                        <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                        <p>Parapluie</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face soleil">
+                        <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                        <p>Ensoleillé</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face parapluie">
+                        <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                        <p>Parapluie</p>
+                    </div>
+                </div>
+                <div class="carte">
+                    <div class="dos"></div>
+                    <div class="face bonnet">
+                        <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                        <p>Bonnet</p>
+                    </div>
                 </div>
             </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face brosse">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
-                    <p>Brosse à dents</p>
+            <button id="passerAAssociation">Passer à la partie association</button>
+            <button id="aideMemo">💡 Aide Memory</button>
+            <div id="association">
+
+                <h2 id="consigne">Associez les objets pour Brossage de dents dans le bon ordre.</h2>
+
+                <div id="zoneAssociation"></div>
+                <div id="messageAssociation"></div>
+                <div id="elementsDispo">
+                    <div class="elem" draggable="true" id="1">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                        <p>Brosse à dents</p>
+                    </div>
+                    <div class="elem" draggable="true" id="2">
+                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                        <p>Dentifrice</p>
+                    </div>
+                    <div class="elem" draggable="true">
+                        <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                        <p>T-shirt</p>
+                    </div>
+                    <div class="elem" draggable="true">
+                        <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                        <p>Bonnet</p>
+                    </div>
+                    <div class="elem" draggable="true">
+                        <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                        <p>Parapluie</p>
+                    </div>
+                    <div class="elem" draggable="true">
+                        <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                        <p>Ensoleillé</p>
+                    </div>
                 </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face dentifrice">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
-                    <p>Dentifrice</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face t-shirt">
-                    <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
-                    <p>T-shirt</p></div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face brosse">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
-                    <p>Brosse à dents</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face dentifrice">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
-                    <p>Dentifrice</p></div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face soleil">
-                    <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
-                    <p>Ensoleillé</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face bonnet">
-                    <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
-                    <p>Bonnet</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face parapluie">
-                    <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
-                    <p>Parapluie</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face soleil">
-                    <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
-                    <p>Ensoleillé</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face parapluie">
-                    <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
-                    <p>Parapluie</p>
-                </div>
-            </div>
-            <div class="carte">
-                <div class="dos"></div>
-                <div class="face bonnet">
-                    <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
-                    <p>Bonnet</p>
-                </div>
+
             </div>
         </div>
-        <button id="passerAAssociation">Passer à la partie association</button>
-        <button id="aideMemo">💡 Aide Memory</button>
-        <div id="association">
-
-            <h2 id="consigne">Associez les objets pour Brossage de dents dans le bon ordre.</h2>
-
-            <div id="zoneAssociation"></div>
-            <div id="messageAssociation"></div>
-            <div id="elementsDispo">
-                <div class="elem" draggable="true" id="1">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
-                    <p>Brosse à dents</p>
-                </div>
-                <div class="elem" draggable="true" id="2">
-                    <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
-                    <p>Dentifrice</p>
-                </div>
-                <div class="elem" draggable="true">
-                    <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
-                    <p>T-shirt</p>
-                </div>
-                <div class="elem" draggable="true">
-                    <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
-                    <p>Bonnet</p>
-                </div>
-                <div class="elem" draggable="true">
-                    <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
-                    <p>Parapluie</p>
-                </div>
-                <div class="elem" draggable="true">
-                    <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
-                    <p>Ensoleillé</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <h1 id="messageFelicitation">🎉 Félicitations ! Vous avez terminé le jeu ! 🎉</h1>
-</main>
-<footer>
-
-</footer>
-<script src="jeu.js"></script>
+        <h1 id="messageFelicitation">🎉 Félicitations ! Vous avez terminé le jeu ! 🎉</h1>
+    </main>
+    <footer>
+    </footer>
+    <script src="jeu.js"></script>
 </body>
 </html>

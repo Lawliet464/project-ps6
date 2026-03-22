@@ -12,11 +12,31 @@ header{
     padding:10px;
 }
 
-header a{
-    padding: 10px;
-    color:#393E41;
-    text-decoration:none;
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--texte);
+    letter-spacing: 0.04em;
 }
+
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+    nav a {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--texte);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+    }
+
+        nav a:hover {
+            opacity: 1;
+        }
 
 main{
     text-align: center;
