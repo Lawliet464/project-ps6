@@ -1,7 +1,5 @@
-
 let compteurErreurs = 0;
 const SEUIL_AIDE = 8;
-
 
 let premiereCarte = null;
 let deuxiemeCarte = null;
@@ -11,11 +9,9 @@ let button = document.getElementById("btnCommencer");
 button.addEventListener("click", function(){
     let accueil = document.getElementById("accueil");
     let jeu = document.getElementById("jeu");
-    accueil.style.display ="none";
+    accueil.style.display = "none";
     jeu.style.display = "block";
-
 })
-
 
 let cartes = document.querySelectorAll(".carte");
 cartes.forEach(function(carte){
@@ -51,33 +47,29 @@ cartes.forEach(function(carte){
                     premiereCarte = null;
                     deuxiemeCarte = null;
                     estBloque = false;
-                } , 1000);
+                }, 1000);
             }
         }
-
     })
 })
 
 let startAssocia = document.getElementById("passerAAssociation");
-
 startAssocia.addEventListener("click", lancerAssociation);
 
 function verifierFinMemory(){
-
     let cartesRetournees = document.querySelectorAll(".carte.retournee");
 
     if(cartes.length === cartesRetournees.length){
         console.log("Memory terminé !");
         startAssocia.style.display = "block";
-        aideMemo.style.display="none";
-
+        aideMemo.style.display = "none";
     }
-
 }
 
 // Variables globales
 let objetGlisse = null;
 let ordreCorrect = [];
+let messageTimer = null;
 
 // Lancer la phase association
 function lancerAssociation() {
@@ -90,8 +82,6 @@ function lancerAssociation() {
     initDrag();
     initDrop();
 }
-
-// Initialiser le drag des éléments
 function initDrag() {
     let elems = document.querySelectorAll(".elem");
     elems.forEach(elem => {
@@ -113,7 +103,12 @@ function initDrop() {
 
 // Vérifie l'ordre et dépose l'élément
 function handleDrop(zone, message) {
-    if(!objetGlisse || !objetGlisse.id) return;
+    if(!objetGlisse) return;
+
+    if(!objetGlisse.id) {
+    afficherMessage(message, "Cet objet ne fait pas partie du thème !");
+    return;
+}
 
     let idObjet = Number(objetGlisse.id);
     if(!verifierOrdre(idObjet, message)) return;
@@ -147,21 +142,33 @@ function verifierFinAssociation(zone) {
     return Array.from(elemsAvecId).every(elem => zone.contains(elem));
 }
 
-// Affiche le message temporairement
 function afficherMessage(message, texte) {
+    if (messageTimer) {
+        clearTimeout(messageTimer);
+        messageTimer = null;
+    }
+
+    message.style.display = "none";
+    void message.offsetHeight; 
+
     message.textContent = texte;
     message.style.display = "block";
-    setTimeout(() => message.style.display = "none", 1500);
+
+    messageTimer = setTimeout(() => {
+        message.style.display = "none";
+        messageTimer = null;
+    }, 1500);
 }
 
 // Termine le jeu et revient à l'accueil
 function terminerJeu() {
     document.getElementById("jeu").style.display = "none";
     let felicitation = document.getElementById("messageFelicitation");
+    felicitation.removeAttribute("style");
     felicitation.style.display = "block";
 
     setTimeout(() => {
-        felicitation.style.display = "none"
+        felicitation.style.display = "none";
         document.getElementById("accueil").style.display = "block";
 
         ordreCorrect = [];
@@ -232,3 +239,20 @@ function surbrillanceUnePaire() {
 
 let aideMemo = document.getElementById("aideMemo");
 aideMemo.addEventListener("click", surbrillanceUnePaire);
+
+let aideAssoc = document.getElementById("aideAssociation");
+aideAssoc.addEventListener("click", donnerIndiceAssociation);
+
+function donnerIndiceAssociation() {
+    let elemsAvecId = Array.from(document.querySelectorAll("#elementsDispo .elem[id]"));
+
+    if (elemsAvecId.length === 0) return;
+
+    elemsAvecId.sort((a, b) => Number(a.id) - Number(b.id));
+    let prochain = elemsAvecId[0];
+
+    prochain.classList.add("indice-surbrillance");
+    setTimeout(() => prochain.classList.remove("indice-surbrillance"), 2000);
+
+    let message = document.getElementById("messageAssociation");
+}
