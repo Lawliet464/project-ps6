@@ -200,19 +200,6 @@ main button:hover {
 .fleche-guide {
     font-size: 2.5rem;
     color: #875C74;
-    opacity: 0.5;
-    animation: pulseArrow 1.5s ease-in-out infinite;
-}
-
-@keyframes pulseArrow {
-    0%, 100% {
-        opacity: 0.3;
-        transform: translateX(0);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translateX(-6px);
-    }
 }
 
 .elem {
