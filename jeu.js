@@ -85,7 +85,7 @@ function lancerAssociation() {
 function initDrag() {
     let elems = document.querySelectorAll(".elem");
     elems.forEach(elem => {
-        elem.addEventListener("dragstart", e => { objetGlisse = e.target; });
+        elem.addEventListener("dragstart", e => { objetGlisse = e.target.closest(".elem"); });
     });
 }
 
