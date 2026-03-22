@@ -35,7 +35,7 @@ header nav a:hover {
 }
 
 main {
-    max-width: 680px;
+    max-width: 800px;
     margin: 40px auto;
     padding: 0 20px;
 }
@@ -136,4 +136,75 @@ h1 {
 
 footer {
     height: 40px;
+}
+
+.usage-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.usage-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #EEF0F2;
+}
+
+.usage-item:last-child {
+    border-bottom: none;
+}
+
+.usage-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #393E41;
+}
+
+.usage-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #453750;
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.theme-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #393E41;
+}
+
+.theme-select {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #393E41;
+    border: 2px solid #875C74;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+    .theme-select:focus {
+        box-shadow: 0 0 0 3px rgba(135, 92, 116, 0.2);
+    }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--texte-doux);
+    border-top: 1px solid var(--beige-card);
+    font-weight: 300;
+    letter-spacing: 0.04em;
 }

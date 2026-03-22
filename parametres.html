@@ -11,79 +11,82 @@
 </head>
 <body>
 
-<header>
-    <p>MemoLink</p>
-    <nav>
-        <a href="jeu.html">Jouer</a>
-        <a href="statistiques.html">Statistiques</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="index.html">Accueil</a>
-    </nav>
-</header>
+    <header>
+        <p>MemoLink</p>
+        <nav>
+            <a href="jeu.html">Jouer</a>
+            <a href="statistiques.html">Statistiques</a>
+            <a href="parametres.html">Paramètres</a>
+            <a href="index.html">Accueil</a>
+        </nav>
+    </header>
 
-<main>
-    <h1>Paramètres</h1>
+    <main>
+        <h1>Paramètres</h1>
 
-    <param-qcm label="Format du jeu"
-               options="Images avec du texte, Images avec du son"
-               checked="Images avec du texte">
-    </param-qcm>
+        <param-qcm label="Format du jeu"
+                   options="Images avec du texte, Images avec du son"
+                   checked="Images avec du texte">
+        </param-qcm>
 
 
-    <param-slider label="Volume du son"
-                  min="0" max="100" value="70" step="5" unit="%"
-                  icon-min="🔈" icon-max="🔊">
-    </param-slider>
+        <param-slider label="Volume du son"
+                      min="0" max="100" value="70" step="5" unit="%"
+                      icon-min="🔈" icon-max="🔊">
+        </param-slider>
 
-    <param-qcm label="Format d'une partie"
-               options="Memory, Association"
-               checked="Memory, Association">
-    </param-qcm>
+        <param-qcm label="Format d'une partie"
+                   options="Memory, Association"
+                   checked="Memory, Association">
+        </param-qcm>
 
-    <param-qcm label="Thèmes du jeu"
-               options="Habillement selon la météo, Saisons, Brossage de dents, Se laver, Repas, Prise de médicament, Objets du quotidien"
-               checked="Habillement selon la météo, Saisons">
-    </param-qcm>
+        <param-qcm label="Thèmes du jeu"
+                   options="Habillement selon la météo, Saisons, Brossage de dents, Se laver, Repas, Prise de médicament, Objets du quotidien"
+                   checked="Habillement selon la météo, Saisons">
+        </param-qcm>
 
-    <param-plateau label="Taille du plateau"
-                   checked="4x4">
-    </param-plateau>
+        <param-plateau label="Taille du plateau"
+                       checked="4x4">
+        </param-plateau>
 
-    <param-slider label="Taille de la police"
-                  min="16" max="24" value="16" step="1" unit="px"
-                  icon-min="A" icon-max="A">
-    </param-slider>
+        <param-slider label="Taille de la police"
+                      min="16" max="24" value="16" step="1" unit="px"
+                      icon-min="A" icon-max="A">
+        </param-slider>
 
-    <param-counter label="Temps de retournement"
-                   description="En cas d'erreur les cartes restent face visible {value}s avant de se retourner."
-                   min="1" max="5" value="1">
-    </param-counter>
+        <param-counter label="Temps de retournement"
+                       description="En cas d'erreur les cartes restent face visible {value}s avant de se retourner."
+                       min="1" max="5" value="1">
+        </param-counter>
 
-    <param-counter label="Fréquence d'aide"
-                   description="Recevoir une aide toutes les {value} erreurs."
-                   min="3" max="15" value="8">
-    </param-counter>
+        <param-counter label="Fréquence d'aide"
+                       description="Recevoir une aide toutes les {value} erreurs."
+                       min="3" max="15" value="8">
+        </param-counter>
 
-    <param-qcm label="Type d'aide pour le memory"
-               options="Garder quelques cartes face visible, Retourner brièvement l'intégralité du jeu, Mise en surbrillance d'une paire"
-               checked="Mise en surbrillance d'une paire">
-    </param-qcm>
+        <param-qcm label="Type d'aide pour le memory"
+                   options="Garder quelques cartes face visible, Retourner brièvement l'intégralité du jeu, Mise en surbrillance d'une paire"
+                   checked="Mise en surbrillance d'une paire">
+        </param-qcm>
 
-    <param-qcm label="Type d'aide pour la partie association"
-               options="Mise en surbrillance de la pochaine carte, Marquer les cartes déjà tentées et le type d'erreur (Mauvaise association ou Mauvais ordre d'association)"
-               checked="Mise en surbrillance de la pochaine carte">
-    </param-qcm>
+        <param-qcm label="Type d'aide pour la partie association"
+                   options="Mise en surbrillance de la pochaine carte, Marquer les cartes déjà tentées et le type d'erreur (Mauvaise association ou Mauvais ordre d'association)"
+                   checked="Mise en surbrillance de la pochaine carte">
+        </param-qcm>
 
-    <button class="btn-save" onclick="sauvegarder()">
-        Sauvegarder les paramètres
-    </button>
-</main>
+        <button class="btn-save" onclick="sauvegarder()">
+            Sauvegarder les paramètres
+        </button>
+    </main>
 
-<footer></footer>
+    <footer>
+        MemoLink &copy; 2026 — Conçu avec soin pour les seniors
+    </footer>
 
-<div id="toast">✓ Paramètres sauvegardés !</div>
 
-<script src="parametres.js"></script>
+    <div id="toast">✓ Paramètres sauvegardés !</div>
+
+    <script src="parametres.js"></script>
 
 </body>
 </html>

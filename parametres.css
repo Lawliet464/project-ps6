@@ -312,3 +312,15 @@ footer {
 .qcm-option label:hover {
     border-color: #875C74;
 }
+
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--texte-doux);
+    border-top: 1px solid var(--beige-card);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+}
