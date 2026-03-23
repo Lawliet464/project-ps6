@@ -63,6 +63,8 @@ function verifierFinMemory(){
         console.log("Memory terminé !");
         startAssocia.style.display = "block";
         aideMemo.style.display = "none";
+
+        declencherVictoire();
     }
 }
 
@@ -277,49 +279,72 @@ function afficherMessage(message, texte) {
 }
 
 // Termine le jeu et revient à l'accueil
+// Termine le jeu et revient à l'accueil
 function terminerJeu() {
-    document.getElementById("association").style.display="none";
-    document.getElementById("jeu").style.display = "none";
-    let felicitation = document.getElementById("messageFelicitation");
-    felicitation.style.display = "block";
+    document.getElementById("association").style.display="none";
+    document.getElementById("jeu").style.display = "none";
+    let felicitation = document.getElementById("messageFelicitation");
+    felicitation.style.display = "block";
 
-    setTimeout(() => {
-        felicitation.style.display = "none";
+    // On déclenche les confettis ici 
+    declencherVictoire();
 
-        // 1. Récupérer les éléments AVANT tout reset
-        let elemsAvecId = document.querySelectorAll(".elem[id]");
-        elemsAvecId.forEach(elem => {
-            elem.style.background = "";
-            document.getElementById("elementsDispo").appendChild(elem);
-        });
+    setTimeout(() => {
+        felicitation.style.display = "none";
 
-        // 2. Maintenant on peut vider la zone sans perdre les éléments
-        document.getElementById("zoneAssociation").innerHTML = "";
+        // 1. Récupérer les éléments AVANT tout reset
+        let elemsAvecId = document.querySelectorAll(".elem[id]");
+        elemsAvecId.forEach(elem => {
+            elem.style.background = "";
+            document.getElementById("elementsDispo").appendChild(elem);
+        });
 
-        // 3. Reset association
-        ordreCorrect = [];
-        objetGlisse = null;
-        document.getElementById("association").style.display = "none";
+        // 2. Maintenant on peut vider la zone sans perdre les éléments
+        document.getElementById("zoneAssociation").innerHTML = "";
 
-        // 4. Reset memory
-        document.getElementById("plateau").style.display = "grid";
-        premiereCarte = null;
-        deuxiemeCarte = null;
-        estBloque = false;
-        compteurErreurs = 0;
+        // 3. Reset association
+        ordreCorrect = [];
+        objetGlisse = null;
+        document.getElementById("association").style.display = "none";
 
-        let toutesCartes = document.querySelectorAll(".carte");
-        toutesCartes.forEach(c => {
-            c.classList.remove("retournee", "surbrillance");
-        });
+        // 4. Reset memory
+        document.getElementById("plateau").style.display = "grid";
+        premiereCarte = null;
+        deuxiemeCarte = null;
+        estBloque = false;
+        compteurErreurs = 0;
 
-        document.getElementById("passerAAssociation").style.display = "none";
-        document.getElementById("aideMemo").style.display = "";
+        let toutesCartes = document.querySelectorAll(".carte");
+        toutesCartes.forEach(c => {
+            c.classList.remove("retournee", "surbrillance");
+        });
 
-        // 5. Afficher l'accueil en dernier
-        document.getElementById("accueil").style.display = "block";
+        document.getElementById("passerAAssociation").style.display = "none";
+        document.getElementById("aideMemo").style.display = "";
 
-    }, 4000);
+        // 5. Afficher l'accueil en dernier
+        document.getElementById("accueil").style.display = "block";
+
+    }, 4000); // Le joueur a 4 secondes pour profiter des confettis avant le reset
+}
+
+// Paramètres de l'animation douce et festive pour la victoire
+function declencherVictoire() {
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return; // Sécurité au cas où le canvas n'est pas trouvé
+    
+    var myConfetti = confetti.create(canvas, {
+        resize: true,
+        useWorker: true
+    });
+
+    myConfetti({
+        particleCount: 80, // Quantité modérée pour ne pas surcharger
+        spread: 100, // Angle de dispersion
+        origin: { y: 0.6 }, // Partent du milieu/bas de l'écran
+        gravity: 0.6, // Tombent doucement
+        colors: ['#875C74', '#B79D94', '#BBCDE5', '#453750'] // Les couleurs de ton site
+    });
 }
 
 

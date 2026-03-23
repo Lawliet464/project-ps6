@@ -206,7 +206,7 @@ main button:hover {
 
 .cellule.remplie {
     border-style: solid;
-    background: #edf7ed;
+    background: #be99ad;
 }
 
 .cellule.survol {
@@ -320,6 +320,16 @@ main button:hover {
 
 #accueil {
     margin-top: 15%;
+}
+
+#confetti-canvas {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Crucial : permet de cliquer "à travers" la toile */
 }
 
 #modaleHelp {
