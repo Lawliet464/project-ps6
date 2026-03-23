@@ -14,13 +14,14 @@
 
     <!-- HEADER -->
     <header>
-        <div class="logo">MemoLink</div>
-        <nav>
-            <a href="statistiques.html">Statistiques</a>
-            <a href="parametres.html">Paramètres</a>
-            <a href="index.html">Accueil</a>
-        </nav>
-    </header>
+    <div class="logo">MemoLink</div>
+    <nav>
+        <a href="statistiques.html">Statistiques</a>
+        <a href="parametres.html">Paramètres</a>
+        <a href="index.html">Accueil</a>
+    </nav>
+    <button id="btnHelp">❓ Comment jouer</button>
+</header>
     <main>
         <div id="accueil">
             <h1>Faites de votre mieux !</h1>
@@ -115,6 +116,7 @@
             </div>
             <button id="passerAAssociation">Passer à la partie association</button>
             <button id="aideMemo">💡 Aide</button>
+           
             <div id="association">
                 <h2 id="consigne">Associez les objets pour Brossage de dents dans le bon ordre.</h2>
 
@@ -169,8 +171,19 @@
         </div>
         <h1 id="messageFelicitation">🎉 Félicitations ! Vous avez terminé le jeu ! 🎉</h1>
     </main>
-    <footer>
-    </footer>
+
+    <div id="modaleHelp" onclick="if(event.target===this)this.style.display='none'">
+        <div class="contenu">
+            <button class="fermer" onclick="document.getElementById('modaleHelp').style.display='none'">✕</button>
+            <h2>Comment jouer ?</h2>
+            <p><strong>1. Le memory</strong><br>Retournez les cartes deux par deux et retrouvez toutes les paires identiques.</p>
+            <p><strong>2. L'association</strong><br>Glissez les images dans le bon ordre pour reconstituer une routine du quotidien.</p>
+            <p><strong>3. Le bouton 💡 Aide</strong><br>Il vous donne un indice en surbrillance si vous êtes bloqué.</p>
+        </div>
+    </div>
+
+    <footer></footer>
     <script src="jeu.js"></script>
+
 </body>
 </html>

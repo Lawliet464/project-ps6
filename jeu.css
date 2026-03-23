@@ -321,3 +321,71 @@ main button:hover {
 #accueil {
     margin-top: 15%;
 }
+
+#modaleHelp {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(57, 62, 65, 0.45);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(3px);
+}
+
+#btnHelp {
+    margin-top: 16px;
+    background: white;
+    color: #875C74;
+    border: 2px solid #B79D94;
+    border-radius: 30px;
+    box-shadow: none;
+}
+
+#btnHelp:hover {
+    background: #f3d9ea;
+    color: #393E41;
+    box-shadow: none;
+    transform: none;
+}
+
+#modaleHelp .contenu {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 32px 28px;
+    max-width: 460px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(57,62,65,0.25);
+}
+
+#modaleHelp .contenu h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #393E41;
+}
+
+#modaleHelp .contenu p {
+    font-size: 0.88rem;
+    color: #5A6063;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.fermer {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: #EEF0F2;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+#jeu {
+    position: relative;
+}
+

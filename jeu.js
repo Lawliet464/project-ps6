@@ -405,3 +405,8 @@ function donnerIndiceAssociation() {
 
     let message = document.getElementById("messageAssociation");
 }
+
+document.getElementById('btnHelp').addEventListener('click', function() {
+        const m = document.getElementById('modaleHelp');
+        m.style.display = 'flex';
+});
