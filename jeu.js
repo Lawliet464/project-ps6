@@ -78,6 +78,8 @@ function lancerAssociation() {
     document.getElementById("plateau").style.display = "none";
     startAssocia.style.display = "none";
     document.getElementById("association").style.display = "block";
+    document.getElementById("btnVerifier").style.display = "none";
+    document.getElementById("aideAssociation").style.display = "block";
 
     genererCellules(document.querySelectorAll(".elem[id]").length);
 
@@ -128,6 +130,21 @@ function initDrop() {
             handleDrop(numCellule, message);
         });
     });
+
+    // Drop sur elementsDispo pour retirer un élément d'une cellule
+    let dispo = document.getElementById("elementsDispo");
+    dispo.addEventListener("dragover", e => e.preventDefault());
+    dispo.addEventListener("drop", e => {
+        e.preventDefault();
+        if (!objetGlisse) return;
+
+        // Trouver la cellule parente si l'élément vient d'une cellule
+        let celluleParente = objetGlisse.closest(".cellule");
+        if (celluleParente) {
+            let numCellule = Number(celluleParente.id.replace("cellule-", ""));
+            retirerElement(numCellule, objetGlisse);
+        }
+    });
 }
 
 function initDrag() {
@@ -142,56 +159,104 @@ function initDrag() {
 function handleDrop(numCellule, message) {
     if (!objetGlisse) return;
 
-    if (!objetGlisse.id) {
-        afficherMessage(message, "Cet objet ne fait pas partie du thème !");
+    let cellule = document.getElementById("cellule-" + numCellule);
+    if (cellule.classList.contains("remplie")) {
+        afficherMessage(message, "Cette case est déjà occupée !");
         return;
     }
 
-    let idObjet = Number(objetGlisse.id);
-
-    // Vérifier que l'utilisateur dépose dans la bonne cellule
-    if (numCellule !== idObjet) {
-        afficherMessage(message, "Ce n'est pas la bonne case !");
-        return;
+    // Si l'élément vient d'une autre cellule, vider la cellule d'origine
+    let celluleParente = objetGlisse.closest(".cellule");
+    if (celluleParente && celluleParente.id !== cellule.id) {
+        let numParente = Number(celluleParente.id.replace("cellule-", ""));
+        celluleParente.classList.remove("remplie", "correcte", "incorrecte");
+        celluleParente.querySelector(".cellule-contenu").innerHTML = "";
     }
 
-    if (!verifierOrdre(idObjet, message)) return;
-
-    deposerElement(objetGlisse);
-    ordreCorrect.push(idObjet);
-
-    let zone = document.getElementById("zoneAssociation");
-    if (verifierFinAssociation(zone)) terminerJeu();
-}
-
-// Vérifie si l'ordre est correct
-function verifierOrdre(idObjet, message) {
-    for(let i = 1; i < idObjet; i++){
-        if(!ordreCorrect.includes(i)){
-            afficherMessage(message, "Mauvais ordre d'association !");
-            return false;
-        }
-    }
-    return true;
+    deposerElement(numCellule, objetGlisse);
+    verifierCellulesRemplies();
 }
 
 // Dépose l'élément correctement
-function deposerElement(elem) {
-    let idObjet = Number(elem.id);
-    let cellule = document.getElementById("cellule-" + idObjet);
-
+function deposerElement(numCellule, elem) {
+    let cellule = document.getElementById("cellule-" + numCellule);
     if (!cellule) return;
 
-    elem.style.background = "lightgreen";
     cellule.classList.add("remplie");
     cellule.querySelector(".cellule-contenu").appendChild(elem);
 }
 
-// Vérifie si tous les éléments avec id sont déposés
-function verifierFinAssociation(zone) {
-    let elemsAvecId = document.querySelectorAll(".elem[id]");
-    return Array.from(elemsAvecId).every(elem => zone.contains(elem));
+function retirerElement(numCellule, elem) {
+    let cellule = document.getElementById("cellule-" + numCellule);
+    
+    elem.style.background = "";
+    document.getElementById("elementsDispo").appendChild(elem);
+    
+    cellule.classList.remove("remplie", "correcte", "incorrecte");
+    cellule.querySelector(".cellule-contenu").innerHTML = "";
+    let croix = cellule.querySelector(".cellule-croix");
+    if (croix) croix.remove();
+
+    document.getElementById("btnVerifier").style.display = "none";
+    verifierCellulesRemplies(); // ← ajouter cet appel
 }
+
+function verifierCellulesRemplies() {
+    let cellules = document.querySelectorAll(".cellule");
+    let toutesRemplies = Array.from(cellules).every(c => c.classList.contains("remplie"));
+    
+    document.getElementById("btnVerifier").style.display = toutesRemplies ? "inline-block" : "none";
+    document.getElementById("aideAssociation").style.display = toutesRemplies ? "none" : "block";
+}
+
+function verifierAssociation() {
+    let cellules = document.querySelectorAll(".cellule");
+    let message = document.getElementById("messageAssociation");
+    let toutCorrect = true;
+    let messages = [];
+
+    cellules.forEach(cellule => {
+        let numCellule = Number(cellule.id.replace("cellule-", ""));
+        let elem = cellule.querySelector(".elem");
+        let idElem = elem ? Number(elem.id) : null;
+
+        if (idElem === numCellule) {
+            cellule.classList.add("correcte");
+        } else {
+            cellule.classList.add("incorrecte");
+            toutCorrect = false;
+
+            let elemsAvecId = Array.from(document.querySelectorAll(".elem[id]"));
+            let appartientAuTheme = elemsAvecId.some(e => Number(e.id) === idElem);
+            let nomElem = elem.querySelector("p").textContent;
+
+            if (!appartientAuTheme) {
+                messages.push(nomElem + " (case " + numCellule + ") n'appartient pas à ce thème !");
+            } else {
+                messages.push(nomElem + " (case " + numCellule + ") appartient à ce thème mais n'est pas dans le bon ordre !");
+            }
+
+            setTimeout(() => retirerElement(numCellule, elem), 1500);
+        }
+    });
+
+    if (toutCorrect) {
+        terminerJeu();
+    } else {
+        // Afficher tous les messages d'un coup
+        message.innerHTML = messages.join("<br>");
+        message.style.display = "block";
+
+        if (messageTimer) clearTimeout(messageTimer);
+        messageTimer = setTimeout(() => {
+            message.style.display = "none";
+            messageTimer = null;
+        }, 3000);
+    }
+}
+
+let btnVerifier = document.getElementById("btnVerifier");
+btnVerifier.addEventListener("click", verifierAssociation);
 
 function afficherMessage(message, texte) {
     if (messageTimer) {
@@ -327,8 +392,16 @@ function donnerIndiceAssociation() {
     elemsAvecId.sort((a, b) => Number(a.id) - Number(b.id));
     let prochain = elemsAvecId[0];
 
+    let numProchain = Number(prochain.id);
+    let celluleCible = document.getElementById("cellule-" + numProchain);
+
     prochain.classList.add("indice-surbrillance");
-    setTimeout(() => prochain.classList.remove("indice-surbrillance"), 2000);
+    if (celluleCible) celluleCible.classList.add("indice-surbrillance");
+
+    setTimeout(() => {
+        prochain.classList.remove("indice-surbrillance");
+        if (celluleCible) celluleCible.classList.remove("indice-surbrillance");
+    }, 2000);
 
     let message = document.getElementById("messageAssociation");
 }
