@@ -79,9 +79,57 @@ function lancerAssociation() {
     startAssocia.style.display = "none";
     document.getElementById("association").style.display = "block";
 
+    genererCellules(document.querySelectorAll(".elem[id]").length);
+
     initDrag();
     initDrop();
 }
+
+function genererCellules(nombre) {
+    let zone = document.getElementById("zoneAssociation");
+    zone.innerHTML = "";
+
+    for (let i = 1; i <= nombre; i++) {
+        let cellule = document.createElement("div");
+        cellule.classList.add("cellule");
+        cellule.id = "cellule-" + i;
+
+        let num = document.createElement("div");
+        num.classList.add("cellule-num");
+        num.textContent = i;
+
+        let contenu = document.createElement("div");
+        contenu.classList.add("cellule-contenu");
+
+        cellule.appendChild(num);
+        cellule.appendChild(contenu);
+        zone.appendChild(cellule);
+    }
+}
+
+// Initialiser la zone de drop
+function initDrop() {
+    let message = document.getElementById("messageAssociation");
+
+    document.querySelectorAll(".cellule").forEach(cellule => {
+        cellule.addEventListener("dragover", e => {
+            e.preventDefault();
+            e.stopPropagation();
+            cellule.classList.add("survol");
+        });
+        cellule.addEventListener("dragleave", () => {
+            cellule.classList.remove("survol");
+        });
+        cellule.addEventListener("drop", e => {
+            e.preventDefault();
+            e.stopPropagation();
+            cellule.classList.remove("survol");
+            let numCellule = Number(cellule.id.replace("cellule-", ""));
+            handleDrop(numCellule, message);
+        });
+    });
+}
+
 function initDrag() {
     let elems = document.querySelectorAll(".elem");
     elems.forEach(elem => {
@@ -89,34 +137,31 @@ function initDrag() {
     });
 }
 
-// Initialiser la zone de drop
-function initDrop() {
-    let zone = document.getElementById("zoneAssociation");
-    let message = document.getElementById("messageAssociation");
-
-    zone.addEventListener("dragover", e => e.preventDefault());
-    zone.addEventListener("drop", e => {
-        e.preventDefault();
-        handleDrop(zone, message);
-    });
-}
 
 // Vérifie l'ordre et dépose l'élément
-function handleDrop(zone, message) {
-    if(!objetGlisse) return;
+function handleDrop(numCellule, message) {
+    if (!objetGlisse) return;
 
-    if(!objetGlisse.id) {
-    afficherMessage(message, "Cet objet ne fait pas partie du thème !");
-    return;
-}
+    if (!objetGlisse.id) {
+        afficherMessage(message, "Cet objet ne fait pas partie du thème !");
+        return;
+    }
 
     let idObjet = Number(objetGlisse.id);
-    if(!verifierOrdre(idObjet, message)) return;
 
-    deposerElement(zone, objetGlisse);
+    // Vérifier que l'utilisateur dépose dans la bonne cellule
+    if (numCellule !== idObjet) {
+        afficherMessage(message, "Ce n'est pas la bonne case !");
+        return;
+    }
+
+    if (!verifierOrdre(idObjet, message)) return;
+
+    deposerElement(objetGlisse);
     ordreCorrect.push(idObjet);
 
-    if(verifierFinAssociation(zone)) terminerJeu();
+    let zone = document.getElementById("zoneAssociation");
+    if (verifierFinAssociation(zone)) terminerJeu();
 }
 
 // Vérifie si l'ordre est correct
@@ -131,9 +176,15 @@ function verifierOrdre(idObjet, message) {
 }
 
 // Dépose l'élément correctement
-function deposerElement(zone, elem) {
+function deposerElement(elem) {
+    let idObjet = Number(elem.id);
+    let cellule = document.getElementById("cellule-" + idObjet);
+
+    if (!cellule) return;
+
     elem.style.background = "lightgreen";
-    zone.appendChild(elem);
+    cellule.classList.add("remplie");
+    cellule.querySelector(".cellule-contenu").appendChild(elem);
 }
 
 // Vérifie si tous les éléments avec id sont déposés
@@ -162,25 +213,50 @@ function afficherMessage(message, texte) {
 
 // Termine le jeu et revient à l'accueil
 function terminerJeu() {
+    document.getElementById("association").style.display="none";
     document.getElementById("jeu").style.display = "none";
     let felicitation = document.getElementById("messageFelicitation");
-    felicitation.removeAttribute("style");
     felicitation.style.display = "block";
 
     setTimeout(() => {
         felicitation.style.display = "none";
-        document.getElementById("accueil").style.display = "block";
 
-        ordreCorrect = [];
-        objetGlisse = null;
+        // 1. Récupérer les éléments AVANT tout reset
         let elemsAvecId = document.querySelectorAll(".elem[id]");
         elemsAvecId.forEach(elem => {
             elem.style.background = "";
             document.getElementById("elementsDispo").appendChild(elem);
         });
 
+        // 2. Maintenant on peut vider la zone sans perdre les éléments
+        document.getElementById("zoneAssociation").innerHTML = "";
+
+        // 3. Reset association
+        ordreCorrect = [];
+        objetGlisse = null;
+        document.getElementById("association").style.display = "none";
+
+        // 4. Reset memory
+        document.getElementById("plateau").style.display = "grid";
+        premiereCarte = null;
+        deuxiemeCarte = null;
+        estBloque = false;
+        compteurErreurs = 0;
+
+        let toutesCartes = document.querySelectorAll(".carte");
+        toutesCartes.forEach(c => {
+            c.classList.remove("retournee", "surbrillance");
+        });
+
+        document.getElementById("passerAAssociation").style.display = "none";
+        document.getElementById("aideMemo").style.display = "";
+
+        // 5. Afficher l'accueil en dernier
+        document.getElementById("accueil").style.display = "block";
+
     }, 4000);
 }
+
 
 function retournerTemporairementToutesCartes() {
     let cartes = Array.from(document.querySelectorAll(".carte:not(.retournee)"));

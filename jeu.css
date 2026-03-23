@@ -166,15 +166,53 @@ main button:hover {
 }
 
 #zoneAssociation {
-    min-height: 250px;
-    border: 3px dashed #875C74;
-    border-radius: 12px;
     padding: 1rem;
     background: #fdf7fa;
+    border: 3px dashed #875C74;
+    border-radius: 12px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-content: flex-start;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cellule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px dashed #875C74;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: #fdf7fa;
+    min-height: 60px;
+}
+
+.cellule-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #875C74;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cellule-contenu {
+    flex: 1;
+}
+
+.cellule.remplie {
+    border-style: solid;
+    background: #edf7ed;
+}
+
+.cellule.survol {
+    background: #f3d9ea;
+    border-color: #875C74;
+    border-style: dashed;
 }
 
 #elementsDispo {
