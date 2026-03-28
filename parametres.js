@@ -338,6 +338,105 @@ class ParamPlateau extends HTMLElement {
 }
 customElements.define('param-plateau', ParamPlateau);
 
+// ---Sélecteur de Stades--------------------------------------------------------
+
+const paramStageTemplate = `
+<template>
+    <link rel="stylesheet" href="parametres.css">
+    <div class="param-card">
+        <span class="param-label"></span>
+        <p class="param-description"></p>
+        <div class="stage-group"></div>
+    </div>
+</template>`;
+
+const STAGES = [
+    {
+        value: 'leger',
+        name: 'Stade léger',
+        desc: 'Autonomie préservée : aides ponctuelles',
+        color: '#B79D94', 
+        bg: '#F8F4F2',    // Version très claire du beige
+    },
+    {
+        value: 'modere',
+        name: 'Stade modéré',
+        desc: 'Désorientation fréquente : aides régulières',
+        color: '#875C74', 
+        bg: '#F4F0F2',    // Version très claire du prune
+    },
+    {
+        value: 'severe',
+        name: 'Stade sévère',
+        desc: 'Forte dépendance : aides continues',
+        color: '#453750', 
+        bg: '#F0EFF2',    // Version très claire du violet
+    },
+];
+
+class ParamStage extends HTMLElement {
+    static get observedAttributes() {
+        return ['label', 'description', 'checked'];
+    }
+    constructor() {
+        super();
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(parseTemplate(paramStageTemplate).cloneNode(true));
+    }
+    connectedCallback() {
+        this._render();
+    }
+    attributeChangedCallback(key, oldValue, newValue) {
+        if (oldValue !== newValue && this.shadowRoot.querySelector('.param-label')) {
+            this._render();
+        }
+    }
+    _render() {
+        const label       = this.getAttribute('label')       || '';
+        const description = this.getAttribute('description') || '';
+        const checked     = this.getAttribute('checked')     || 'leger';
+
+        this.shadowRoot.querySelector('.param-label').textContent = label;
+
+        const descEl = this.shadowRoot.querySelector('.param-description');
+        descEl.textContent = description;
+        descEl.hidden = !description;
+
+        const group = this.shadowRoot.querySelector('.stage-group');
+        group.innerHTML = STAGES.map(s => `
+            <label class="stage-option ${checked === s.value ? 'selected' : ''}"
+                   style="--stage-color: ${s.color}; --stage-bg: ${s.bg};">
+                <input type="radio" name="stage-${this._uid()}" value="${s.value}"
+                    ${checked === s.value ? 'checked' : ''}>
+                <span class="stage-dot"></span>
+                <span class="stage-text">
+                    <span class="stage-name">${s.name}</span>
+                    <span class="stage-desc">${s.desc}</span>
+                </span>
+            </label>
+        `).join('');
+
+        group.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', () => {
+                group.querySelectorAll('.stage-option').forEach(opt => opt.classList.remove('selected'));
+                input.closest('.stage-option').classList.add('selected'); 
+    
+                this.dispatchEvent(new CustomEvent('change', {
+                    bubbles: true, composed: true,
+                    detail: { value: input.value }
+                }));
+            });
+        });
+    }
+    _uid() {
+        return this._id || (this._id = Math.random().toString(36).slice(2, 7));
+    }
+    getSelected() {
+        const input = this.shadowRoot.querySelector('input:checked');
+        return input ? input.value : null;
+    }
+}
+customElements.define('param-stage', ParamStage);
 
 // ─── Utilitaire ───────────────────────────────────────────────────────────────
 
@@ -346,6 +445,5 @@ function sauvegarder() {
     toast.classList.add('visible');
     setTimeout(() => {
         toast.classList.remove('visible');
-        window.location.href = 'simulation_changement_de_parametres.html';
     }, 2500);
 }
