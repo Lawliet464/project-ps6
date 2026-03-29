@@ -1,6 +1,7 @@
 body {
-    font-family: "Josefin Sans";
+    font-family: "Josefin Sans", sans-serif;
     background-color: #EEF0F2;
+    margin: 0;
 }
 
 header {
@@ -8,13 +9,13 @@ header {
     background-color: #B79D94;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 .logo {
     font-size: 22px;
     font-weight: 700;
-    color: var(--texte);
+    color: black;
     letter-spacing: 0.04em;
 }
 
@@ -26,16 +27,13 @@ nav {
 nav a {
     font-size: 14px;
     font-weight: 400;
-    color: var(--texte);
+    color: black;
     text-decoration: none;
     letter-spacing: 0.04em;
     opacity: 0.85;
     transition: opacity 0.2s;
 }
-
-nav a:hover {
-    opacity: 1;
-}
+nav a:hover { opacity: 1; }
 
 main {
     text-align: center;
@@ -45,18 +43,151 @@ main {
 main button {
     background: #453750;
     color: #DBE9EE;
-    padding: 10px;
+    padding: 12px 22px;
     border-radius: 30px;
     border: none;
     margin-bottom: 20px;
-}
-
-main button:hover {
-    background-color: #875C74;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.2s;
+}
+main button:hover { background-color: #875C74; }
+
+/* ── CHOIX DU RÔLE (Correction #2) ── */
+
+#choixRole {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
 }
 
-/* ── Plateau memory ── */
+.role-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(69, 55, 80, 0.12);
+}
+
+.role-emoji { font-size: 3rem; margin-bottom: 12px; }
+
+.role-card h2 {
+    font-size: 1.8rem;
+    color: #453750;
+    margin: 0 0 8px;
+}
+
+.role-card > p {
+    color: #875C74;
+    margin: 0 0 28px;
+}
+
+.role-boutons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.role-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 16px;
+    border: 2px solid #BBCDE5;
+    background: #fdf7fa;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    width: 100%;
+    margin: 0;
+}
+
+.role-btn:hover {
+    border-color: #875C74;
+    background: #f3d9ea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(135, 92, 116, 0.15);
+}
+
+.role-icon { font-size: 2rem; flex-shrink: 0; }
+
+.role-label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #453750;
+}
+
+.role-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: #875C74;
+    margin-top: 2px;
+}
+
+/* Badge rôle actif */
+.role-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.badge-patient { background: #BBCDE5; color: #453750; }
+.badge-aidant  { background: #875C74; color: white; }
+
+/* ── LÉGENDE FIXE (Correction #4) ── */
+
+#legendeFixe {
+    display: none; /* Affiché seulement en phase association */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border: 2px solid #B79D94;
+    border-radius: 14px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 16px rgba(69, 55, 80, 0.15);
+    z-index: 100;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 160px;
+}
+
+.legende-titre {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #875C74;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+}
+
+.legende-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #453750;
+}
+
+.legende-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.dot-vide   { background: #EEF0F2; border: 2px dashed #875C74; }
+.dot-ok     { background: #6abf69; }
+.dot-ordre  { background: #e05c5c; }
+.dot-theme  { background: #f5a623; }
+
+/* ── MEMORY ── */
 
 #plateau {
     display: grid;
@@ -66,22 +197,20 @@ main button:hover {
     margin: 0 auto;
 }
 
-#jeu {
-    display: none;
-}
+#jeu { display: none; }
 
 .carte {
     position: relative;
     width: 100px;
     height: 100px;
     background-color: #BBCDE5;
-    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     transform-style: preserve-3d;
     transition: transform 0.5s ease;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .dos, .face {
@@ -92,9 +221,7 @@ main button:hover {
     border-radius: 20px;
 }
 
-.dos {
-    background-color: #BBCDE5;
-}
+.dos { background-color: #BBCDE5; }
 
 .face {
     display: flex;
@@ -104,42 +231,67 @@ main button:hover {
     transform: rotateY(180deg);
 }
 
-.face img {
-    max-width: 60%;
-    max-height: 60%;
-}
+.face img { max-width: 60%; max-height: 60%; }
+.face p { font-size: 16px; margin: 2px 0 0 0; }
 
-.face p {
-    font-size: 16px;
-    margin: 2px 0 0 0;
-}
-
-.carte.retournee {
-    transform: rotateY(180deg);
-    border-radius: 20px;
-}
+.carte.retournee { transform: rotateY(180deg); }
 
 .carte.surbrillance {
     box-shadow: 0 0 15px 5px gold;
     transition: box-shadow 0.3s ease;
 }
 
-#passerAAssociation {
-    display: none;
-    margin: 30px auto;
+#passerAAssociation { display: none; margin: 30px auto; }
+#aideMemo { margin-top: 20px; }
+
+/* ── ASSOCIATION ── */
+
+#association { display: none; width: 100%; }
+
+/* Consigne narrative (Correction #3) */
+#consigneWrapper {
+    margin: 0 auto 1.5rem;
+    max-width: 700px;
 }
 
-#aideMemo {
-    margin-top: 20px;
+#consigneNarrative {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
 }
 
-/* ── Phase association ── */
+#iconeTheme { font-size: 2.2rem; }
 
-#association {
-    display: none;
-    width: 100%;
+#consigne {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #453750;
+    margin: 0;
 }
 
+#indicateurOrdre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 20px;
+    background: #fdf7fa;
+    border: 2px solid #BBCDE5;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #875C74;
+    font-weight: 600;
+}
+
+.ordre-explication {
+    font-size: 0.8rem;
+    color: #B79D94;
+    font-weight: 400;
+}
+
+/* Zone association principale */
 #zoneAssociationWrapper {
     display: flex;
     flex-direction: row;
@@ -184,6 +336,8 @@ main button:hover {
     padding: 8px 12px;
     background: #fdf7fa;
     min-height: 60px;
+    cursor: pointer;
+    transition: background 0.15s;
 }
 
 .cellule-num {
@@ -200,19 +354,67 @@ main button:hover {
     flex-shrink: 0;
 }
 
-.cellule-contenu {
-    flex: 1;
-}
+.cellule-contenu { flex: 1; }
 
 .cellule.remplie {
     border-style: solid;
     background: #be99ad;
 }
 
+/* ✅ Bonne réponse = vert clair */
+.cellule.correcte {
+    background: #d4edda;
+    border-color: #6abf69;
+    border-style: solid;
+}
+
+/* 🔀 Bon thème mais mauvais ordre = rouge */
+.cellule.incorrecte-ordre {
+    background: #fde8e8;
+    border-color: #e05c5c;
+    border-style: solid;
+    animation: shake 0.5s ease;
+}
+
+/* 🚫 Mauvais thème = orange */
+.cellule.incorrecte-theme {
+    background: #fff3e0;
+    border-color: #f5a623;
+    border-style: solid;
+    animation: shake 0.5s ease;
+}
+
+/* Conserver .incorrecte pour compatibilité */
+.cellule.incorrecte {
+    background: #fde8e8;
+    border-color: #e05c5c;
+    border-style: solid;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-8px); }
+    40%       { transform: translateX(8px); }
+    60%       { transform: translateX(-5px); }
+    80%       { transform: translateX(5px); }
+}
+
 .cellule.survol {
     background: #f3d9ea;
     border-color: #875C74;
     border-style: dashed;
+}
+
+/* Tutoriel clic (Correction #3) */
+.tuto-click {
+    font-size: 0.82rem;
+    color: #875C74;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #fdf7fa;
+    border-radius: 8px;
+    border: 1px dashed #BBCDE5;
 }
 
 #elementsDispo {
@@ -251,28 +453,31 @@ main button:hover {
     border-radius: 10px;
     border: 2px solid #EEF0F2;
     cursor: grab;
+    transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.elem img {
-    max-width: 60%;
-    max-height: 60%;
+.elem:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(135, 92, 116, 0.15);
 }
 
-.elem p {
-    font-size: 11px;
-    margin: 2px 0 0 0;
-    text-align: center;
-}
+.elem img { max-width: 60%; max-height: 60%; }
+.elem p { font-size: 11px; margin: 2px 0 0 0; text-align: center; }
+.elem:active { cursor: grabbing; }
 
-.elem:active {
-    cursor: grabbing;
+/* Sélection par clic (Correction #3) */
+.elem.selectionne {
+    border: 3px solid #875C74;
+    background: #f3d9ea;
+    box-shadow: 0 0 0 4px rgba(135, 92, 116, 0.25);
+    transform: scale(1.07);
 }
 
 /* Surbrillance indice */
 .indice-surbrillance {
     outline: 3px solid #875C74;
     border-radius: 8px;
-    animation: clignote 0.4s ease-in-out 4;
+    animation: clignote 0.4s ease-in-out 5;
 }
 
 @keyframes clignote {
@@ -280,7 +485,55 @@ main button:hover {
     50%       { background: #f3d9ea; }
 }
 
-/* Bouton indice association */
+/* ── MESSAGE D'ERREUR AMÉLIORÉ (Correction #1) ── */
+
+#messageAssociation {
+    display: none;
+    margin: 0.8rem auto;
+    max-width: 600px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    line-height: 1.7;
+}
+
+#messageAssociation.visible { opacity: 1; }
+
+#messageAssociation.message-erreur {
+    background: #fde8e8;
+    border: 2px solid #e05c5c;
+    color: #c0392b;
+}
+
+#messageAssociation.message-erreur-ordre {
+    background: #fde8e8;
+    border: 2px solid #e05c5c;
+    color: #c0392b;
+}
+
+#messageAssociation.message-erreur-theme {
+    background: #fff3e0;
+    border: 2px solid #f5a623;
+    color: #b36a00;
+}
+
+#messageAssociation.message-erreur-mixte {
+    background: #fff8ec;
+    border: 2px solid #f5a623;
+    color: #7a4500;
+}
+
+#messageAssociation.message-info {
+    background: #fdf7fa;
+    border: 2px solid #875C74;
+    color: #875C74;
+}
+
+/* Boutons association */
 #aideAssociation {
     display: block;
     margin: 1rem auto;
@@ -292,36 +545,110 @@ main button:hover {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    font-family: "Josefin Sans", sans-serif;
 }
 
-#aideAssociation:hover {
+#aideAssociation:hover { background: #875C74; color: white; }
+
+.btn-assoc-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── RÉCAP VISUEL FIN DE JEU ── */
+
+#recapFin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.recap-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(69, 55, 80, 0.12);
+}
+
+.recap-card h2 { font-size: 2rem; color: #453750; margin: 0 0 8px; }
+
+.recap-sous-titre {
+    color: #875C74;
+    margin: 0 0 28px;
+    font-size: 1.1rem;
+}
+
+#recapSequence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.recap-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: #fdf7fa;
+    border-radius: 14px;
+    padding: 14px;
+    border: 2px solid #BBCDE5;
+    min-width: 90px;
+    animation: fadeInUp 0.4s ease both;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.recap-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
     background: #875C74;
     color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Message association */
-#messageAssociation {
-    text-align: center;
-    font-size: 1rem;
-    color: #875C74;
-    font-weight: 600;
-    min-height: 1.5rem;
-    margin: 0.5rem 0;
+.recap-item img { max-width: 60px; max-height: 60px; }
+.recap-item p { font-size: 0.8rem; margin: 0; color: #453750; font-weight: 600; }
+
+.recap-fleche {
+    font-size: 1.8rem;
+    color: #B79D94;
+    font-weight: 700;
 }
 
-/* ── Écrans accueil / félicitation ── */
+#btnRejouer {
+    margin: 0 auto;
+    display: block;
+}
+
+/* ── FÉLICITATION ── */
 
 #messageFelicitation {
     display: none;
     margin-top: 15%;
-    position: relative; 
+    position: relative;
     z-index: 10;
 }
 
-#accueil {
-    margin-top: 15%;
-}
+#accueil { margin-top: 15%; }
 
+/* ── CANVAS CONFETTIS ── */
 #confetti-canvas {
     position: fixed;
     z-index: 999;
@@ -329,8 +656,10 @@ main button:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Crucial : permet de cliquer "à travers" la toile */
+    pointer-events: none;
 }
+
+/* ── MODALE AIDE ── */
 
 #modaleHelp {
     display: none;
@@ -351,13 +680,13 @@ main button:hover {
     border: 2px solid #B79D94;
     border-radius: 30px;
     box-shadow: none;
+    font-family: "Josefin Sans", sans-serif;
 }
 
 #btnHelp:hover {
     background: #f3d9ea;
     color: #393E41;
     box-shadow: none;
-    transform: none;
 }
 
 #modaleHelp .contenu {
@@ -367,7 +696,7 @@ main button:hover {
     max-width: 460px;
     width: 100%;
     position: relative;
-    box-shadow: 0 20px 60px rgba(57,62,65,0.25);
+    box-shadow: 0 20px 60px rgba(57, 62, 65, 0.25);
 }
 
 #modaleHelp .contenu h2 {
@@ -395,7 +724,5 @@ main button:hover {
     font-size: 0.9rem;
     cursor: pointer;
 }
-#jeu {
-    position: relative;
-}
 
+#jeu { position: relative; }

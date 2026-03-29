@@ -1,5 +1,5 @@
 
-    /* ── VARIABLES ────────────────────────────────────────── */
+   
     :root {
       --header:     #B79D94;
       --fond:       #EEF0F2;
@@ -21,7 +21,7 @@
       color: var(--texte);
     }
 
-    /* ── HEADER / NAV ─────────────────────────────────────── */
+
     header {
       display: flex;
       justify-content: space-between;
@@ -53,7 +53,7 @@
     }
     nav a:hover { opacity: 1; }
 
-    /* ── HERO ─────────────────────────────────────────────── */
+
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -136,7 +136,7 @@
     .btn-arrow { transition: transform 0.2s; }
     .btn-principal:hover .btn-arrow { transform: translateX(4px); }
 
-    /* ── CARTE PROGRESSION ───────────────────────────────── */
+
     .progress-card {
       background: var(--beige-card);
       border-radius: 22px;
@@ -212,7 +212,7 @@
       font-weight: 600;
     }
 
-    /* ── SÉPARATEUR ──────────────────────────────────────── */
+
     .section-wrap {
       max-width: 1060px;
       margin: 0 auto;
@@ -250,7 +250,7 @@
       font-weight: 300;
     }
 
-    /* ── ÉTAPES ──────────────────────────────────────────── */
+
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -309,7 +309,7 @@
         border-radius: 20px;
         object-fit: cover;
     }
-    /* ── FOOTER ──────────────────────────────────────────── */
+
     footer {
       text-align: center;
       padding: 24px;

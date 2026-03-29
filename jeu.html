@@ -14,115 +14,162 @@
 
     <!-- HEADER -->
     <header>
-    <div class="logo">MemoLink</div>
-    <nav>
-        <a href="statistiques.html">Statistiques</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="index.html">Accueil</a>
-    </nav>
-    <button id="btnHelp">❓ Comment jouer</button>
-</header>
+        <div class="logo">MemoLink</div>
+        <nav>
+            <a href="statistiques.html">Statistiques</a>
+            <a href="parametres.html">Paramètres</a>
+            <a href="index.html">Accueil</a>
+        </nav>
+        <button id="btnHelp">❓ Comment jouer</button>
+    </header>
+
+    <!-- LÉGENDE FIXE PERMANENTE (Correction #4) -->
+    <div id="legendeFixe">
+        <div class="legende-titre">Légende</div>
+        <div class="legende-item"><span class="legende-dot dot-vide"></span> Case vide</div>
+        <div class="legende-item"><span class="legende-dot dot-ok"></span> Bonne réponse</div>
+        <div class="legende-item"><span class="legende-dot dot-ordre"></span> Mauvais ordre</div>
+        <div class="legende-item"><span class="legende-dot dot-theme"></span> Hors thème</div>
+    </div>
+
     <main>
-        <div id="accueil">
-            <h1>Faites de votre mieux !</h1>
-            <button id="btnCommencer">Commencer le jeu</button>
+        <!-- SÉLECTEUR DE RÔLE (Correction #2) -->
+        <div id="choixRole">
+            <div class="role-card">
+                <div class="role-emoji">🧓</div>
+                <h2>Qui joue ?</h2>
+                <p>Choisissez votre profil pour adapter le jeu</p>
+                <div class="role-boutons">
+                    <button class="role-btn" id="btnPatient" onclick="choisirRole('patient')">
+                        <span class="role-icon">🧓</span>
+                        <span class="role-label">Je suis le patient</span>
+                        <span class="role-desc">Aide visuelle, messages simples</span>
+                    </button>
+                    <button class="role-btn" id="btnAidant" onclick="choisirRole('aidant')">
+                        <span class="role-icon">🤝</span>
+                        <span class="role-label">Je suis l'aidant</span>
+                        <span class="role-desc">Explications détaillées, suivi des erreurs</span>
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <div id="accueil" style="display:none">
+            <h1>Faites de votre mieux !</h1>
+            <!-- Indicateur de rôle actif -->
+            <div id="roleActifBadge"></div>
+            <button id="btnCommencer">▶ Commencer le jeu</button>
+        </div>
+
         <div id="jeu">
             <div id="plateau">
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face t-shirt">
-                        <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                        <img src="Banque_d'images/Habillement/clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
                         <p>T-shirt</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face brosse">
-                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                        <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
                         <p>Brosse à dents</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face dentifrice">
-                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                        <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
                         <p>Dentifrice</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face t-shirt">
-                        <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                        <img src="Banque_d'images/Habillement/clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
                         <p>T-shirt</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face brosse">
-                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                        <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
                         <p>Brosse à dents</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face dentifrice">
-                        <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                        <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
                         <p>Dentifrice</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face soleil">
-                        <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                        <img src="Banque_d'images/Saisons/openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
                         <p>Ensoleillé</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face bonnet">
-                        <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                        <img src="Banque_d'images/Habillement/ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
                         <p>Bonnet</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face parapluie">
-                        <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                        <img src="Banque_d'images/Habillement/openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
                         <p>Parapluie</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face soleil">
-                        <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                        <img src="Banque_d'images/Saisons/openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
                         <p>Ensoleillé</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face parapluie">
-                        <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                        <img src="Banque_d'images/Habillement/openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
                         <p>Parapluie</p>
                     </div>
                 </div>
                 <div class="carte">
                     <div class="dos"></div>
                     <div class="face bonnet">
-                        <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                        <img src="Banque_d'images/Habillement/ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
                         <p>Bonnet</p>
                     </div>
                 </div>
             </div>
             <button id="passerAAssociation">Passer à la partie association</button>
             <button id="aideMemo">💡 Aide</button>
+
+            <!-- PHASE ASSOCIATION -->
             <div id="association">
-                <h2 id="consigne">Associez les objets sur le thème du brossage de dents.</h2>
+                <!-- Consigne adaptée à la cible (Correction #3) -->
+                <div id="consigneWrapper">
+                    <div id="consigneNarrative">
+                        <span id="iconeTheme">🦷</span>
+                        <h2 id="consigne">Mets les objets dans l'ordre pour te brosser les dents</h2>
+                    </div>
+                    <!-- Flèches directionnelles entre les cases (Correction #3) -->
+                    <div id="indicateurOrdre">
+                        <span>① ➜ ② ➜ ③</span>
+                        <span class="ordre-explication">Dans cet ordre, de haut en bas</span>
+                    </div>
+                </div>
 
                 <div id="zoneAssociationWrapper">
 
                     <div id="colonneDepot">
-                        <h3 class="zone-titre">Déposez ici dans l'ordre</h3>
+                        <h3 class="zone-titre">Dépose ici dans l'ordre ↓</h3>
                         <div id="zoneAssociation"></div>
                     </div>
 
@@ -134,50 +181,76 @@
                         <h3 class="zone-titre">Éléments disponibles</h3>
                         <div id="elementsDispo">
                             <div class="elem" draggable="true" id="1">
-                                <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
+                                <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothbrush-311373_1920.png" alt="Brosse à dents">
                                 <p>Brosse à dents</p>
                             </div>
                             <div class="elem" draggable="true" id="2">
-                                <img src="Banque_d'images\Brossage_de_dents\clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
+                                <img src="Banque_d'images/Brossage_de_dents/clker-free-vector-images-toothpaste-29774_1920.png" alt="Dentifrice">
                                 <p>Dentifrice</p>
                             </div>
                             <div class="elem" draggable="true">
-                                <img src="Banque_d'images\Habillement\clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
+                                <img src="Banque_d'images/Habillement/clker-free-vector-images-t-shirt-294078_1920.png" alt="T-shirt">
                                 <p>T-shirt</p>
                             </div>
                             <div class="elem" draggable="true">
-                                <img src="Banque_d'images\Habillement\ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
+                                <img src="Banque_d'images/Habillement/ideativas-tlm-wool-hat-6232250_1920.png" alt="Bonnet">
                                 <p>Bonnet</p>
                             </div>
                             <div class="elem" draggable="true">
-                                <img src="Banque_d'images\Habillement\openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
+                                <img src="Banque_d'images/Habillement/openclipart-vectors-rain-1295189_1920.png" alt="Parapluie">
                                 <p>Parapluie</p>
                             </div>
                             <div class="elem" draggable="true">
-                                <img src="Banque_d'images\Saisons\openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
+                                <img src="Banque_d'images/Saisons/openclipart-vectors-sun-2026715_1920.png" alt="Ensoleillé">
                                 <p>Ensoleillé</p>
                             </div>
                         </div>
+                        <!-- Bouton fallback clic (Correction #3) -->
+                        <p id="tutoClick" class="tuto-click">💡 Tu peux aussi <strong>cliquer</strong> sur un objet puis <strong>cliquer</strong> sur une case !</p>
                     </div>
 
                 </div>
 
-                <div id="messageAssociation"></div>
+                <!-- MESSAGE D'ERREUR AMÉLIORÉ (Correction #1) -->
+                <div id="messageAssociation" role="alert" aria-live="assertive"></div>
 
-                <button id="aideAssociation">💡 Aide</button>
-                <button id="btnVerifier">Vérifier</button>
+                <div class="btn-assoc-row">
+                    <button id="aideAssociation">💡 Aide</button>
+                    <button id="btnVerifier">✅ Vérifier</button>
+                </div>
             </div>
         </div>
-        <h1 id="messageFelicitation">🎉 Félicitations ! Vous avez terminé le jeu ! 🎉</h1>
+
+        <!-- RECAP VISUEL FIN DE JEU (différenciateur vs memory classique) -->
+        <div id="recapFin" style="display:none">
+            <div class="recap-card">
+                <h2>🎉 Bravo !</h2>
+                <p class="recap-sous-titre">Tu te souviens ? Voilà comment se brosser les dents :</p>
+                <div id="recapSequence"></div>
+                <button id="btnRejouer" onclick="relancerJeu()">🔄 Rejouer</button>
+            </div>
+        </div>
+
+        <h1 id="messageFelicitation" style="display:none">🎉 Félicitations ! Vous avez terminé le jeu ! 🎉</h1>
     </main>
 
+    <!-- MODALE AIDE CONTEXTUELLE (Correction #2) -->
     <div id="modaleHelp" onclick="if(event.target===this)this.style.display='none'">
         <div class="contenu">
             <button class="fermer" onclick="document.getElementById('modaleHelp').style.display='none'">✕</button>
             <h2>Comment jouer ?</h2>
-            <p><strong>1. Le memory</strong><br>Cliquez sur n'importe quelle carte pour la révéler. Retournez une seconde carte. Si les deux correspondent, elles restent visibles.</p>
-            <p><strong>2. L'association</strong><br>Associez les cartes du memory dans le bon ordre (dans la bonne cellule numérotée) selon le thème donné. Changez votre réponse à tout moment avant de valider : vous pouvez déplacer l'élément que vous souhaitez dans une cellule vide ou la zone des éléments disponibles. Les thèmes vous permettent de vous rappeler des gestes et objets du quotidien.</p>
-            <p><strong>3. Le bouton 💡 Aide</strong><br>Il vous donne un indice si vous êtes bloqué.</p>
+            <!-- Contenu adapté au rôle (affiché via JS) -->
+            <div id="aidePatient">
+                <p>🃏 <strong>1. Le memory</strong><br>Clique sur une carte pour la voir. Puis clique sur une autre. Si elles sont pareilles, elles restent ouvertes !</p>
+                <p>🦷 <strong>2. L'association</strong><br>Mets les objets dans le bon ordre. Glisse-les ou clique dessus puis clique sur une case.</p>
+                <p>💡 <strong>Le bouton Aide</strong><br>Appuie dessus si tu es bloqué, ça t'aidera !</p>
+            </div>
+            <div id="aideAidant" style="display:none">
+                <p><strong>1. Le memory</strong><br>Retournez les cartes pour trouver les paires identiques. Après un certain nombre d'erreurs, une aide visuelle s'affiche automatiquement.</p>
+                <p><strong>2. L'association</strong><br>Associez les cartes dans le bon ordre selon le thème. Le bouton "Vérifier" apparaît une fois toutes les cases remplies. Un message d'erreur détaillé indique les mauvais placements.</p>
+                <p><strong>💡 Bouton Aide</strong><br>Pour le patient : mise en surbrillance. Pour vous : explication complète de l'erreur avec type (mauvais thème ou mauvais ordre).</p>
+                <p><strong>📊 Statistiques</strong><br>Consultez la page Statistiques pour suivre la progression dans le temps.</p>
+            </div>
         </div>
     </div>
 
@@ -186,7 +259,6 @@
     <canvas id="confetti-canvas"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
     <script src="jeu.js" defer></script>
 </body>
 </html>
