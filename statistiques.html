@@ -23,7 +23,39 @@
 
     <main>
         <h1>Vos Statistiques</h1>
+        <div class="patient-selector-container">
+            <div class="selector-group">
+                <label for="patient-select">Dossier patient :</label>
+                <select id="patient-select" class="patient-select" onchange="changerPatient(this.value)">
+                    <option value="jean">Jean Dupont</option>
+                    <option value="marie">Marie Martin</option>
+                    <option value="claude">Claude Dubois</option>
+                </select>
+            </div>
+            
+            <button class="btn-action btn-primary">+ Nouveau patient</button>
+        </div>
 
+        <div class="stat-card patient-profile" id="profile-card">
+            <div class="profile-photo">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Photo du patient" id="patient-photo">
+            </div>
+            <div class="profile-info">
+                
+                <div class="profile-header">
+                    <h2 id="patient-name">Jean Dupont</h2>
+                    <button class="btn-action btn-secondary">✏️ Modifier</button>
+                </div>
+
+                <div class="profile-details">
+                    <p><strong>Âge :</strong> <span id="patient-age">82 ans</span></p>
+                    <p><strong>Stade cognitif :</strong> <span class="badge" id="patient-stade" style="background: #F4F0F2; color: #875C74;">Modéré</span></p>
+                </div>
+                <div class="profile-therapy">
+                    <p><strong>Objectif thérapeutique :</strong> <span id="patient-objectif">Ralentissement de l'oubli à court terme, stimulation spatiale via le Memory 4x3.</span></p>
+                </div>
+            </div>
+        </div>
         <div class="stat-card">
             <span class="stat-label">Historique : Taux de bonnes réponses</span>
             <div class="chart-header">
@@ -90,7 +122,6 @@
             <thead>
                 <tr>
                     <th>Partie</th>
-                    <th>Stade</th>
                     <th>Format Jeu</th>
                     <th>Format Partie</th>
                     <th>Plateau</th>
@@ -103,7 +134,6 @@
             <tbody>
                 <tr>
                     <td>#6</td>
-                    <td><span class="badge" style="background: #F0EFF2; color: #453750;">Sévère</span></td>
                     <td>Images + Son</td>
                     <td>Memory</td>
                     <td>4 × 2</td>
@@ -114,7 +144,6 @@
                 </tr>
                 <tr>
                     <td>#5</td>
-                    <td><span class="badge" style="background: #F4F0F2; color: #875C74;">Modéré</span></td>
                     <td>Images + Texte</td>
                     <td>Assoc.</td>
                     <td>4 × 3</td>
@@ -125,7 +154,6 @@
                 </tr>
                 <tr>
                     <td>#4</td>
-                    <td><span class="badge" style="background: #F8F4F2; color: #B79D94;">Léger</span></td>
                     <td>Images + Texte</td>
                     <td>Mémo + Assoc.</td>
                     <td>4 × 4</td>
@@ -136,7 +164,6 @@
                 </tr>
                 <tr>
                     <td>#3</td>
-                    <td><span class="badge" style="background: #F8F4F2; color: #B79D94;">Léger</span></td>
                     <td>Images + Texte</td>
                     <td>Mémo + Assoc.</td>
                     <td>4 × 3</td>
@@ -251,7 +278,6 @@
     <footer>
         MemoLink &copy; 2026 — Conçu avec soin pour les seniors
     </footer>
-
-
+    <script src="statistiques.js"></script>
 </body>
 </html>
