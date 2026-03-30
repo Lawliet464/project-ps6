@@ -511,14 +511,14 @@ main button:hover { background-color: #875C74; }
 
 #messageAssociation.message-erreur {
     background: #fde8e8;
-    border: 2px solid #e05c5c;
-    color: #c0392b;
+    border: 2px solid #2b6ec0;
+    color: #2b6ec0;
 }
 
 #messageAssociation.message-erreur-ordre {
     background: #fde8e8;
-    border: 2px solid #e05c5c;
-    color: #c0392b;
+    border: 2px solid #5ca7e0;
+    color: #2b6ec0;
 }
 
 #messageAssociation.message-erreur-theme {
