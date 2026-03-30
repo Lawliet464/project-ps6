@@ -426,6 +426,10 @@ function terminerJeu() {
     });
 
     document.getElementById("recapFin").style.display = "block";
+    let recapFin = document.getElementById("recapFin");
+    recapFin.style.display = "flex";
+    recapFin.style.flexDirection = "column";
+    recapFin.style.alignItems = "center";
 
     // Reset après affichage du récap (via bouton Rejouer)
 }

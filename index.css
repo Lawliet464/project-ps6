@@ -11,6 +11,7 @@
       --beige-pale: #E8DFDA;
       --blanc:      #FFFFFF;
       --radius:     16px;
+      --rose:       #dfc9cc;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,11 +35,15 @@
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--texte);
-      letter-spacing: 0.04em;
+      font-family: 'Lora', serif; 
+      font-size: 1.6rem; 
+      font-weight: 600;
+      color: var(--prune); 
+      letter-spacing: -0.02em;
     }
+    .logo span { 
+      color: var(--rose); 
+      font-style: italic; }
 
     nav { display: flex; gap: 32px; }
 
