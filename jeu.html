@@ -42,7 +42,7 @@
                 <h2>Qui joue ?</h2>
                 <p>Choisissez votre profil pour adapter le jeu</p>
                 <div class="role-boutons">
-                    <button class="role-btn" id="btnPatient" onclick="choisirRole('patient')">
+                    <button class="role-btn" id="btnAccueilli" onclick="choisirRole('accueilli')">
                         <span class="role-icon">🧓</span>
                         <span class="role-label">Je joue tout seul</span>
                         <span class="role-desc">Aide visuelle, messages simples</span>
@@ -227,7 +227,7 @@
         <div id="recapFin" style="display:none">
             <div class="recap-card">
                 <h2>🎉 Bravo !</h2>
-                <p class="recap-sous-titre">Tu te souviens ? Voilà comment se brosser les dents :</p>
+                <p class="recap-sous-titre">Voilà comment se brosser les dents :</p>
                 <div id="recapSequence"></div>
                 <button id="btnRejouer" onclick="relancerJeu()">🔄 Rejouer</button>
             </div>
@@ -242,7 +242,7 @@
             <button class="fermer" onclick="document.getElementById('modaleHelp').style.display='none'">✕</button>
             <h2>Comment jouer ?</h2>
             <!-- Contenu adapté au rôle (affiché via JS) -->
-            <div id="aidePatient">
+            <div id="aideAccueilli">
                 <p>🃏 <strong>1. Le memory</strong><br>Clique sur une carte pour la voir. Puis clique sur une autre. Si elles sont pareilles, elles restent ouvertes !</p>
                 <p>🦷 <strong>2. L'association</strong><br>Mets les objets dans le bon ordre. Glisse-les ou clique dessus puis clique sur une case.</p>
                 <p>💡 <strong>Le bouton Aide</strong><br>Appuie dessus si tu es bloqué, ça t'aidera !</p>
@@ -250,7 +250,7 @@
             <div id="aideAidant" style="display:none">
                 <p><strong>1. Le memory</strong><br>Retournez les cartes pour trouver les paires identiques. Après un certain nombre d'erreurs, une aide visuelle s'affiche automatiquement.</p>
                 <p><strong>2. L'association</strong><br>Associez les cartes dans le bon ordre selon le thème. Le bouton "Vérifier" apparaît une fois toutes les cases remplies. Un message d'erreur détaillé indique les mauvais placements.</p>
-                <p><strong>💡 Bouton Aide</strong><br>Pour le patient : mise en surbrillance. Pour vous : explication complète de l'erreur avec type (mauvais thème ou mauvais ordre).</p>
+                <p><strong>💡 Bouton Aide</strong><br>Pour le accueilli : mise en surbrillance. Pour vous : explication complète de l'erreur avec type (mauvais thème ou mauvais ordre).</p>
                 <p><strong>📊 Statistiques</strong><br>Consultez la page Statistiques pour suivre la progression dans le temps.</p>
             </div>
         </div>

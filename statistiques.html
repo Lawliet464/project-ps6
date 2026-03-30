@@ -23,36 +23,36 @@
 
     <main>
         <h1>Vos Statistiques</h1>
-        <div class="patient-selector-container">
+        <div class="accueilli-selector-container">
             <div class="selector-group">
-                <label for="patient-select">Dossier patient :</label>
-                <select id="patient-select" class="patient-select" onchange="changerPatient(this.value)">
+                <label for="accueilli-select">Dossier accueilli :</label>
+                <select id="accueilli-select" class="accueilli-select" onchange="changerAccueilli(this.value)">
                     <option value="jean">Jean Dupont</option>
                     <option value="marie">Marie Martin</option>
                     <option value="claude">Claude Dubois</option>
                 </select>
             </div>
             
-            <button class="btn-action btn-primary">+ Nouveau patient</button>
+            <button class="btn-action btn-primary">+ Nouveau accueilli</button>
         </div>
 
-        <div class="stat-card patient-profile" id="profile-card">
+        <div class="stat-card accueilli-profile" id="profile-card">
             <div class="profile-photo">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Photo du patient" id="patient-photo">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Photo du accueilli" id="accueilli-photo">
             </div>
             <div class="profile-info">
                 
                 <div class="profile-header">
-                    <h2 id="patient-name">Jean Dupont</h2>
+                    <h2 id="accueilli-name">Jean Dupont</h2>
                     <button class="btn-action btn-secondary">✏️ Modifier</button>
                 </div>
 
                 <div class="profile-details">
-                    <p><strong>Âge :</strong> <span id="patient-age">82 ans</span></p>
-                    <p><strong>Stade cognitif :</strong> <span class="badge" id="patient-stade" style="background: #F4F0F2; color: #875C74;">Modéré</span></p>
+                    <p><strong>Âge :</strong> <span id="accueilli-age">82 ans</span></p>
+                    <p><strong>Niveay :</strong> <span class="badge" id="niveau" style="background: #F4F0F2; color: #875C74;">Modéré</span></p>
                 </div>
                 <div class="profile-therapy">
-                    <p><strong>Objectif thérapeutique :</strong> <span id="patient-objectif">Ralentissement de l'oubli à court terme, stimulation spatiale via le Memory 4x3.</span></p>
+                    <p><strong>Objectif thérapeutique :</strong> <span id="accueilli-objectif">Ralentissement de l'oubli à court terme, stimulation spatiale via le Memory 4x3.</span></p>
                 </div>
             </div>
         </div>

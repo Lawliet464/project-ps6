@@ -1,4 +1,4 @@
-const patientsData = {
+const accueillisData = {
     "jean": {
         nom: "Claudine Dupont",
         age: "82 ans",
@@ -22,15 +22,15 @@ const patientsData = {
     }
 };
 
-function changerPatient(idPatient) {
-    const data = patientsData[idPatient];
+function changerAccueilli(idAccueilli) {
+    const data = accueillisData[idAccueilli];
     
-    document.getElementById('patient-name').textContent = data.nom;
-    document.getElementById('patient-age').textContent = data.age;
-    document.getElementById('patient-objectif').textContent = data.objectif;
+    document.getElementById('accueilli-name').textContent = data.nom;
+    document.getElementById('accueilli-age').textContent = data.age;
+    document.getElementById('accueilli-objectif').textContent = data.objectif;
     
     // Mise à jour du badge de stade
-    const badgeStade = document.getElementById('patient-stade');
+    const badgeStade = document.getElementById('accueilli-stade');
     badgeStade.textContent = data.stade;
     badgeStade.style.backgroundColor = data.couleurStade;
     badgeStade.style.color = data.colorTexte;

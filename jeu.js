@@ -1,6 +1,6 @@
 // ─── ÉTAT GLOBAL ──────────────────────────────────────────────────────────────
 
-let role = null; // 'patient' | 'aidant'
+let role = null; // 'accueilli' | 'aidant'
 let elemSelectionne = null; // Pour le fallback clic (Correction #3)
 
 let compteurErreurs = 0;
@@ -23,16 +23,16 @@ function choisirRole(r) {
 
     // Badge rôle actif
     const badge = document.getElementById('roleActifBadge');
-    if (r === 'patient') {
-        badge.innerHTML = '🧓 Mode patient activé';
-        badge.className = 'role-badge badge-patient';
+    if (r === 'accueilli') {
+        badge.innerHTML = '🧓 Mode accueilli activé';
+        badge.className = 'role-badge badge-accueilli';
     } else {
         badge.innerHTML = '🤝 Mode aidant activé';
         badge.className = 'role-badge badge-aidant';
     }
 
     // Adapter l'aide de la modale
-    document.getElementById('aidePatient').style.display = r === 'patient' ? 'block' : 'none';
+    document.getElementById('aideAccueilli').style.display = r === 'accueilli' ? 'block' : 'none';
     document.getElementById('aideAidant').style.display = r === 'aidant' ? 'block' : 'none';
 }
 
@@ -303,10 +303,10 @@ function verifierAssociation() {
         let aOrdre = messagesAidant.some(m => m.includes("bon thème"));
         let typeErreur = (aTheme && aOrdre) ? 'mixte' : aTheme ? 'theme' : 'ordre';
 
-        if (role === 'patient') {
+        if (role === 'accueilli') {
             afficherMessageErreur(messagesAidant.join("<br>"), true, typeErreur);
         } else {
-            afficherMessageErreur("❌ Pas tout à fait... Essaie encore !", true, typeErreur);
+            afficherMessageErreur("Pas tout à fait... Essaie encore !", true, typeErreur);
         }
     }
 }

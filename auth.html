@@ -104,7 +104,6 @@
     <div class="card">
         <span class="card-icon">🧠</span>
         <h1>Bienvenue sur MemoLink</h1>
-        <p class="sous-titre">Un jeu de mémoire conçu pour les personnes atteintes d'Alzheimer, adapté à chaque stade de la maladie.</p>
         <div class="role-grid">
             <button class="role-btn" onclick="allerVers('screenConnexionAidant')">
                 <span class="r-icon">🤝</span>
@@ -113,7 +112,7 @@
             </button>
             <button class="role-btn" onclick="allerVers('screenConnexionMalade')">
                 <span class="r-icon">🧓</span>
-                <span class="r-label">Je suis patient</span>
+                <span class="r-label">Je suis un accueilli</span>
                 <span class="r-desc">Jouer à mon rythme</span>
             </button>
         </div>
@@ -137,7 +136,7 @@
         <div class="etapes"><div class="etape active" id="e1"></div><div class="etape" id="e2"></div></div>
         <span class="card-icon">✏️</span>
         <h1>Créer mon compte</h1>
-        <p class="sous-titre">Votre compte vous permet de gérer les profils des patients et de suivre leur progression.</p>
+        <p class="sous-titre">Votre compte vous permet de gérer les profils des accueillis et de suivre leur progression.</p>
         <div class="msg-erreur" id="errCreerAidant"></div>
         <div class="form-group">
             <label>Votre prénom</label>
@@ -156,9 +155,9 @@
     <div class="card" style="max-width:600px">
         <span class="card-icon">🤝</span>
         <h1 id="titreAidant">Bonjour !</h1>
-        <p class="sous-titre">Gérez les profils des patients et suivez leur progression.</p>
-        <div id="listePatientsAidant" style="margin-bottom:20px"></div>
-        <button class="btn-primary" onclick="allerVers('screenCreerMalade')">+ Ajouter un patient</button>
+        <p class="sous-titre">Gérez les profils des accueillis et suivez leur progression.</p>
+        <div id="listeAccueillisAidant" style="margin-bottom:20px"></div>
+        <button class="btn-primary" onclick="allerVers('screenCreerMalade')">+ Ajouter un accueilli</button>
         <button class="btn-secondary" onclick="deconnecterAidant()">Se déconnecter</button>
     </div>
 </div>
@@ -167,11 +166,11 @@
     <div class="card">
         <div class="etapes"><div class="etape done"></div><div class="etape active"></div></div>
         <span class="card-icon">🧓</span>
-        <h1>Nouveau patient</h1>
+        <h1>Nouveau accueilli</h1>
         <p class="sous-titre">Créez un profil adapté à la personne atteinte d'Alzheimer.</p>
         <div class="msg-erreur" id="errCreerMalade"></div>
         <div class="form-group">
-            <label>Prénom du patient</label>
+            <label>Prénom du accueilli</label>
             <input type="text" id="inputPrenomMalade" placeholder="Ex : Jean" maxlength="30">
         </div>
         <div class="form-group">
@@ -226,13 +225,13 @@
 
 <script>
 let aidants  = JSON.parse(localStorage.getItem('ml_aidants')  || '[]');
-let patients = JSON.parse(localStorage.getItem('ml_patients') || '[]');
+let accueillis = JSON.parse(localStorage.getItem('ml_accueillis') || '[]');
 let aidantConnecte  = null;
 let stadeSelectionne = 'leger';
 
 function sauvegarder() {
     localStorage.setItem('ml_aidants',  JSON.stringify(aidants));
-    localStorage.setItem('ml_patients', JSON.stringify(patients));
+    localStorage.setItem('ml_accueillis', JSON.stringify(accueillis));
 }
 
 function allerVers(id) {
@@ -300,9 +299,9 @@ function ouvrirConnexionAidant(id) {
 
 function supprimerAidant(id) {
     const a = aidants.find(x => x.id === id);
-    if (!confirm(`Supprimer le compte de "${a.prenom}" ?\nSes patients associés seront aussi supprimés.`)) return;
+    if (!confirm(`Supprimer le compte de "${a.prenom}" ?\nSes accueillis associés seront aussi supprimés.`)) return;
     aidants  = aidants.filter(x => x.id !== id);
-    patients = patients.filter(p => p.aidantId !== id);
+    accueillis = accueillis.filter(p => p.aidantId !== id);
     sauvegarder();
     renderListeAidants();
 }
@@ -311,36 +310,36 @@ function supprimerAidant(id) {
 
 function renderDashboardAidant() {
     document.getElementById('titreAidant').textContent = `Bonjour, ${aidantConnecte.prenom} 👋`;
-    const mesPts = patients.filter(p => p.aidantId === aidantConnecte.id);
-    const liste  = document.getElementById('listePatientsAidant');
+    const mesPts = accueillis.filter(p => p.aidantId === aidantConnecte.id);
+    const liste  = document.getElementById('listeAccueillisAidant');
     if (mesPts.length === 0) {
-        liste.innerHTML = '<p style="color:var(--gris);font-size:0.9rem;text-align:center;padding:16px 0">Aucun patient créé. Commencez par en ajouter un !</p>';
+        liste.innerHTML = '<p style="color:var(--gris);font-size:0.9rem;text-align:center;padding:16px 0">Aucun accueilli créé. Commencez par en ajouter un !</p>';
         return;
     }
     const stadeLabels = { leger: '🌱 Stade léger', modere: '🌿 Stade modéré', severe: '🍂 Stade sévère' };
     liste.innerHTML = mesPts.map(p => `
         <div class="profil-item">
-            <div class="profil-avatar" onclick="voirStatsPatient('${p.id}')">${p.prenom[0].toUpperCase()}</div>
-            <div style="flex:1;cursor:pointer" onclick="voirStatsPatient('${p.id}')">
+            <div class="profil-avatar" onclick="voirStatsAccueilli('${p.id}')">${p.prenom[0].toUpperCase()}</div>
+            <div style="flex:1;cursor:pointer" onclick="voirStatsAccueilli('${p.id}')">
                 <span class="profil-nom">${p.prenom}</span>
                 <span class="profil-stade">${stadeLabels[p.stade] || p.stade}</span>
             </div>
-            <span style="cursor:pointer;color:var(--beige);font-size:1.3rem" onclick="voirStatsPatient('${p.id}')">→</span>
-            <button class="btn-supprimer" onclick="supprimerPatient('${p.id}')" title="Supprimer">🗑️</button>
+            <span style="cursor:pointer;color:var(--beige);font-size:1.3rem" onclick="voirStatsAccueilli('${p.id}')">→</span>
+            <button class="btn-supprimer" onclick="supprimerAccueilli('${p.id}')" title="Supprimer">🗑️</button>
         </div>
     `).join('');
 }
 
-function supprimerPatient(id) {
-    const p = patients.find(x => x.id === id);
+function supprimerAccueilli(id) {
+    const p = accueillis.find(x => x.id === id);
     if (!confirm(`Supprimer le profil de "${p.prenom}" ?`)) return;
-    patients = patients.filter(x => x.id !== id);
+    accueillis = accueillis.filter(x => x.id !== id);
     sauvegarder();
     renderDashboardAidant();
 }
 
-function voirStatsPatient(id) {
-    localStorage.setItem('ml_patientActif', id);
+function voirStatsAccueilli(id) {
+    localStorage.setItem('ml_accueilliActif', id);
     window.location.href = 'statistiques.html';
 }
 
@@ -354,10 +353,10 @@ function deconnecterAidant() {
 function creerProfilMalade() {
     const prenom = document.getElementById('inputPrenomMalade').value.trim();
     const err    = document.getElementById('errCreerMalade');
-    if (!prenom) { err.textContent = '⚠️ Veuillez entrer le prénom du patient.'; err.classList.add('visible'); return; }
+    if (!prenom) { err.textContent = '⚠️ Veuillez entrer le prénom du accueilli.'; err.classList.add('visible'); return; }
     err.classList.remove('visible');
-    const patient = { id: Date.now().toString(), prenom, stade: stadeSelectionne, aidantId: aidantConnecte ? aidantConnecte.id : null, stats: [] };
-    patients.push(patient);
+    const accueilli = { id: Date.now().toString(), prenom, stade: stadeSelectionne, aidantId: aidantConnecte ? aidantConnecte.id : null, stats: [] };
+    accueillis.push(accueilli);
     sauvegarder();
     document.getElementById('inputPrenomMalade').value = '';
     stadeSelectionne = 'leger';
@@ -368,10 +367,10 @@ function creerProfilMalade() {
 function renderListeProfils() {
     const liste = document.getElementById('listeProfils');
     const aucun = document.getElementById('aucunProfil');
-    if (patients.length === 0) { liste.innerHTML = ''; aucun.style.display = 'block'; return; }
+    if (accueillis.length === 0) { liste.innerHTML = ''; aucun.style.display = 'block'; return; }
     aucun.style.display = 'none';
     const stadeLabels = { leger: '🌱 Stade léger', modere: '🌿 Stade modéré', severe: '🍂 Stade sévère' };
-    liste.innerHTML = patients.map(p => `
+    liste.innerHTML = accueillis.map(p => `
         <div class="profil-item">
             <div class="profil-avatar" onclick="lancerJeu('${p.id}')">${p.prenom[0].toUpperCase()}</div>
             <div style="flex:1;cursor:pointer" onclick="lancerJeu('${p.id}')">
@@ -385,15 +384,15 @@ function renderListeProfils() {
 }
 
 function supprimerProfilMalade(id) {
-    const p = patients.find(x => x.id === id);
+    const p = accueillis.find(x => x.id === id);
     if (!confirm(`Supprimer le profil de "${p.prenom}" ?`)) return;
-    patients = patients.filter(x => x.id !== id);
+    accueillis = accueillis.filter(x => x.id !== id);
     sauvegarder();
     renderListeProfils();
 }
 
-function lancerJeu(patientId) {
-    localStorage.setItem('ml_patientActif', patientId);
+function lancerJeu(accueilliId) {
+    localStorage.setItem('ml_accueilliActif', accueilliId);
     window.location.href = 'jeu.html';
 }
 </script>

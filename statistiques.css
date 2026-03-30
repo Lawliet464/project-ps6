@@ -198,7 +198,7 @@ footer {
         box-shadow: 0 0 0 3px rgba(135, 92, 116, 0.2);
     }
 
-.patient-selector-container {
+.accueilli-selector-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -206,13 +206,13 @@ footer {
     margin-bottom: 30px;
 }
 
-.patient-selector-container label {
+.accueilli-selector-container label {
     font-size: 1.1rem;
     font-weight: 700;
     color: #453750;
 }
 
-.patient-select {
+.accueilli-select {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
@@ -226,12 +226,12 @@ footer {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.patient-select:focus {
+.accueilli-select:focus {
     border-color: #875C74;
     box-shadow: 0 0 0 3px rgba(135, 92, 116, 0.2);
 }
 
-.patient-profile {
+.accueilli-profile {
     display: flex;
     align-items: center;
     gap: 25px;
@@ -285,7 +285,7 @@ footer {
 }
 
 /* ── CONTENEUR SÉLECTEUR AJUSTÉ ── */
-.patient-selector-container {
+.accueilli-selector-container {
     display: flex;
     justify-content: space-between; /* Écarte le sélecteur à gauche et le bouton à droite */
     align-items: center;

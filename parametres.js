@@ -353,24 +353,24 @@ const paramStageTemplate = `
 const STAGES = [
     {
         value: 'leger',
-        name: 'Stade léger',
-        desc: 'Autonomie préservée : aides ponctuelles',
+        name: 'Niveau élevé',
+        desc: 'Aides ponctuelles',
         color: '#B79D94', 
-        bg: '#F8F4F2',    // Version très claire du beige
+        bg: '#F8F4F2',    
     },
     {
         value: 'modere',
-        name: 'Stade modéré',
-        desc: 'Désorientation fréquente : aides régulières',
+        name: 'Niveau modéré',
+        desc: 'Aides régulières',
         color: '#875C74', 
-        bg: '#F4F0F2',    // Version très claire du prune
+        bg: '#F4F0F2',    
     },
     {
         value: 'severe',
-        name: 'Stade sévère',
-        desc: 'Forte dépendance : aides continues',
+        name: 'Niveau facile',
+        desc: 'Aides continues',
         color: '#453750', 
-        bg: '#F0EFF2',    // Version très claire du violet
+        bg: '#F0EFF2',    
     },
 ];
 
