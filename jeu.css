@@ -523,8 +523,8 @@ main button:hover { background-color: #875C74; }
 
 #messageAssociation.message-erreur-theme {
     background: #fff3e0;
-    border: 2px solid #f5a623;
-    color: #b36a00;
+    border: 2px solid #2b6ec0;
+    color: #2b6ec0;
 }
 
 #messageAssociation.message-erreur-mixte {
