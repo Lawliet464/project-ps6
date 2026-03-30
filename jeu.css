@@ -25,7 +25,7 @@ nav {
 }
 
 nav a {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     color: black;
     text-decoration: none;
@@ -34,6 +34,12 @@ nav a {
     transition: opacity 0.2s;
 }
 nav a:hover { opacity: 1; }
+
+#btnHelp {
+    align-content: center;
+    margin: 20px;
+    padding: 5px;
+}
 
 main {
     text-align: center;

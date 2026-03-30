@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoLink — Création de thème</title>
+    <link rel="stylesheet" href="creationThm.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Memo<span>Link</span></div>
+    </header>
+
+    <div class="screen active">
+        <div class="card">
+            <h1>Créer un thème</h1>
+            <p class="sous-titre">
+                Créer vos propres éléments et définissez leurs associations.
+            </p>
+
+            <div class="form-group">
+                <label>Nom du thème</label>
+                <input type="text" id="themeNom" placeholder="Ex : Famille, Vacances...">
+            </div>
+
+            <div id="elementsList"></div>
+
+            <button class="btn-secondary" onclick="ajouterElement()">+ Ajouter un élément</button>
+
+            <div class="explication">
+                <h3>Comment créer un thème ?</h3>
+                <p>Créez au moins 2 éléments pour pouvoir faire une association fonctionnelle.</p>
+                <p>Chaque élément représente une carte.</p>
+                <p>Indiquez sa position dans l'association en remplissant la zone grisée "Ordre".</p>
+                <p>Les ordres des éléments du thème doivent être consécutifs de 1 à N pour sauvegarder le thèeme.</p>
+            </div>
+
+            <div id="messageTheme" class="msg-erreur"></div>
+            <button class="btn-primary" onclick="sauvegarderTheme()">Enregistrer le thème</button>
+        </div>
+    </div>
+
+    <script src="creationThm.js"></script>
+</body>
+</html>
