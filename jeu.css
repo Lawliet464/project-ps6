@@ -190,7 +190,7 @@ main button:hover { background-color: #875C74; }
 }
 .dot-vide   { background: #EEF0F2; border: 2px dashed #875C74; }
 .dot-ok     { background: #6abf69; }
-.dot-ordre  { background: #e05c5c; }
+.dot-ordre  { background: #5c6be0; }
 .dot-theme  { background: #f5a623; }
 
 /* ── MEMORY ── */
@@ -376,8 +376,8 @@ main button:hover { background-color: #875C74; }
 
 /* 🔀 Bon thème mais mauvais ordre = rouge */
 .cellule.incorrecte-ordre {
-    background: #fde8e8;
-    border-color: #e05c5c;
+    background: #857ed3;
+    border-color: #5c7de0;
     border-style: solid;
     animation: shake 0.5s ease;
 }
@@ -511,20 +511,20 @@ main button:hover { background-color: #875C74; }
 
 #messageAssociation.message-erreur {
     background: #fde8e8;
-    border: 2px solid #2b6ec0;
-    color: #2b6ec0;
+    border: 2px solid #e05c5c;
+    color: #c0392b;
 }
 
 #messageAssociation.message-erreur-ordre {
     background: #fde8e8;
-    border: 2px solid #5ca7e0;
-    color: #2b6ec0;
+    border: 2px solid #e05c5c;
+    color: #c0392b;
 }
 
 #messageAssociation.message-erreur-theme {
     background: #fff3e0;
-    border: 2px solid #2b6ec0;
-    color: #2b6ec0;
+    border: 2px solid #f5a623;
+    color: #b36a00;
 }
 
 #messageAssociation.message-erreur-mixte {
