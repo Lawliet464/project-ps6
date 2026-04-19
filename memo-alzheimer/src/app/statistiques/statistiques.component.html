@@ -4,7 +4,7 @@
     <div class="accueilli-selector-container">
         <div class="selector-group">
             <label for="accueilli-select">Dossier accueilli :</label>
-            <select id="accueilli-select" class="accueilli-select" (change)="changerAccueilli($event.target.value)">
+            <select id="accueilli-select" class="accueilli-select" (change)="changerAccueilli($any($event.target).value)">
                 <option *ngFor="let personne of listeAccueillis" [value]="personne.id">
                     {{ personne.nom }}
                 </option>
@@ -43,7 +43,7 @@
         <span class="stat-label">Historique : Taux de bonnes réponses</span>
         <div class="chart-header">
             <label for="theme-select" class="theme-label">Thème :</label>
-            <select id="theme-select" class="theme-select" (change)="updateChart($event.target.value)">
+            <select id="theme-select" class="theme-select" (change)="updateChart($any($event.target).value)">
                 <option value="all">Tous</option>
                 <option value="Animaux">Animaux</option>
                 <option value="Fruits">Fruits</option>
@@ -52,7 +52,7 @@
         </div>
         <div class="chart-header">
             <label for="plateau-select" class="theme-label">Taille du plateau :</label>
-            <select id="plateau-select" class="theme-select" (change)="updatePlateau($event.target.value)">
+            <select id="plateau-select" class="theme-select" (change)="updatePlateau($any($event.target).value)">
                 <option value="all">Tous</option>
                 <option value="4x2">4 × 2</option>
                 <option value="4x3">4 × 3</option>
