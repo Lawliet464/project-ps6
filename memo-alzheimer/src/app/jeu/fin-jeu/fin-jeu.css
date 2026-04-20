@@ -1,0 +1,90 @@
+.recap-fin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 20px;
+}
+
+.recap-card {
+  background: white;
+  border-radius: 24px;
+  text-align: center;
+  padding: 40px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(69, 55, 80, 0.12);
+}
+
+.recap-card h2 { font-size: 2rem; color: #453750; margin: 0 0 8px; }
+
+.recap-sous-titre {
+  color: #875C74;
+  margin: 0 0 28px;
+  font-size: 1.1rem;
+}
+
+.recap-sequence {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.recap-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #fdf7fa;
+  border-radius: 14px;
+  padding: 14px;
+  border: 2px solid #BBCDE5;
+  min-width: 90px;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.recap-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #875C74;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recap-item img { max-width: 60px; max-height: 60px; }
+.recap-item p { font-size: 0.8rem; margin: 0; color: #453750; font-weight: 600; }
+
+.recap-fleche {
+  font-size: 1.8rem;
+  color: #B79D94;
+  font-weight: 700;
+}
+
+.btn-rejouer {
+  display: block;
+  margin: 0 auto;
+  background: #453750;
+  color: #DBE9EE;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-rejouer:hover { background: #875C74; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
