@@ -1,4 +1,19 @@
 /*style des pages*/
+
+:root {
+  --rose:    #C97B84;
+  --rose-l:  #F2D7DA;
+  --prune:   #6B3F5E;
+  --prune-l: #E8D5E2;
+  --creme:   #FDF8F5;
+  --beige:   #EDE5DC;
+  --texte:   #2D1F2A;
+  --gris:    #7A6B74;
+  --vert:    #4CAF50;
+  --orange:  #FF9800;
+  --rouge:   #E53935;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -45,3 +60,4 @@ footer {
     letter-spacing: 0.04em;
     height: 40px;
 }
+
