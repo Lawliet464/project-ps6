@@ -1,0 +1,78 @@
+<main>
+  <h1>Paramètres</h1>
+
+  <app-param-stage 
+    label="Paramètres par défaut selon le niveau de difficulté"
+    description="Les différents paramètres seront automatiquement adaptés"
+    [value]="settings.niveau"
+    (valueChange)="updateSetting('niveau', $event)">
+  </app-param-stage>
+
+  <app-param-qcm 
+    label="Format du jeu"
+    [options]="['Images avec du texte', 'Images avec du son']"
+    [checked]="['Images avec du texte']">
+  </app-param-qcm>
+
+  <app-param-slider 
+    label="Volume du son"
+    [min]="0" [max]="100" [value]="settings.volume" [step]="5" unit="%"
+    iconMin="🔈" iconMax="🔊"
+    (valueChange)="updateSetting('volume', $event)">
+  </app-param-slider>
+
+  <app-param-slider 
+    label="Taille de la police"
+    [min]="16" [max]="24" [value]="settings.fontSize" [step]="1" unit="px"
+    iconMin="A" iconMax="A"
+    (valueChange)="updateSetting('fontSize', $event)">
+  </app-param-slider>
+
+  <app-param-qcm 
+    label="Format d'une partie"
+    [options]="['Memory', 'Association']"
+    [checked]="['Memory', 'Association']">
+  </app-param-qcm>
+
+  <app-param-qcm 
+    label="Thèmes du jeu"
+    [options]="['Habillement selon la météo', 'Saisons', 'Brossage de dents', 'Se laver', 'Repas', 'Prise de médicament', 'Objets du quotidien']"
+    [checked]="settings.themes">
+  </app-param-qcm>
+
+  <app-param-plateau 
+    label="Taille du plateau"
+    [value]="settings.plateau"
+    (valueChange)="updateSetting('plateau', $event)">
+  </app-param-plateau>
+
+  <app-param-counter 
+    label="Temps de retournement"
+    description="En cas d'erreur les cartes restent face visible {value}s avant de se retourner."
+    [min]="1" [max]="5" [value]="settings.tempsRetournement"
+    (valueChange)="updateSetting('tempsRetournement', $event)">
+  </app-param-counter>
+
+  <app-param-counter 
+    label="Fréquence d'aide"
+    description="Recevoir une aide toutes les {value} erreurs."
+    [min]="3" [max]="15" [value]="settings.frequenceAide"
+    (valueChange)="updateSetting('frequenceAide', $event)">
+  </app-param-counter>
+
+  <app-param-qcm 
+    label="Type d'aide pour le memory"
+    [options]="['Garder quelques cartes face visible', 'Retourner brièvement l\'intégralité du jeu', 'Mise en surbrillance d\'une paire']"
+    [checked]="['Mise en surbrillance d\'une paire']">
+  </app-param-qcm>
+
+  <app-param-qcm 
+    label="Type d'aide pour la partie association"
+    [options]="['Mise en surbrillance d\'une carte du thème et de sa case associée', 'Marquer les cartes déjà tentées et le type d\'erreur']"
+    [checked]="['Mise en surbrillance d\'une carte du thème et de sa case associée']">
+  </app-param-qcm>
+
+  <button class="btn-save" (click)="sauvegarder()">
+    Sauvegarder les paramètres
+  </button>
+</main>

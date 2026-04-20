@@ -1,0 +1,20 @@
+<div class="param-card">
+  <span class="param-label">{{ label }}</span>
+  <div class="radio-group">
+    @for (opt of plateauOptions; track opt.value) {
+      <div class="radio-option">
+        <input type="radio" name="plateau" [id]="'p' + opt.value" 
+               [value]="opt.value" [checked]="value === opt.value"
+               (change)="onSelect(opt.value)">
+        <label [for]="'p' + opt.value">
+          <div class="grid-preview" [style.grid-template-columns]="'repeat(' + opt.cols + ', 8px)'">
+            @for (cell of [].constructor(opt.cols * opt.rows); track $index) {
+              <div class="grid-cell"></div>
+            }
+          </div>
+          {{ opt.label }}
+        </label>
+      </div>
+    }
+  </div>
+</div>
