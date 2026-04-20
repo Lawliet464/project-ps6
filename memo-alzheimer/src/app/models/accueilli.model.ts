@@ -3,8 +3,8 @@ export interface Accueilli {
     id: string;
     nom: string;
     age: string;
-    stade: string;
+    level: string;
     couleurStade: string;
     colorTexte: string;
-    objectif: string;
+    passions: string;
 }

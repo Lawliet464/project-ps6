@@ -10,7 +10,6 @@
                 </option>
             </select>
         </div>
-        <button class="btn-action btn-primary">+ Nouveau accueilli</button>
     </div>
 
     <div class="stat-card accueilli-profile">
@@ -20,7 +19,6 @@
         <div class="profile-info">
             <div class="profile-header">
                 <h2>{{ accueilliActuel.nom }}</h2>
-                <button class="btn-action btn-secondary">✏️ Modifier</button>
             </div>
 
             <div class="profile-details">
@@ -29,12 +27,12 @@
                     <span class="badge" 
                           [style.backgroundColor]="accueilliActuel.couleurStade" 
                           [style.color]="accueilliActuel.colorTexte">
-                        {{ accueilliActuel.stade }}
+                        {{ accueilliActuel.level }}
                     </span>
                 </p>
             </div>
             <div class="profile-therapy">
-                <p><strong>Objectif thérapeutique :</strong> <span>{{ accueilliActuel.objectif }}</span></p>
+                <p><strong>Passions : </strong>{{ accueilliActuel.passions }}</p>
             </div>
         </div>
     </div>
@@ -86,35 +84,148 @@
         </div>
     </div>
 
+    
     <div class="stat-card">
-        <span class="stat-label">Détails des dernières parties</span>
-        <div class="table-responsive">
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        <th>Partie</th>
-                        <th>Date</th>
-                        <th>Taux de bonnes réponses Memory</th>
-                        <th>Durée</th>
-                        <th>Indices utilisées</th>
-                        <th>Erreur ordre</th>
-                        <th>Erreur incohérence</th>
-                        <th>Thème de la partie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#6</td>
-                        <td>Aujourd'hui</td>
-                        <td><strong>52%</strong></td>
-                        <td>01:15</td>
-                        <td>2</td>
-                        <td>10%</td>
-                        <td>0%</td>
-                        <td>Animaux</td>
-                    </tr>
-                    </tbody>
-            </table>
-        </div>
+    <span class="stat-label">Historique des configurations</span>
+    <div class="table-responsive">
+        <table class="stats-table config-table">
+            <thead>
+                <tr>
+                    <th>Partie</th>
+                    <th>Format Jeu</th>
+                    <th>Format Partie</th>
+                    <th>Plateau</th>
+                    <th>Police</th>
+                    <th>Aides Mémo (Type / Fréq.)</th>
+                    <th>Aides Assoc. (Type)</th>
+                    <th>Temps Ret.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#6</td>
+                    <td>Images + Son</td>
+                    <td>Memory</td>
+                    <td>4 × 2</td>
+                    <td>24px</td>
+                    <td>Surbrillance / 3 err.</td>
+                    <td>Surbrillance case</td>
+                    <td>5s</td>
+                </tr>
+                <tr>
+                    <td>#5</td>
+                    <td>Images + Texte</td>
+                    <td>Assoc.</td>
+                    <td>4 × 3</td>
+                    <td>20px</td>
+                    <td>Surbrillance / 5 err.</td>
+                    <td>Réordonner les cartes</td>
+                    <td>3s</td>
+                </tr>
+                <tr>
+                    <td>#4</td>
+                    <td>Images + Texte</td>
+                    <td>Mémo + Assoc.</td>
+                    <td>4 × 4</td>
+                    <td>16px</td>
+                    <td>Surbrillance / 8 err.</td>
+                    <td>Surbrillance case</td>
+                    <td>1s</td>
+                </tr>
+                <tr>
+                    <td>#3</td>
+                    <td>Images + Texte</td>
+                    <td>Mémo + Assoc.</td>
+                    <td>4 × 3</td>
+                    <td>16px</td>
+                    <td>Cartes visibles / 8 err.</td>
+                    <td>Réordonner les cartes</td>
+                    <td>2s</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+
+        <div class="stat-card">
+            <span class="stat-label">Détails des dernières parties</span>
+            <div class="table-responsive">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Partie</th>
+                            <th>Date</th>
+                            <th>Taux de bonnes réponses Memory</th>
+                            <th>Durée</th>
+                            <th>Indices utilisées</th>
+                            <th>Erreur ordre</th>
+                            <th>Erreur incohérence</th>
+                            <th>Thème de la partie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#6</td>
+                            <td>Aujourd'hui</td>
+                            <td><strong>52%</strong></td>
+                            <td>01:15</td>
+                            <td>2</td>
+                            <td>10%</td>
+                            <td>0%</td>
+                            <td>Animaux</td>
+                        </tr>
+                        <tr>
+                            <td>#5</td>
+                            <td>Aujourd'hui</td>
+                            <td><strong>32%</strong></td>
+                            <td>01:42</td>
+                            <td>1</td>
+                            <td>0%</td>
+                            <td>15%</td>
+                            <td>Fruits</td>
+                        </tr>
+                        <tr>
+                            <td>#4</td>
+                            <td>Hier</td>
+                            <td><strong>45%</strong></td>
+                            <td>02:30</td>
+                            <td>3</td>
+                            <td>20%</td>
+                            <td>0%</td>
+                            <td>Véhicules</td>
+                        </tr>
+                        <tr>
+                            <td>#3</td>
+                            <td>Hier</td>
+                            <td><strong>40%</strong></td>
+                            <td>00:55</td>
+                            <td>0</td>
+                            <td>0%</td>
+                            <td>0%</td>
+                            <td>Couleurs</td>
+                        </tr>
+                        <tr>
+                            <td>#2</td>
+                            <td>10 Mars</td>
+                            <td><strong>36%</strong></td>
+                            <td>02:05</td>
+                            <td>1</td>
+                            <td>10%</td>
+                            <td>10%</td>
+                            <td>Objets</td>
+                        </tr>
+                        <tr>
+                            <td>#1</td>
+                            <td>10 Mars</td>
+                            <td><strong>42%</strong></td>
+                            <td>02:50</td>
+                            <td>2</td>
+                            <td>0%</td>
+                            <td>25%</td>
+                            <td>Pays</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </main>
