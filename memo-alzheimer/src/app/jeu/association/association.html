@@ -1,0 +1,67 @@
+<!-- CONSIGNE -->
+<div class="consigne-wrapper">
+  <div class="consigne-narrative">
+    <span class="icone-theme">🦷</span>
+    <h2 class="consigne">Mets les objets dans l'ordre pour te brosser les dents</h2>
+  </div>
+  <div class="indicateur-ordre">
+    <span>① ➜ ②</span>
+    <span class="ordre-explication">Dans cet ordre, de haut en bas</span>
+  </div>
+</div>
+
+<!-- ZONE PRINCIPALE -->
+<div class="zone-association-wrapper">
+
+  <!-- COLONNE DÉPÔT -->
+  <div class="colonne-depot">
+    <h3 class="zone-titre">Dépose ici dans l'ordre ↓</h3>
+    <div class="zone-association">
+      @for (c of cellules; track c; let i = $index) {
+        <jeu-association-zone
+          [cell]="c"
+          [index]="i"
+          (dropItem)="drop(i)"
+          (clickCell)="clickCell(i)"
+          (dragStartCell)="dragStartDepuisCellule($event, i)">
+        </jeu-association-zone>
+      }
+    </div>
+  </div>
+
+  <!-- SÉPARATEUR -->
+  <div class="colonne-separateur">
+    <div class="fleche-guide">←</div>
+  </div>
+
+  <!-- COLONNE DISPONIBLE -->
+  <div class="colonne-disponible">
+    <h3 class="zone-titre">Éléments disponibles</h3>
+    <div class="elements-dispo"
+         (dragover)="$event.preventDefault()"
+         (drop)="dropDansZoneDispo()">
+      @for (e of elementsDispo; track e) {
+        <jeu-association-element
+          [elem]="e"
+          [selected]="selection === e"
+          (dragStartItem)="dragStart(e)"
+          (clickItem)="selectItem(e)">
+        </jeu-association-element>
+      }
+    </div>
+    <p class="tuto-click">💡 Tu peux aussi <strong>cliquer</strong> sur un objet puis <strong>cliquer</strong> sur une case !</p>
+  </div>
+
+</div>
+
+<!-- MESSAGE -->
+<jeu-association-message
+  [text]="message"
+  [type]="messageType">
+</jeu-association-message>
+
+<!-- BOUTONS -->
+<div class="btn-assoc-row">
+  <button class="btn-aide" (click)="donnerIndice()">💡 Aide</button>
+  <button class="btn-verifier" (click)="verifier()" [disabled]="!toutesRemplies">✅ Vérifier</button>
+</div>
