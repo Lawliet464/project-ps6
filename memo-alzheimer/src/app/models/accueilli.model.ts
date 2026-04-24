@@ -1,4 +1,4 @@
-// src/models/accueilli.model.ts
+// src/app/models/accueilli.model.ts
 export interface Accueilli {
     id: string;
     nom: string;
@@ -6,5 +6,5 @@ export interface Accueilli {
     level: string;
     couleurStade: string;
     colorTexte: string;
-    passions: string;
+    objectif: string; // On remplace "passions" par "objectif"
 }

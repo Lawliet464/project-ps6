@@ -1,64 +1,53 @@
-// src/app/statistiques/statistiques.component.ts
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+// 1. On importe le modèle et le SERVICE
 import { Accueilli } from '../models/accueilli.model';
+import { AccueilliService } from '../services/accueilli.service';
+
+// 2. On importe tes nouveaux ENFANTS
+import { ProfilPatientComponent } from './profil-patient/profil-patient';
+import { GraphiqueCourbeComponent } from './graphique-courbe/graphique-courbe';
+import { TableauHistoriqueComponent } from './tableau-historique/tableau-historique';
 
 @Component({
   selector: 'app-statistiques',
   standalone: true,           
-  imports: [CommonModule],    
-  templateUrl: './statistiques.component.html',
-  styleUrls: ['./statistiques.component.css']
+  // On déclare ici tout ce dont on a besoin
+  imports: [
+    CommonModule, 
+    ProfilPatientComponent, 
+    GraphiqueCourbeComponent, 
+    TableauHistoriqueComponent
+  ],    
+  templateUrl: 'statistiques.component.html', // <-- Vérifie si c'est .html ou .component.html chez toi
+  styleUrls: ['statistiques.component.css']   // <-- Vérifie si c'est .css ou .component.css chez toi
 })
 export class StatistiquesComponent implements OnInit {
-  public listeAccueillis: Accueilli[] = [
-    { 
-      id: "jean", 
-      nom: "Jean Dupont", 
-      age: "82 ans", 
-      level: "Intermédiare", 
-      couleurStade: "#F4F0F2", 
-      colorTexte: "#875C74", 
-      passions: "Jardinage, pêche" 
-    },
-    { 
-      id: "marie", 
-      nom: "Marie Martin", 
-      age: "76 ans", 
-      level: "Elevé", 
-      couleurStade: "#F8F4F2", 
-      colorTexte: "#B79D94", 
-      passions: "Herbier, couture" 
-    },
-    { 
-      id: "claude", 
-      nom: "Claude Dubois", 
-      age: "88 ans", 
-      level: "Facile", 
-      couleurStade: "#F0EFF2", 
-      colorTexte: "#453750", 
-      passions: "Timbre, voyage" 
-    }
-  ];
-
+  
+  // Les variables sont vides au départ...
+  public listeAccueillis: Accueilli[] = [];
   public accueilliActuel!: Accueilli;
 
+  // On demande notre Service à Angular
+  constructor(private accueilliService: AccueilliService) {}
+
   ngOnInit() {
-    this.accueilliActuel = this.listeAccueillis[0];
+    // ... et le Service vient les remplir au démarrage !
+    this.accueilliService.getListeAccueillis().subscribe((donnees) => {
+      this.listeAccueillis = donnees;
+      
+      // Dès que les données arrivent, on sélectionne le premier patient
+      if (this.listeAccueillis.length > 0) {
+        this.accueilliActuel = this.listeAccueillis[0];
+      }
+    });
   }
 
   changerAccueilli(idSelectionne: string) {
     const trouve = this.listeAccueillis.find(personne => personne.id === idSelectionne);
     if (trouve) {
-      this.accueilliActuel = trouve;
+      this.accueilliActuel = trouve; // Le *ngIf se met à jour, et la magie opère !
     }
-  }
-
-  updateChart(theme: string) {
-    console.log("Thème sélectionné :", theme);
-  }
-
-  updatePlateau(taille: string) {
-    console.log("Plateau sélectionné :", taille);
   }
 }
