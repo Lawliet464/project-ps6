@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 })
 export class GraphiqueCourbeComponent {
 
-  // On a rapatrié les fonctions de l'ancien fichier parent ici !
   updateChart(theme: string) {
     console.log("Thème sélectionné :", theme);
   }

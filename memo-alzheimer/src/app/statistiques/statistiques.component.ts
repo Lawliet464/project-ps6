@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// 1. On importe le modèle et le SERVICE
+// 1. On importe le modèle et le service
 import { Accueilli } from '../models/accueilli.model';
 import { AccueilliService } from '../services/accueilli.service';
 
-// 2. On importe tes nouveaux ENFANTS
+// 2. On importe les enfants
 import { ProfilPatientComponent } from './profil-patient/profil-patient';
 import { GraphiqueCourbeComponent } from './graphique-courbe/graphique-courbe';
 import { TableauHistoriqueComponent } from './tableau-historique/tableau-historique';
@@ -20,12 +20,12 @@ import { TableauHistoriqueComponent } from './tableau-historique/tableau-histori
     GraphiqueCourbeComponent, 
     TableauHistoriqueComponent
   ],    
-  templateUrl: 'statistiques.component.html', // <-- Vérifie si c'est .html ou .component.html chez toi
-  styleUrls: ['statistiques.component.css']   // <-- Vérifie si c'est .css ou .component.css chez toi
+  templateUrl: 'statistiques.component.html',
+  styleUrls: ['statistiques.component.css']   
 })
 export class StatistiquesComponent implements OnInit {
   
-  // Les variables sont vides au départ...
+  // Les variables sont vides au départ
   public listeAccueillis: Accueilli[] = [];
   public accueilliActuel!: Accueilli;
 
@@ -33,7 +33,7 @@ export class StatistiquesComponent implements OnInit {
   constructor(private accueilliService: AccueilliService) {}
 
   ngOnInit() {
-    // ... et le Service vient les remplir au démarrage !
+    // Le Service vient les remplir au démarrage 
     this.accueilliService.getListeAccueillis().subscribe((donnees) => {
       this.listeAccueillis = donnees;
       
@@ -47,7 +47,7 @@ export class StatistiquesComponent implements OnInit {
   changerAccueilli(idSelectionne: string) {
     const trouve = this.listeAccueillis.find(personne => personne.id === idSelectionne);
     if (trouve) {
-      this.accueilliActuel = trouve; // Le *ngIf se met à jour, et la magie opère !
+      this.accueilliActuel = trouve; // Le *ngIf se met à jour
     }
   }
 }
