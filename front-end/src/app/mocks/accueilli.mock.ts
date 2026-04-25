@@ -1,4 +1,4 @@
-import { Accueilli } from '../../core/models/accueilli.model';
+import { Accueilli } from '../core/models/accueilli.model';
 
 export const MOCK_ACCUEILLIS: Accueilli[] = [
   { 
