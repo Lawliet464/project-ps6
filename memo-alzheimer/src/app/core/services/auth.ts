@@ -1,43 +1,63 @@
 import { Injectable, signal, computed } from '@angular/core';
 
-export type Role = 'accueilli' | 'aidant' | null;
+// Types partagés - importés partout dans le projet
 
-export interface Profil {
-  id: string;
-  nom: string;
-  prenom: string;
-  niveau: 'facile' | 'moyen' | 'difficile';
-}
+export type Role = 'aidant' | 'patient' | null;
 
 export interface Aidant {
   id: string;
-  nom: string;
-  profils: Profil[];
+  prenom: string;
+  mdp: string;
 }
+
+export interface Patient {
+  id: string;
+  prenom: string;
+  niveau: 'facile' | 'moyen' | 'difficile';
+  aidantId: string;
+  stats: any[];
+}
+
+// - Service -
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  readonly role = signal<Role>(null);
-  readonly profilActif = signal<Profil | null>(null);
-  readonly aidantActif = signal<Aidant | null>(null);
-  readonly estConnecte = computed(() => this.profilActif() !== null || this.aidantActif() !== null);
+  // Qui est connecté et avec quel rôle
+  readonly role           = signal<Role>(null);
+  readonly aidantConnecte = signal<Aidant | null>(null);
+  readonly patientActif   = signal<Patient | null>(null);
 
-  choisirRole(r: Role): void { this.role.set(r); }
+  // true dès qu'un aidant ou un patient est connecté
+  readonly estConnecte = computed(() =>
+    this.aidantConnecte() !== null || this.patientActif() !== null
+  );
 
-  seConnecterAccueilli(profil: Profil): void {
-    this.profilActif.set(profil);
-    this.role.set('accueilli');
-  }
+  // - Aidant -
 
-  seConnecterAidant(aidant: Aidant): void {
-    this.aidantActif.set(aidant);
+  connecterAidant(aidant: Aidant): void {
+    this.aidantConnecte.set(aidant);
     this.role.set('aidant');
   }
 
-  seDeconnecter(): void {
+  deconnecterAidant(): void {
+    this.aidantConnecte.set(null);
     this.role.set(null);
-    this.profilActif.set(null);
-    this.aidantActif.set(null);
+  }
+
+  verifierMotDePasse(aidant: Aidant, mdp: string): boolean {
+    return aidant.mdp === mdp;
+  }
+
+  // - Patient -
+
+  connecterPatient(patient: Patient): void {
+    this.patientActif.set(patient);
+    this.role.set('patient');
+  }
+
+  deconnecterPatient(): void {
+    this.patientActif.set(null);
+    this.role.set(null);
   }
 }

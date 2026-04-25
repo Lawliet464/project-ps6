@@ -27,20 +27,22 @@
       <h1>Espace Administrateur</h1>
       <p class="sous-titre">Connectez-vous pour gérer les profils et consulter les statistiques.</p>
       <div class="liste-aidants">
-        @for (aidant of aidants(); track aidant.id) {
+        @if (aidant$()) {
           <div class="aidant-item">
             <span class="aidant-icon">🤝</span>
-            <span class="aidant-nom" (click)="ouvrirConnexionAidant(aidant)">{{ aidant.prenom }}</span>
-            <span class="aidant-arrow" (click)="ouvrirConnexionAidant(aidant)">→</span>
-            <button class="btn-supprimer" (click)="supprimerAidant(aidant.id)">🗑️</button>
+            <span class="aidant-nom" (click)="ouvrirConnexionAidant(aidant$()!)">{{ aidant$()!.prenom }}</span>
+            <span class="aidant-arrow" (click)="ouvrirConnexionAidant(aidant$()!)">→</span>
+            <button class="btn-supprimer" (click)="supprimerAidant()">🗑️</button>
           </div>
         }
-        @if (aidants().length === 0) {
+        @if (!aidant$()) {
           <p style="color:var(--gris);font-size:0.9rem;margin-bottom:16px;text-align:center">Aucun compte aidant pour le moment.</p>
         }
       </div>
-      <div class="separateur">ou créer un nouveau compte</div>
-      <button class="btn-primary" (click)="ecran.set('creerAidant')">+ Créer un compte aidant</button>
+      @if (!aidant$()) {
+        <div class="separateur">ou créer un nouveau compte</div>
+        <button class="btn-primary" (click)="ecran.set('creerAidant')">+ Créer un compte aidant</button>
+      }
       <button class="btn-secondary" (click)="ecran.set('accueil')">← Retour</button>
     </div>
   </div>
@@ -77,10 +79,10 @@
   <div class="screen active">
     <div class="card" style="max-width:600px">
       <span class="card-icon">🤝</span>
-      <h1>Bonjour, {{ aidantConnecte()?.prenom }} 👋</h1>
+      <h1>Bonjour, {{ auth.aidantConnecte()?.prenom }} 👋</h1>
       <p class="sous-titre">Gérez les profils des patients et suivez leur progression.</p>
       <div style="margin-bottom:20px">
-        @for (patient of mesPatientsAidant(); track patient.id) {
+        @for (patient of mesPatientsAidant$(); track patient.id) {
           <div class="profil-item">
             <div class="profil-avatar" (click)="voirStats(patient.id)">{{ patient.prenom[0].toUpperCase() }}</div>
             <div style="flex:1;cursor:pointer" (click)="voirStats(patient.id)">
@@ -91,7 +93,7 @@
             <button class="btn-supprimer" (click)="supprimerPatient(patient.id)">🗑️</button>
           </div>
         }
-        @if (mesPatientsAidant().length === 0) {
+        @if (mesPatientsAidant$().length === 0) {
           <p style="color:var(--gris);font-size:0.9rem;text-align:center;padding:16px 0">Aucun patient créé. Commencez par en ajouter un !</p>
         }
       </div>
@@ -163,7 +165,7 @@
       <h1>Qui joue ?</h1>
       <p class="sous-titre">Cliquez sur votre prénom pour commencer à jouer.</p>
       <div class="profils-liste">
-        @for (patient of patients(); track patient.id) {
+        @for (patient of patients$(); track patient.id) {
           <div class="profil-item">
             <div class="profil-avatar" (click)="lancerJeu(patient.id)">{{ patient.prenom[0].toUpperCase() }}</div>
             <div style="flex:1;cursor:pointer" (click)="lancerJeu(patient.id)">
@@ -171,10 +173,10 @@
               <span class="profil-stade">{{ niveauLabel(patient.niveau) }}</span>
             </div>
             <span style="cursor:pointer" (click)="lancerJeu(patient.id)">▶</span>
-            <button class="btn-supprimer" (click)="supprimerProfilMalade(patient.id)">🗑️</button>
+            <button class="btn-supprimer" (click)="supprimerPatient(patient.id)">🗑️</button>
           </div>
         }
-        @if (patients().length === 0) {
+        @if (patients$().length === 0) {
           <div style="text-align:center;color:var(--gris);padding:24px 0;font-size:0.95rem;">
             Aucun profil créé pour le moment.<br>Demandez à votre aidant de créer un profil.
           </div>

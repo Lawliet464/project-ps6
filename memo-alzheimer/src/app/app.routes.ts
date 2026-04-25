@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: 'parametres', component: Parametres},
   { path: 'jeu', component: Jeu },
   { path: 'auth', component: Auth},
-  { path: '', redirectTo: 'statistiques', pathMatch: 'full' }
+  { path: '', redirectTo: 'auth', pathMatch: 'full' }
 ];
 
