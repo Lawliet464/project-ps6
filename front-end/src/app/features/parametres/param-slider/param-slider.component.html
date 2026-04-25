@@ -1,0 +1,14 @@
+<div class="param-card">
+  <div class="param-row">
+    <span class="param-label">{{ label }}</span>
+    <span class="param-value">{{ value }}{{ unit }}</span>
+  </div>
+  <div class="slider-wrapper">
+    <span class="slider-icon">{{ iconMin }}</span>
+    <input type="range" 
+           [min]="min" [max]="max" [step]="step" 
+           [(ngModel)]="value" 
+           (input)="onInputChange()">
+    <span class="slider-icon" style="font-size:1.4rem">{{ iconMax }}</span>
+  </div>
+</div>

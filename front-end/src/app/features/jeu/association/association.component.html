@@ -1,0 +1,38 @@
+<div class="zone-association-wrapper">
+
+  <div class="colonne-depot">
+    <h3 class="zone-titre">Dépose ici dans l'ordre ↓</h3>
+    <div class="zone-association">
+      @for (c of cellules; track i; let i = $index) {
+        <app-association-zone
+          [cell]="c"
+          [index]="i"
+          (dropItem)="drop(i)"
+          (clickCell)="clickCell(i)"
+          (dragStartCell)="dragStartDepuisCellule($event, i)">
+        </app-association-zone>
+      }
+    </div>
+  </div>
+
+  <div class="colonne-disponible">
+    <h3 class="zone-titre">Éléments disponibles</h3>
+    <div class="elements-dispo"
+         (dragover)="$event.preventDefault()"
+         (drop)="dropDansZoneDispo()">
+      @for (e of elementsDispo; track e.label) {
+        <app-association-element
+          [elem]="e"
+          [selected]="selection === e"
+          (dragStartItem)="dragStart(e)"
+          (clickItem)="selectItem(e)">
+        </app-association-element>
+      }
+    </div>
+  </div>
+</div>
+
+<app-association-message
+  [text]="message"
+  [type]="messageType">
+</app-association-message>

@@ -1,0 +1,25 @@
+<header class="main-header">
+    <div class="logo">MemoLink</div>
+    <nav class="nav-container">
+        <a routerLink="/jeu" routerLinkActive="active-link" class="nav-item">
+            Jouer
+        </a>
+        <a routerLink="/statistiques" routerLinkActive="active-link" class="nav-item">
+            Statistiques
+        </a>
+        <a routerLink="/parametres" routerLinkActive="active-link" class="nav-item">
+            Paramètres
+        </a>
+        <a routerLink="/auth" routerLinkActive="active-link" class="nav-item">
+            Accueil
+        </a>
+    </nav>
+</header>
+
+<main class="content-area">
+    <router-outlet></router-outlet>
+</main>
+
+<footer class="main-footer">
+    <p>MemoLink — Conçu avec soin pour votre bien-être</p>
+</footer>

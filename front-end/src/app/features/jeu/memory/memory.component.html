@@ -1,0 +1,9 @@
+<div class="plateau">
+  @for (c of cartes; track $index) {
+    <app-memory-card
+      [carte]="c"
+      [bloquee]="estBloque"
+      (cardClick)="clickCarte(c)">
+    </app-memory-card>
+  }
+</div>

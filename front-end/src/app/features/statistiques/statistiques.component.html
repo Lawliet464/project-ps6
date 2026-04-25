@@ -1,0 +1,21 @@
+<main>
+    <h1>Vos Statistiques</h1>
+    
+    <div class="accueilli-selector-container">
+        <div class="selector-group">
+            <label for="accueilli-select">Dossier accueilli :</label>
+            <select id="accueilli-select" class="accueilli-select" (change)="changerAccueilli($any($event.target).value)">
+                <option *ngFor="let personne of listeAccueillis" [value]="personne.id">
+                    {{ personne.nom }}
+                </option>
+            </select>
+        </div>
+        <button class="btn-action btn-primary">+ Nouvel accueilli</button>
+    </div>
+
+    <ng-container *ngIf="accueilliActuel">
+        <app-profil-accueilli [accueilli]="accueilliActuel"></app-profil-accueilli>
+        <app-graphique-courbe></app-graphique-courbe>
+        <app-tableau-historique></app-tableau-historique>
+    </ng-container>
+</main>

@@ -1,0 +1,11 @@
+<div *ngIf="text" 
+     class="message-association"
+     [ngClass]="{
+       'message-erreur-ordre': type === 'ordre',
+       'message-erreur-theme': type === 'theme',
+       'message-erreur-mixte': type === 'mixte',
+       'message-info': type === 'info',
+       'message-erreur': type === 'erreur'
+     }"
+     [innerHTML]="text">
+</div>

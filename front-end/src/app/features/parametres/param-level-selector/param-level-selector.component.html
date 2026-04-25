@@ -1,0 +1,20 @@
+<div class="param-card">
+  <span class="param-label">{{ label }}</span>
+  @if (description) { <p class="param-description">{{ description }}</p> }
+  
+  <div class="stage-group">
+    @for (s of stages; track s.value) {
+      <label class="stage-option" [class.selected]="value === s.value"
+             [style.--stage-color]="s.color" [style.--stage-bg]="s.bg">
+        <input type="radio" [name]="'stage-' + instanceId" 
+               [value]="s.value" [checked]="value === s.value"
+               (change)="onSelect(s.value)">
+        <span class="stage-dot"></span>
+        <span class="stage-text">
+          <span class="stage-name">{{ s.name }}</span>
+          <span class="stage-desc">{{ s.desc }}</span>
+        </span>
+      </label>
+    }
+  </div>
+</div>

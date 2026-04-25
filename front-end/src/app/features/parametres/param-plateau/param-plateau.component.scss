@@ -1,0 +1,48 @@
+.radio-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.radio-option input[type="radio"] { display: none; }
+
+.radio-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 72px;
+    border-radius: 16px;
+    border: 2px solid #BBCDE5;
+    background: #EEF0F2;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #393E41;
+    gap: 4px;
+}
+
+.radio-option label .grid-preview {
+    display: grid;
+    gap: 3px;
+}
+
+.radio-option label .grid-cell {
+    width: 8px;
+    height: 8px;
+    background: #B79D94;
+    border-radius: 2px;
+}
+
+.radio-option input[type="radio"]:checked + label {
+    border-color: #453750;
+    background: #453750;
+    color: white;
+}
+
+.radio-option input[type="radio"]:checked + label .grid-cell {
+    background: #DBE9EE;
+}

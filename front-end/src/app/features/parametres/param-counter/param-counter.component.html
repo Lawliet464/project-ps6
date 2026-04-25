@@ -1,0 +1,13 @@
+<div class="param-card">
+  <span class="param-label">{{ label }}</span>
+  <div class="param-row">
+    <p class="param-description">
+      {{ descriptionParts[0] }} <strong>{{ value }}</strong> {{ descriptionParts[1] }}
+    </p>
+    <div class="number-control">
+      <button (click)="update(-1)">−</button>
+      <input type="number" [value]="value" readonly>
+      <button (click)="update(1)">+</button>
+    </div>
+  </div>
+</div>
