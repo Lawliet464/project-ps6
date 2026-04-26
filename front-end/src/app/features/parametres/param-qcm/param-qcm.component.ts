@@ -1,20 +1,25 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-param-qcm',
   templateUrl: './param-qcm.component.html',
   styleUrls: ['./param-qcm.component.scss']
 })
-export class ParamQcmComponent implements OnInit {
+export class ParamQcmComponent implements OnChanges {
   @Input() label: string = '';
   @Input() options: string[] = [];
   @Input() checked: string[] = [];
-
   @Output() selectionChange = new EventEmitter<string[]>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['checked']) {
+      this.checked = changes['checked'].currentValue;
+    }
   }
 
   isChecked(option: string): boolean {

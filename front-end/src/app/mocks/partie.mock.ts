@@ -6,13 +6,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: "Aujourd'hui",
         theme: 'Animaux',
         configuration: {
-            formatJeu: 'Images + Son',
-            formatPartie: 'Memory',
+            formatJeu: 'Memory',
             plateau: '4 × 2',
             taillePolice: '24px',
             aideMemo: 'Surbrillance / 3 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '5s'
+            tempsRetenue: 5, 
+            frequenceAide: 3
         },
         resultats: {
             tauxReussiteMemory: 52,
@@ -27,13 +27,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: "Aujourd'hui",
         theme: 'Fruits',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Assoc.',
+            formatJeu: 'Assoc.',
             plateau: '4 × 3',
             taillePolice: '20px',
             aideMemo: 'Surbrillance / 5 err.',
             aideAssoc: 'Réordonner les cartes',
-            tempsRetenue: '3s'
+            tempsRetenue: 3, 
+            frequenceAide: 8
         },
         resultats: {
             tauxReussiteMemory: 32,
@@ -48,13 +48,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: 'Hier',
         theme: 'Véhicules',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Mémo + Assoc.',
-            plateau: '4 × 4',
+            formatJeu: 'Mémo + Assoc.',
+            plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 8 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '1s'
+            tempsRetenue: 1, 
+            frequenceAide: 6
         },
         resultats: {
             tauxReussiteMemory: 45,
@@ -69,13 +69,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: 'Hier',
         theme: 'Couleurs',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Mémo + Assoc.',
+            formatJeu: 'Mémo + Assoc.',
             plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Cartes visibles / 8 err.',
             aideAssoc: 'Réordonner les cartes',
-            tempsRetenue: '2s'
+            tempsRetenue: 2, 
+            frequenceAide: 6 
         },
         resultats: {
             tauxReussiteMemory: 40,
@@ -90,13 +90,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: '10 Mars',
         theme: 'Objets',
         configuration: {
-            formatJeu: 'Images seules',
-            formatPartie: 'Memory',
+            formatJeu: 'Memory',
             plateau: '4 × 2',
             taillePolice: '24px',
-            aideMemo: 'Aucune',
-            aideAssoc: 'Aucune',
-            tempsRetenue: '4s'
+            aideMemo: 'Surbrillance / 5 err.',
+            aideAssoc: 'Surbrillance case',
+            tempsRetenue: 4, 
+            frequenceAide: 3
         },
         resultats: {
             tauxReussiteMemory: 36,
@@ -111,13 +111,13 @@ export const MOCK_PARTIES: Partie[] = [
         date: '10 Mars',
         theme: 'Pays',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Assoc.',
-            plateau: '4 × 4',
+            formatJeu: 'Assoc.',
+            plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 5 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '3s'
+            tempsRetenue: 3, 
+            frequenceAide: 4
         },
         resultats: {
             tauxReussiteMemory: 42,

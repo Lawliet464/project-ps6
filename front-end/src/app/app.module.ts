@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms'; // Pour utiliser [(ngModel)]
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// Services et Contrats
+import { DataService } from './core/services/data.service';
+import { MockDataService } from './mocks/data.mock'; 
+
 // Paramètres
 import { ParametresComponent } from './features/parametres/parametres.component';
 import { ParamSliderComponent } from './features/parametres/param-slider/param-slider.component';
@@ -71,7 +75,10 @@ import { AuthComponent } from './features/auth/auth.component';
     FormsModule,       // Gestion des formulaires/sliders
     AppRoutingModule   // Gestion des routes
   ],
-  providers: [],
+  providers: [
+    // Résout l'erreur NullInjectorError en associant le contrat abstrait à son implémentation Mock
+    { provide: DataService, useClass: MockDataService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

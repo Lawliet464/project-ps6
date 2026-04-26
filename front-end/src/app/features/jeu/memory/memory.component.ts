@@ -34,6 +34,24 @@ export class MemoryComponent implements OnInit {
     this.cartes = toutesCartes.sort(() => Math.random() - 0.5);
   }
 
+  // 1. Calcul du nombre de paires nécessaire
+  get nbPairesAMontrer(): number {
+    const [cols, rows] = this.game.configActive.plateau.split('x').map(Number);
+    return (cols * rows) / 2;
+  }
+
+  // 2. Style dynamique pour la grille de cartes
+  get gridMemory() {
+    const [cols, rows] = this.game.configActive.plateau.split('x');
+    return {
+      'display': 'grid',
+      'grid-template-columns': `repeat(${cols}, 1fr)`,
+      'gap': '15px',
+      'margin': '20px auto',
+      'max-width': '600px'
+    };
+  }
+
   clickCarte(carte: Carte): void {
     if (this.estBloque || carte.retournee) return;
 

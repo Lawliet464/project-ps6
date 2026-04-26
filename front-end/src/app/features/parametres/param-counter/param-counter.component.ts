@@ -1,27 +1,24 @@
-import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-param-counter',
   templateUrl: './param-counter.component.html',
   styleUrls: ['./param-counter.component.scss']
 })
-export class ParamCounterComponent implements OnInit {
+export class ParamCounterComponent implements OnChanges {
   @Input() label: string = '';
   @Input() description: string = ''; 
   @Input() min: number = 1;
   @Input() max: number = 10;
   @Input() value: number = 1;
-
   @Output() valueChange = new EventEmitter<number>();
 
   constructor() { }
 
-  ngOnInit(): void {
-    // Initialisation conforme au modèle UniCA
-  }
-
-  get descriptionParts(): string[] {
-    return this.description.split('{value}');
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      this.value = changes['value'].currentValue;
+    }
   }
 
   update(delta: number): void {
@@ -30,5 +27,9 @@ export class ParamCounterComponent implements OnInit {
       this.value = newValue;
       this.valueChange.emit(this.value);
     }
+  }
+
+  get descriptionParts(): string[] {
+    return this.description.split('{value}');
   }
 }

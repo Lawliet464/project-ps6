@@ -1,15 +1,15 @@
 // Interface définissant la configuration choisie avant la partie
 export interface ConfigurationPartie {
     formatJeu: string;
-    formatPartie: string;
     plateau: string;
     taillePolice: string;
     aideMemo: string;
     aideAssoc: string;
-    tempsRetenue: string;
+    tempsRetenue: number;
+    frequenceAide: number;
 }
 
-// Interface définissant les résultats obtenus par le patient
+// Interface définissant les résultats obtenus par l'accueilli'
 export interface ResultatPartie {
     tauxReussiteMemory: number; 
     duree: string;              

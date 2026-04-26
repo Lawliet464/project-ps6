@@ -1,4 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { JeuService } from '../../core/services/jeu-communication.service';
+import { ConfigurationPartie } from '../../core/models/partie.model';
+import { CONFIG_PAR_DEFAUT } from '../../core/constants/game-config.constants';
 
 @Component({
   selector: 'app-parametres',
@@ -6,32 +9,45 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
   styleUrls: ['./parametres.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class ParametresComponent implements OnInit {
-  
+  configLocale!: ConfigurationPartie;
   settings = {
-    niveau: 'leger',
     volume: 70,
     fontSize: 16,
-    plateau: '4x4',
     tempsRetournement: 1,
     frequenceAide: 8,
     themes: ['Saisons', 'Habillement selon la météo']
   };
 
-  constructor() { }
+  constructor(private jeuService: JeuService) {}
 
   ngOnInit(): void {
-    // Initialisation globale des paramètres si nécessaire
+    // On initialise avec la config actuelle du service (pour garder les réglages si on revient sur la page)
+    this.configLocale = { ...this.jeuService.configActive };
+  }
+
+  onNiveauChange(niveau: string): void {
+    const nouvelleConfig = CONFIG_PAR_DEFAUT[niveau];
+    if (nouvelleConfig) {
+      this.configLocale = { ...nouvelleConfig };
+      this.settings.volume = 70; 
+      this.settings.fontSize = 16;
+    }
   }
 
   sauvegarder(): void {
-    console.log('Paramètres sauvegardés :', this.settings);
-    const toast = document.getElementById('toast');
-    toast?.classList.add('visible');
-    setTimeout(() => toast?.classList.remove('visible'), 2500);
+    // On applique la config locale au service global
+    this.jeuService.configActive = { ...this.configLocale };
   }
-
+  
   updateSetting(key: string, value: any): void {
-    (this.settings as any)[key] = value;
+    // On met à jour configLocale pour que la sauvegarde fonctionne
+    (this.configLocale as any)[key] = value;
+    
+    // Si c'est une valeur partagée avec settings (ex: volume), on met aussi settings à jour
+    if (this.settings.hasOwnProperty(key)) {
+      (this.settings as any)[key] = value;
+    }
   }
 }
