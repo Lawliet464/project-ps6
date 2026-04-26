@@ -5,7 +5,6 @@ import { CONFIG_PAR_DEFAUT } from '../constants/game-config.constants';
 import { Theme, ElemTheme } from '../models/theme.model';
 import { THEMES } from '../../mocks/themes.mock';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,20 +14,22 @@ export class JeuService {
   // État de la partie en cours
 
   themeChoisi: Theme | null = null;
-  elemsJeu: ElemTheme[]=[];
+  elemsJeu: ElemTheme[] = [];
   aideMemorisation: number | null = null;
   aideAssociation: number | null = null;
 
-  compteurErreurs: number = 0;
+  compteurErreursMemory: number = 0;
+  compteurErreursAssociation: number = 0;
+
   frequenceAide: number = 0;
-  tempsRetournement: number = 0;
+  temps: number = 0;
   role: 'accueilli' | 'aidant' | null = null;
 
   // Communication entre composants
   private finEtapeSource = new Subject<void>();
   finEtape$ = this.finEtapeSource.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   // --- MÉTHODES DE CONFIGURATION ---
 
@@ -53,25 +54,42 @@ export class JeuService {
     this.finEtapeSource.next();
   }
 
-  incrementErreur(): boolean {
-    this.compteurErreurs++;
-    if (this.compteurErreurs >= this.frequenceAide) {
-      this.compteurErreurs = 0;
+  incrementErreurMemory(): boolean {
+    this.compteurErreursMemory++;
+    if (this.compteurErreursMemory >= this.frequenceAide) {
+      this.compteurErreursMemory = 0;
+      return true;
+    }
+    return false;
+  }
+
+  incrementErreurAssociation(): boolean {
+    this.compteurErreursAssociation++;
+    if (this.compteurErreursAssociation >= this.frequenceAide) {
+      this.compteurErreursAssociation = 0;
       return true;
     }
     return false;
   }
 
   reset(): void {
-    this.compteurErreurs = 0;
+    this.compteurErreursMemory = 0;
+    this.compteurErreursAssociation = 0;
   }
 
-  configurerJeu(frequence: number, temps: number, paires: number, themeChoisi: Theme, aideMemorisation: number, aideAssociation: number): void {
+  configurerJeu(
+    frequence: number,
+    temps: number,
+    paires: number,
+    themeChoisi: Theme,
+    aideMemorisation: number,
+    aideAssociation: number
+  ): void {
     this.frequenceAide = frequence;
-    this.tempsRetournement = temps * 1000;
-    this.themeChoisi=themeChoisi;
-    this.aideMemorisation= aideMemorisation;
-    this.aideAssociation= aideAssociation;
+    this.temps = temps * 1000;
+    this.themeChoisi = themeChoisi;
+    this.aideMemorisation = aideMemorisation;
+    this.aideAssociation = aideAssociation;
     this.setElemsJeu(paires, themeChoisi);
   }
 
@@ -85,6 +103,7 @@ export class JeuService {
     if (this.elemsJeu.length < paires) {
       const autresElems: ElemTheme[] = [];
       const autresThemes = THEMES.filter(t => t.id !== theme.id);
+
       for (const autreTheme of autresThemes) {
         for (const e of autreTheme.elementsAssoc) {
           autresElems.push(e);
@@ -99,5 +118,4 @@ export class JeuService {
       }
     }
   }
-
 }

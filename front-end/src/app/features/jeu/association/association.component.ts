@@ -29,7 +29,7 @@ export class AssociationComponent implements OnInit {
 
     this.elementsDispo = [];
     for (const e of this.game.elemsJeu) {
-      this.elementsDispo.push({ elemTheme: e, surbrillance: false });
+      this.ajouterDansDispo({ elemTheme: e, surbrillance: false });
     }
 
     this.cellules = [];
@@ -46,12 +46,30 @@ export class AssociationComponent implements OnInit {
     this.messageType = 'info';
   }
 
-  selectItem(elem: ElemAssoc): void { this.selection = elem; }
-  dragStart(elem: ElemAssoc): void { this.selection = elem; }
+  private estHorsTheme(elem: ElemAssoc): boolean {
+    for (const e of this.elementsHorsTheme) {
+      if (
+        e.elemTheme.id === elem.elemTheme.id &&
+        e.elemTheme.themeId === elem.elemTheme.themeId
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
 
+  selectItem(elem: ElemAssoc): void {
+    if (this.estHorsTheme(elem)) return;
+    this.selection = elem;
+  }
+
+  dragStart(elem: ElemAssoc): void {
+    if (this.estHorsTheme(elem)) return;
+    this.selection = elem;
+  }
   dragStartDepuisCellule(index: number): void {
     const elem = this.cellules[index].value;
-    if (elem) {
+    if (elem && !this.estHorsTheme(elem)) {
       this.selection = elem;
       this.retirer(index);
     }
@@ -59,6 +77,8 @@ export class AssociationComponent implements OnInit {
 
   drop(index: number): void {
     if (!this.selection) return;
+
+    if (this.estHorsTheme(this.selection)) return;
 
     if (this.cellules[index].value) this.retirer(index);
 
@@ -93,7 +113,7 @@ export class AssociationComponent implements OnInit {
     }
 
     if (!dejaPresent) {
-      this.elementsDispo.push(this.selection);
+      this.ajouterDansDispo(this.selection);
       this.selection = null;
     }
   }
@@ -122,7 +142,7 @@ export class AssociationComponent implements OnInit {
       }
 
       if (!estHorsTheme) {
-        this.elementsDispo.push(elem);
+        this.ajouterDansDispo(elem);
       }
 
       this.cellules[index].value = null;
@@ -197,7 +217,8 @@ export class AssociationComponent implements OnInit {
     } else {
       this.message = "Ce n'est pas tout à fait ça, réessayez !";
       this.messageType = 'erreur';
-      this.game.incrementErreur();
+      const aide = this.game.incrementErreurAssociation();
+      if (aide) this.utiliserAide();
     }
   }
 
@@ -210,8 +231,20 @@ export class AssociationComponent implements OnInit {
     count++;
     this.tentativesParElem.set(key, count);
 
-    if (count >= 4) {
+    if (count >= 3) {
       this.tentativesParElem.delete(key);
+
+      for (let i = 0; i < this.cellules.length; i++) {
+        const c = this.cellules[i];
+        if (
+          c.value &&
+          c.value.elemTheme.id === elem.elemTheme.id &&
+          c.value.elemTheme.themeId === elem.elemTheme.themeId
+        ) {
+          this.retirer(i);
+          break;
+        }
+      }
       this.deplacerVersHorsTheme(elem);
     }
   }
@@ -259,82 +292,58 @@ export class AssociationComponent implements OnInit {
     }, 2000);
   }
 
-  enleverUnElementHorsTheme(): void {
-    const resultatCellule = this.trouverPireElementDansCellules();
+  private reorganiserOrdre(): void {
+    if (!this.game.themeChoisi) return;
 
-    if (resultatCellule) {
-      this.retirer(resultatCellule.index);
-      this.supprimerTentative(resultatCellule.elem);
-      this.deplacerVersHorsTheme(resultatCellule.elem);
-      return;
+    const temp: (ElemAssoc | null)[] = new Array(this.cellules.length).fill(null);
+
+    for (const cell of this.cellules) {
+      if (!cell.value) continue;
+
+      const id = cell.value.elemTheme.id - 1;
+
+      if (id >= 0 && id < temp.length) {
+        temp[id] = cell.value;
+      }
     }
-
-    const elemDispo = this.trouverPireElementDansDispo();
-
-    if (elemDispo) {
-      this.supprimerTentative(elemDispo);
-      this.deplacerVersHorsTheme(elemDispo);
-      return;
-    }
-
-    this.surbrilliance();
-  }
-
-  private trouverPireElementDansCellules(): { elem: ElemAssoc, index: number } | null {
-    let maxCount = 0;
-    let elemMax: ElemAssoc | null = null;
-    let indexMax = -1;
 
     for (let i = 0; i < this.cellules.length; i++) {
-      const cell = this.cellules[i];
+      const current = this.cellules[i].value;
+      const correct = temp[i];
 
-      if (
-        cell.value &&
-        this.game.themeChoisi &&
-        cell.value.elemTheme.themeId !== this.game.themeChoisi.id
-      ) {
-        const count = this.getTentative(cell.value);
+      if (correct) {
+        this.cellules[i].value = correct;
 
-        if (!elemMax || count > maxCount) {
-          maxCount = count;
-          elemMax = cell.value;
-          indexMax = i;
+        if (current && current !== correct) {
+          let exists = false;
+
+          for (const e of this.elementsDispo) {
+            if (
+              e.elemTheme.id === current.elemTheme.id &&
+              e.elemTheme.themeId === current.elemTheme.themeId
+            ) {
+              exists = true;
+              break;
+            }
+          }
+
+          if (!exists) {
+            this.ajouterDansDispo(current);
+          }
         }
       }
     }
-
-    return elemMax ? { elem: elemMax, index: indexMax } : null;
   }
 
-  private trouverPireElementDansDispo(): ElemAssoc | null {
-    let maxCount = 0;
-    let elemMax: ElemAssoc | null = null;
+  private ajouterDansDispo(elem: ElemAssoc): void {
+    const existeDeja = this.elementsDispo.some(e =>
+      e.elemTheme.id === elem.elemTheme.id &&
+      e.elemTheme.themeId === elem.elemTheme.themeId
+    );
 
-    for (const e of this.elementsDispo) {
-      if (
-        this.game.themeChoisi &&
-        e.elemTheme.themeId !== this.game.themeChoisi.id
-      ) {
-        const count = this.getTentative(e);
-
-        if (!elemMax || count > maxCount) {
-          maxCount = count;
-          elemMax = e;
-        }
-      }
+    if (!existeDeja) {
+      this.elementsDispo.push(elem);
     }
-
-    return elemMax;
-  }
-
-  private getTentative(elem: ElemAssoc): number {
-    const key = elem.elemTheme.id + '-' + elem.elemTheme.themeId;
-    return this.tentativesParElem.get(key) || 0;
-  }
-
-  private supprimerTentative(elem: ElemAssoc): void {
-    const key = elem.elemTheme.id + '-' + elem.elemTheme.themeId;
-    this.tentativesParElem.delete(key);
   }
 
   utiliserAide(): void {
@@ -343,7 +352,7 @@ export class AssociationComponent implements OnInit {
         this.surbrilliance();
         break;
       case 2:
-        this.enleverUnElementHorsTheme();
+        this.reorganiserOrdre();
         break;
     }
   }

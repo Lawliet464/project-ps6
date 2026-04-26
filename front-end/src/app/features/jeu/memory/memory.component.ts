@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JeuService } from '../../../core/services/jeu-communication.service';
 import { Carte } from '../../../core/models/memory.model';
 
@@ -7,23 +7,31 @@ import { Carte } from '../../../core/models/memory.model';
   templateUrl: './memory.component.html',
   styleUrls: ['./memory.component.scss']
 })
-export class MemoryComponent {
+export class MemoryComponent implements OnInit {
 
   cartes: Carte[] = [];
   premiere: Carte | null = null;
   deuxieme: Carte | null = null;
   estBloque = false;
 
-  constructor(public game: JeuService, private cdr: ChangeDetectorRef) {
+  constructor(public game: JeuService) {}
+
+  ngOnInit(): void {
+    this.initCartes();
+  }
+
+  private initCartes(): void {
     const toutesCartes: Carte[] = [];
+
     for (const e of this.game.elemsJeu) {
       toutesCartes.push({ elemTheme: e, retournee: false, surbrillance: false });
     }
+
     for (const e of this.game.elemsJeu) {
       toutesCartes.push({ elemTheme: e, retournee: false, surbrillance: false });
     }
-    toutesCartes.sort(() => Math.random() - 0.5);
-    this.cartes = toutesCartes;
+
+    this.cartes = toutesCartes.sort(() => Math.random() - 0.5);
   }
 
   // 1. Calcul du nombre de paires nécessaire
@@ -48,7 +56,6 @@ export class MemoryComponent {
     if (this.estBloque || carte.retournee) return;
 
     carte.retournee = true;
-    this.cdr.detectChanges();
 
     if (!this.premiere) {
       this.premiere = carte;
@@ -58,14 +65,23 @@ export class MemoryComponent {
     this.deuxieme = carte;
     this.estBloque = true;
 
-    if (
-      this.premiere.elemTheme.id === this.deuxieme.elemTheme.id &&
-      this.premiere.elemTheme.themeId === this.deuxieme.elemTheme.themeId
-    ) {
+    const p1 = this.premiere;
+    const p2 = this.deuxieme;
+
+    if (!p1 || !p2) return;
+
+    if (this.estPaire(p1, p2)) {
       this.validerPaire();
     } else {
-      this.echouerPaire();
+      this.echouerPaire(p1, p2);
     }
+  }
+
+  private estPaire(c1: Carte, c2: Carte): boolean {
+    return (
+      c1.elemTheme.id === c2.elemTheme.id &&
+      c1.elemTheme.themeId === c2.elemTheme.themeId
+    );
   }
 
   private validerPaire(): void {
@@ -75,29 +91,31 @@ export class MemoryComponent {
     this.checkFin();
   }
 
-  private echouerPaire(): void {
-    const aide = this.game.incrementErreur();
-    if (aide) this.surbrilliancePaire();
+  private echouerPaire(p1: Carte, p2: Carte): void {
+    this.estBloque = true;
 
-    const p = this.premiere!;
-    const d = this.deuxieme!;
+    const aide = this.game.incrementErreurMemory();
 
     setTimeout(() => {
-      p.retournee = false;
-      d.retournee = false;
+      p1.retournee = false;
+      p2.retournee = false;
+
       this.premiere = null;
       this.deuxieme = null;
       this.estBloque = false;
-      this.cdr.detectChanges();
-    }, this.game.tempsRetournement);
+
+      if (aide) this.utiliserAide();
+    }, this.game.temps);
   }
 
   private trouverPaire(carte: Carte): Carte | null {
     for (const c of this.cartes) {
-      if (!c.retournee &&
+      if (
+        !c.retournee &&
         c.elemTheme.id === carte.elemTheme.id &&
         c.elemTheme.themeId === carte.elemTheme.themeId &&
-        c !== carte) {
+        c !== carte
+      ) {
         return c;
       }
     }
@@ -105,10 +123,8 @@ export class MemoryComponent {
   }
 
   surbrillanceUnePaireAleatoire(): void {
-    const nonRetournees: Carte[] = [];
-    for (const c of this.cartes) {
-      if (!c.retournee) nonRetournees.push(c);
-    }
+    const nonRetournees = this.cartes.filter(c => !c.retournee);
+
     for (const c of nonRetournees) {
       const paire = this.trouverPaire(c);
       if (paire) {
@@ -134,53 +150,54 @@ export class MemoryComponent {
   private activerSurbrillance(c1: Carte, c2: Carte): void {
     c1.surbrillance = true;
     c2.surbrillance = true;
-    this.estBloque=true;
-    this.cdr.detectChanges();
+    this.estBloque = true;
+
     setTimeout(() => {
       c1.surbrillance = false;
       c2.surbrillance = false;
-      this.estBloque=false;
-      this.cdr.detectChanges();
+      this.estBloque = false;
     }, 2000);
   }
 
   retournerToutesCartes(): void {
-    const cartesARecacher: Carte[] = [];
+    const cachees: Carte[] = [];
+
     for (const c of this.cartes) {
       if (!c.retournee) {
         c.retournee = true;
-        cartesARecacher.push(c);
+        cachees.push(c);
       }
     }
+
     this.estBloque = true;
-    this.premiere=null;
-    this.deuxieme=null;
-    this.cdr.detectChanges();
+    this.premiere = null;
+    this.deuxieme = null;
+
     setTimeout(() => {
-      for (const c of cartesARecacher) c.retournee = false;
+      for (const c of cachees) {
+        c.retournee = false;
+      }
       this.estBloque = false;
-      this.cdr.detectChanges();
-    }, 3000);
+    }, this.game.temps);
   }
 
   retournerDefinitivementPaires(): void {
-    const nonRetournees: Carte[] = [];
-    for (const c of this.cartes) {
-      if (!c.retournee) nonRetournees.push(c);
-    }
+    const nonRetournees = this.cartes.filter(c => !c.retournee);
+
     const nbPaires = Math.max(1, Math.floor(nonRetournees.length / 6));
-    let pairesRetournees = 0;
+    let count = 0;
 
     for (const c of nonRetournees) {
-      if (pairesRetournees >= nbPaires) break;
+      if (count >= nbPaires) break;
+
       const paire = this.trouverPaire(c);
       if (paire) {
         c.retournee = true;
         paire.retournee = true;
-        pairesRetournees++;
+        count++;
       }
     }
-    this.cdr.detectChanges();
+
     this.checkFin();
   }
 
@@ -199,9 +216,8 @@ export class MemoryComponent {
   }
 
   checkFin(): void {
-    for (const c of this.cartes) {
-      if (!c.retournee) return;
-    }
-    setTimeout(() => this.game.terminerEtape(), 1000);
+    if (this.cartes.some(c => !c.retournee)) return;
+
+    setTimeout(() => this.game.terminerEtape(), this.game.temps);
   }
 }

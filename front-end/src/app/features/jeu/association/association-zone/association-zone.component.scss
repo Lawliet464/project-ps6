@@ -53,14 +53,7 @@
   border-style: solid;
 }
 
-.cellule.incorrecte-ordre {
-  background: #857ed3;
-  border-color: #5c7de0;
-  border-style: solid;
-  animation: shake 0.5s ease;
-}
-
-.cellule.incorrecte-theme {
+.cellule.incorrecte-theme, .cellule.incorrecte-ordre {
   background: #fff3e0;
   border-color: #f5a623;
   border-style: solid;
