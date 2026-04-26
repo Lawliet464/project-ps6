@@ -1,9 +1,0 @@
-<div class="elem"
-     draggable="true"
-     [class.selectionne]="selected"
-     [class.indice-surbrillance]="elem.surbrillance"
-     (dragstart)="dragStartItem.emit()"
-     (click)="clickItem.emit()">
-  <img [src]="elem.image" [alt]="elem.label">
-  <p>{{ elem.label }}</p>
-</div>
