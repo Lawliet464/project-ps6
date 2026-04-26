@@ -6,8 +6,7 @@ export const MOCK_PARTIES: Partie[] = [
         date: "Aujourd'hui",
         theme: 'Animaux',
         configuration: {
-            formatJeu: 'Images + Son',
-            formatPartie: 'Memory',
+            formatJeu: 'Memory',
             plateau: '4 × 2',
             taillePolice: '24px',
             aideMemo: 'Surbrillance / 3 err.',
@@ -28,8 +27,7 @@ export const MOCK_PARTIES: Partie[] = [
         date: "Aujourd'hui",
         theme: 'Fruits',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Assoc.',
+            formatJeu: 'Assoc.',
             plateau: '4 × 3',
             taillePolice: '20px',
             aideMemo: 'Surbrillance / 5 err.',
@@ -50,9 +48,8 @@ export const MOCK_PARTIES: Partie[] = [
         date: 'Hier',
         theme: 'Véhicules',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Mémo + Assoc.',
-            plateau: '4 × 4',
+            formatJeu: 'Mémo + Assoc.',
+            plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 8 err.',
             aideAssoc: 'Surbrillance case',
@@ -72,8 +69,7 @@ export const MOCK_PARTIES: Partie[] = [
         date: 'Hier',
         theme: 'Couleurs',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Mémo + Assoc.',
+            formatJeu: 'Mémo + Assoc.',
             plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Cartes visibles / 8 err.',
@@ -94,8 +90,7 @@ export const MOCK_PARTIES: Partie[] = [
         date: '10 Mars',
         theme: 'Objets',
         configuration: {
-            formatJeu: 'Images seules',
-            formatPartie: 'Memory',
+            formatJeu: 'Memory',
             plateau: '4 × 2',
             taillePolice: '24px',
             aideMemo: 'Surbrillance / 5 err.',
@@ -116,9 +111,8 @@ export const MOCK_PARTIES: Partie[] = [
         date: '10 Mars',
         theme: 'Pays',
         configuration: {
-            formatJeu: 'Images + Texte',
-            formatPartie: 'Assoc.',
-            plateau: '4 × 4',
+            formatJeu: 'Assoc.',
+            plateau: '4 × 3',
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 5 err.',
             aideAssoc: 'Surbrillance case',

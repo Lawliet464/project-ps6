@@ -9,17 +9,16 @@
 
   <app-param-qcm 
     label="Format du jeu"
-    [options]="['Images uniquement', 'Images + Texte', 'Texte uniquement']"
+    [options]="['Memory', 'Association']"
     [checked]="[configLocale.formatJeu]"
     (selectionChange)="updateSetting('formatJeu', $event[0])">
   </app-param-qcm>
 
-  <app-param-slider 
-    label="Volume du son"
-    [min]="0" [max]="100" [value]="settings.volume" [step]="5" unit="%"
-    iconMin="🔈" iconMax="🔊"
-    (valueChange)="updateSetting('volume', $event)">
-  </app-param-slider>
+  <app-param-qcm 
+    label="Thèmes du jeu"
+    [options]="['Habillement selon la météo', 'Saisons', 'Brossage de dents', 'Se laver', 'Repas', 'Prise de médicament', 'Objets du quotidien']"
+    [checked]="settings.themes">
+  </app-param-qcm>
 
   <app-param-slider 
     label="Taille de la police"

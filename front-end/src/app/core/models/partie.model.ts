@@ -1,7 +1,6 @@
 // Interface définissant la configuration choisie avant la partie
 export interface ConfigurationPartie {
     formatJeu: string;
-    formatPartie: string;
     plateau: string;
     taillePolice: string;
     aideMemo: string;

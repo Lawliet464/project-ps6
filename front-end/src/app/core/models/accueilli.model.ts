@@ -5,5 +5,5 @@ export interface Accueilli {
     level: string;
     couleurStade: string;
     colorTexte: string;
-    objectif: string; 
+    passions: string; 
 }

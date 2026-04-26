@@ -1,31 +1,6 @@
 <div class="stat-card">
     <span class="stat-label">Historique : Taux de bonnes réponses</span>
     
-    <div class="chart-header">
-        <label for="theme-select" class="theme-label">Thème :</label>
-        <select id="theme-select" class="theme-select" (change)="updateChart($any($event.target).value)">
-            <option value="all">Tous</option>
-            <option value="Animaux">Animaux</option>
-            <option value="Fruits">Fruits</option>
-            <option value="Véhicules">Véhicules</option>
-            <option value="Couleurs">Couleurs</option>
-            <option value="Objets">Objets</option>
-            <option value="Pays">Pays</option>
-        </select>
-    </div>
-    
-    <div class="chart-header">
-        <label for="plateau-select" class="theme-label">Taille du plateau :</label>
-        <select id="plateau-select" class="theme-select" (change)="updatePlateau($any($event.target).value)">
-            <option value="all">Tous</option>
-            <option value="2x2">2 × 2</option>
-            <option value="3x2">3 × 2</option>
-            <option value="4x2">4 × 2</option>
-            <option value="4x3">4 × 3</option>
-            <option value="4x4">4 × 4</option>
-        </select>
-    </div>
-    
     <div class="chart-container">
         <svg viewBox="0 0 550 240" class="line-chart">
             <text x="5" y="20" font-family="Josefin Sans" font-size="12" font-weight="700" fill="#875C74">Taux de réussite</text>

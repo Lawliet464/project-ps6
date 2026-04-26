@@ -6,19 +6,17 @@
                 <tr>
                     <th>Partie</th>
                     <th>Format Jeu</th>
-                    <th>Format Partie</th>
                     <th>Plateau</th>
                     <th>Police</th>
                     <th>Aides Mémo (Type / Fréq.)</th>
                     <th>Aides Assoc. (Type)</th>
-                    <th>Temps Ret.</th>
+                    <th>Temps Ret. (en sec.)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let partie of historiqueParties">
                     <td>{{ partie.id }}</td>
                     <td>{{ partie.configuration.formatJeu }}</td>
-                    <td>{{ partie.configuration.formatPartie }}</td>
                     <td>{{ partie.configuration.plateau }}</td>
                     <td>{{ partie.configuration.taillePolice }}</td>
                     <td>{{ partie.configuration.aideMemo }}</td>

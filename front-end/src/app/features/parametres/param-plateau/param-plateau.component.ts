@@ -26,8 +26,8 @@ export class ParamPlateauComponent implements OnChanges {
     { value: '2x2', cols: 2, rows: 2, label: '2 × 2' }, //Facile
     { value: '3x2', cols: 3, rows: 2, label: '3 × 2' }, //Moyen
     { value: '4x2', cols: 4, rows: 2, label: '4 × 2' }, //Moyen
-    { value: '4x3', cols: 4, rows: 3, label: '4 × 3' }, //Difficile
-    { value: '4x4', cols: 4, rows: 4, label: '4 × 4' }]; //Difficile
+    { value: '4x3', cols: 4, rows: 3, label: '4 × 3' } //Difficile
+    ]
 
   // Force la mise à jour visuelle quand configLocale change dans le parent
   ngOnChanges(changes: SimpleChanges): void {

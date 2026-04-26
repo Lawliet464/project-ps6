@@ -2,8 +2,7 @@ import { ConfigurationPartie } from '../models/partie.model';
 
 export const CONFIG_PAR_DEFAUT: Record<string, ConfigurationPartie> = {
     'facile': {
-        formatJeu: 'Images uniquement',
-        formatPartie: 'Court',
+        formatJeu: 'Association',
         plateau: '2x2',
         taillePolice: 'Grande',
         aideMemo: 'Surbrillance paire',
@@ -12,8 +11,7 @@ export const CONFIG_PAR_DEFAUT: Record<string, ConfigurationPartie> = {
         frequenceAide: 3
     },
     'moyen': {
-        formatJeu: 'Images + Texte',
-        formatPartie: 'Standard',
+        formatJeu: 'Association + Memory',
         plateau: '3x2', 
         taillePolice: 'Moyenne',
         aideMemo: 'Partiel visible',
@@ -22,8 +20,7 @@ export const CONFIG_PAR_DEFAUT: Record<string, ConfigurationPartie> = {
         frequenceAide: 6
     },
     'difficile': {
-        formatJeu: 'Texte uniquement',
-        formatPartie: 'Long',
+        formatJeu: 'Association + Memory',
         plateau: '4x3', 
         taillePolice: 'Petite',
         aideMemo: 'Flash intégral',
