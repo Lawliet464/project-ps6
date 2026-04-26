@@ -1,7 +1,7 @@
+import {ElemTheme} from "../models/theme.model"
+
 export interface Carte {
-  type: string;
-  label: string;
-  image: string;
+  elemTheme: ElemTheme;
   retournee: boolean;
   surbrillance: boolean;
 }

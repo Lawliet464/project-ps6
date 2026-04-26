@@ -4,6 +4,6 @@
      [class.indice-surbrillance]="elem.surbrillance"
      (dragstart)="dragStartItem.emit()"
      (click)="clickItem.emit()">
-  <img [src]="elem.image" [alt]="elem.label">
-  <p>{{ elem.label }}</p>
+  <img [src]="elem.elemTheme.image" [alt]="elem.elemTheme.nom">
+  <p>{{ elem.elemTheme.nom }}</p>
 </div>

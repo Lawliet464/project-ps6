@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { ElemAssoc } from '../../../core/models/association.model'; 
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { ElemTheme } from '../../../core/models/theme.model';
+import { JeuService } from '../../../core/services/jeu-communication.service';
 
 @Component({
   selector: 'app-fin-jeu',
@@ -7,17 +8,20 @@ import { ElemAssoc } from '../../../core/models/association.model';
   styleUrls: ['./fin-jeu.component.scss']
 })
 export class FinJeuComponent implements OnInit {
-  @Input() sequence: ElemAssoc[] = [];
   @Output() rejouer = new EventEmitter<void>();
 
-  sequenceTriee: ElemAssoc[] = [];
+  sequenceTriee: ElemTheme[] = [];
 
-  constructor() { }
+  constructor(public game: JeuService) { }
 
   ngOnInit(): void {
-    this.sequenceTriee = [...this.sequence]
-      .filter(e => e.id !== null)
-      .sort((a, b) => (a.id as number) - (b.id as number));
+    this.sequenceTriee = [];
+    if (this.game.themeChoisi) {
+      for (const e of this.game.themeChoisi!.elementsAssoc) {
+        this.sequenceTriee.push(e);
+      }
+      this.sequenceTriee.sort((a, b) => a.id - b.id);
+    }
   }
 
   onRejouer(): void {

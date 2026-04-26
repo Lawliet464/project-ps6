@@ -1,12 +1,12 @@
 <div class="jeu-container">
-  
+
   @if (phase === 'role') {
     <div id="choixRole" class="fade-in">
       <div class="role-card">
         <div class="role-emoji">🧓</div>
         <h2>Qui joue aujourd'hui ?</h2>
         <p>Choisissez votre profil pour adapter les aides durant la partie.</p>
-        
+
         <div class="role-boutons">
           <button class="role-btn btn-accueilli" (click)="choisirRole('accueilli')">
             <span class="role-icon">🧓</span>
@@ -46,7 +46,7 @@
         <span class="badge">Étape 1 / 2</span>
         <h2>Le jeu des paires</h2>
       </div>
-      <app-memory (finished)="passerAssoc()"></app-memory>
+      <app-memory></app-memory>
     </div>
   }
 
@@ -56,14 +56,13 @@
         <span class="badge">Étape 2 / 2</span>
         <h2>Remettre dans l'ordre</h2>
       </div>
-      <app-association (finished)="terminer()"></app-association>
+      <app-association></app-association>
     </div>
   }
 
   @if (phase === 'fin') {
     <div id="fin" class="fade-in">
-      <app-fin-jeu 
-        [sequence]="sequenceFinale" 
+      <app-fin-jeu
         (rejouer)="rejouer()">
       </app-fin-jeu>
     </div>

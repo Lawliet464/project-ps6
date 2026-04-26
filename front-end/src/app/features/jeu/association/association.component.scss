@@ -58,6 +58,14 @@
   gap: 0.8rem;
 }
 
+.colonne-hors-theme {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .zone-titre {
   font-size: 1rem;
   font-weight: 700;
@@ -89,26 +97,18 @@
   background: #f9f9f9;
 }
 
-.colonne-separateur {
+.elements-hors-theme {
+  width: 100%;
+  max-width: 200px;
+  min-height: 90px;
   display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
   align-items: center;
-  justify-content: center;
-  padding-top: 3rem;
-}
-
-.fleche-guide {
-  font-size: 2.5rem;
-  color: #875C74;
-}
-
-.tuto-click {
-  font-size: 0.82rem;
-  color: #875C74;
-  margin-top: 8px;
-  padding: 8px 12px;
-  background: #fdf7fa;
-  border-radius: 8px;
-  border: 1px dashed #BBCDE5;
+  border: 2px solid #EEF0F2;
+  border-radius: 10px;
+  padding: 0.6rem;
+  background: #f9f9f9;
 }
 
 .btn-assoc-row {

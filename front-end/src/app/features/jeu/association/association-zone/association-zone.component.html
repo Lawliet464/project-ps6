@@ -15,8 +15,8 @@
   <div class="cellule-num">{{ index + 1 }}</div>
   <div class="cellule-contenu">
     @if (cell.value) {
-      <img [src]="cell.value.image" [alt]="cell.value.label">
-      <p>{{ cell.value.label }}</p>
+      <img [src]="cell.value.elemTheme.image" [alt]="cell.value.elemTheme.nom">
+      <p>{{ cell.value.elemTheme.nom }}</p>
     }
   </div>
 </div>
