@@ -1,20 +1,18 @@
-<!-- ═══════════════════════════════════════════════
-     LANDING — écran d'accueil (non connecté)
-════════════════════════════════════════════════ -->
+<!-- LANDING — écran d'accueil (non connecté)-->
 @if (ecran() === 'accueil') {
   <div class="screen active">
     <div class="card">
-      <span class="card-icon">🧠</span>
+      <span class="card-icon material-symbols-rounded">neurology</span>
       <h1>Bienvenue sur MemoLink</h1>
       <p class="sous-titre">Un jeu de mémoire conçu pour les personnes atteintes d'Alzheimer, adapté à chaque stade de la maladie.</p>
       <div class="role-grid">
         <button class="role-btn" (click)="ecran.set('connexionAidant')">
-          <span class="r-icon">🤝</span>
+          <span class="r-icon material-symbols-rounded">badge</span>
           <span class="r-label">Je suis un personnel de l'accueil du jour</span>
           <span class="r-desc">Gérer les profils et suivre la progression</span>
         </button>
         <button class="role-btn" (click)="ecran.set('connexionMalade')">
-          <span class="r-icon">🧓</span>
+          <span class="r-icon material-symbols-rounded">person</span>
           <span class="r-label">Je suis patient</span>
           <span class="r-desc">Jouer à mon rythme</span>
         </button>
@@ -23,22 +21,23 @@
   </div>
 }
 
-<!-- ═══════════════════════════════════════════════
-     CONNEXION AIDANT
-════════════════════════════════════════════════ -->
+<!--CONNEXION AIDANT  -->
+
 @if (ecran() === 'connexionAidant') {
   <div class="screen active">
     <div class="card">
-      <span class="card-icon">🤝</span>
+      <span class="card-icon material-symbols-rounded">badge</span>
       <h1>Espace Administrateur</h1>
       <p class="sous-titre">Connectez-vous pour gérer les profils et consulter les statistiques.</p>
       <div class="liste-aidants">
         @if (aidant$()) {
           <div class="aidant-item">
-            <span class="aidant-icon">🤝</span>
+            <span class="aidant-icon material-symbols-rounded">manage_accounts</span>
             <span class="aidant-nom" (click)="ouvrirConnexionAidant(aidant$()!)">{{ aidant$()!.prenom }}</span>
-            <span class="aidant-arrow" (click)="ouvrirConnexionAidant(aidant$()!)">→</span>
-            <button class="btn-supprimer" (click)="supprimerAidant()">🗑️</button>
+            <span class="aidant-arrow material-symbols-rounded" (click)="ouvrirConnexionAidant(aidant$()!)">arrow_forward</span>
+            <button class="btn-supprimer" (click)="supprimerAidant()">
+              <span class="material-symbols-rounded">delete</span>
+            </button>
           </div>
         }
         @if (!aidant$()) {
@@ -49,14 +48,14 @@
         <div class="separateur">ou créer un nouveau compte</div>
         <button class="btn-primary" (click)="ecran.set('creerAidant')">+ Créer un compte aidant</button>
       }
-      <button class="btn-secondary" (click)="ecran.set('accueil')">← Retour</button>
+      <button class="btn-secondary" (click)="ecran.set('accueil')">
+        <span class="material-symbols-rounded">arrow_back</span> Retour
+      </button>
     </div>
   </div>
 }
 
-<!-- ═══════════════════════════════════════════════
-     CRÉER AIDANT
-════════════════════════════════════════════════ -->
+<!-- CRÉER AIDANT -->
 @if (ecran() === 'creerAidant') {
   <div class="screen active">
     <div class="card">
@@ -64,7 +63,7 @@
         <div class="etape active"></div>
         <div class="etape"></div>
       </div>
-      <span class="card-icon">✏️</span>
+      <span class="card-icon material-symbols-rounded">edit</span>
       <h1>Créer mon compte</h1>
       <p class="sous-titre">Votre compte vous permet de gérer les profils des patients et de suivre leur progression.</p>
       @if (erreur()) {
@@ -78,22 +77,22 @@
         <label>Mot de passe</label>
         <input type="password" [(ngModel)]="formAidant.mdp" placeholder="Choisissez un mot de passe" />
       </div>
-      <button class="btn-primary" (click)="creerCompteAidant()">Créer mon compte →</button>
-      <button class="btn-secondary" (click)="ecran.set('connexionAidant')">← Retour</button>
+      <button class="btn-primary" (click)="creerCompteAidant()">Créer mon compte</button>
+      <button class="btn-secondary" (click)="ecran.set('connexionAidant')">
+        <span class="material-symbols-rounded">arrow_back</span> Retour
+      </button>
     </div>
   </div>
 }
 
-<!-- ═══════════════════════════════════════════════
-     DASHBOARD AIDANT — vraie app connectée
-════════════════════════════════════════════════ -->
+<!-- DASHBOARD AIDANT — vraie app connecté -->
 @if (ecran() === 'dashboardAidant') {
   <div class="app-layout">
 
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <span class="logo-icon">🧠</span>
+        <span class="logo-icon material-symbols-rounded">neurology</span>
         <span class="logo-text">Memo<em>Link</em></span>
       </div>
 
@@ -107,18 +106,18 @@
 
       <nav class="sidebar-nav">
         <button class="nav-item active">
-          <span class="nav-icon">🏠</span> Tableau de bord
+          <span class="nav-icon material-symbols-rounded">home</span> Tableau de bord
         </button>
         <button class="nav-item" (click)="ecran.set('creerMalade')">
-          <span class="nav-icon">➕</span> Nouveau patient
+          <span class="nav-icon material-symbols-rounded">person_add</span> Nouveau patient
         </button>
         <button class="nav-item" (click)="ecran.set('connexionMalade')">
-          <span class="nav-icon">🧓</span> Espace patients
+          <span class="nav-icon material-symbols-rounded">groups</span> Espace patients
         </button>
       </nav>
 
       <button class="sidebar-logout" (click)="deconnecterAidant()">
-        <span>⎋</span> Se déconnecter
+        <span class="material-symbols-rounded">logout</span> Se déconnecter
       </button>
     </aside>
 
@@ -128,11 +127,11 @@
       <!-- Header -->
       <header class="dash-header">
         <div>
-          <h2 class="dash-title">Bonjour, {{ auth.aidantConnecte()?.prenom }} 👋</h2>
+          <h2 class="dash-title">Bonjour, {{ auth.aidantConnecte()?.prenom }}</h2>
           <p class="dash-subtitle">Voici un aperçu de vos patients aujourd'hui.</p>
         </div>
         <button class="btn-add-patient" (click)="ecran.set('creerMalade')">
-          + Ajouter un patient
+          <span class="material-symbols-rounded">person_add</span> Ajouter un patient
         </button>
       </header>
 
@@ -144,15 +143,15 @@
         </div>
         <div class="stat-card stat-facile">
           <span class="stat-value">{{ repartitionNiveaux.facile }}</span>
-          <span class="stat-label">🌱 Niveau facile</span>
+          <span class="stat-label">Niveau facile</span>
         </div>
         <div class="stat-card stat-moyen">
           <span class="stat-value">{{ repartitionNiveaux.moyen }}</span>
-          <span class="stat-label">🌿 Niveau moyen</span>
+          <span class="stat-label">Niveau moyen</span>
         </div>
         <div class="stat-card stat-difficile">
           <span class="stat-value">{{ repartitionNiveaux.difficile }}</span>
-          <span class="stat-label">🍂 Niveau difficile</span>
+          <span class="stat-label">Niveau difficile</span>
         </div>
       </div>
 
@@ -162,10 +161,10 @@
 
         @if (mesPatientsAidant$().length === 0) {
           <div class="empty-state">
-            <span class="empty-icon">🧓</span>
+            <span class="empty-icon material-symbols-rounded">group</span>
             <p>Aucun patient pour le moment.</p>
             <button class="btn-primary" style="max-width:240px;margin-top:16px" (click)="ecran.set('creerMalade')">
-              + Ajouter un premier patient
+              Ajouter un premier patient
             </button>
           </div>
         }
@@ -177,7 +176,9 @@
                 <div class="patient-big-avatar" [style.background]="niveauColor(patient.niveau) + '33'">
                   {{ patient.prenom[0].toUpperCase() }}
                 </div>
-                <button class="btn-supprimer patient-delete" (click)="supprimerPatient(patient.id)">🗑️</button>
+                <button class="btn-supprimer patient-delete" (click)="supprimerPatient(patient.id)">
+                  <span class="material-symbols-rounded">delete</span>
+                </button>
               </div>
               <div class="patient-card-body">
                 <span class="patient-name">{{ patient.prenom }}</span>
@@ -186,10 +187,10 @@
                 </span>
                 <div class="patient-actions">
                   <button class="patient-btn-stats" (click)="voirStats(patient.id)">
-                    📊 Stats
+                    <span class="material-symbols-rounded">bar_chart</span> Stats
                   </button>
                   <button class="patient-btn-play" (click)="lancerJeu(patient.id)">
-                    ▶ Jouer
+                    <span class="material-symbols-rounded">play_arrow</span> Jouer
                   </button>
                 </div>
               </div>
@@ -202,9 +203,7 @@
   </div>
 }
 
-<!-- ═══════════════════════════════════════════════
-     CRÉER PATIENT
-════════════════════════════════════════════════ -->
+<!--CRÉER PATIENT -->
 @if (ecran() === 'creerMalade') {
   <div class="screen active">
     <div class="card">
@@ -212,7 +211,7 @@
         <div class="etape done"></div>
         <div class="etape active"></div>
       </div>
-      <span class="card-icon">🧓</span>
+      <span class="card-icon material-symbols-rounded">person_add</span>
       <h1>Nouveau patient</h1>
       <p class="sous-titre">Créez un profil adapté à la personne atteinte d'Alzheimer.</p>
       @if (erreur()) {
@@ -229,7 +228,7 @@
             <input type="radio" name="niveau" value="facile" [checked]="formPatient.niveau === 'facile'" />
             <div class="stade-dot"></div>
             <div class="stade-info">
-              <span class="stade-name">🌱 Niveau facile</span>
+              <span class="stade-name">Niveau facile</span>
               <span class="stade-desc">Autonomie préservée, pertes de mémoire ponctuelles</span>
               <span class="stade-params">Plateau 4×4 · Aide après 8 erreurs · Police standard</span>
             </div>
@@ -238,7 +237,7 @@
             <input type="radio" name="niveau" value="moyen" [checked]="formPatient.niveau === 'moyen'" />
             <div class="stade-dot"></div>
             <div class="stade-info">
-              <span class="stade-name">🌿 Niveau moyen</span>
+              <span class="stade-name">Niveau moyen</span>
               <span class="stade-desc">Désorientation fréquente, aide régulière nécessaire</span>
               <span class="stade-params">Plateau 4×2 · Aide après 4 erreurs · Grande police</span>
             </div>
@@ -247,26 +246,27 @@
             <input type="radio" name="niveau" value="difficile" [checked]="formPatient.niveau === 'difficile'" />
             <div class="stade-dot"></div>
             <div class="stade-info">
-              <span class="stade-name">🍂 Niveau difficile</span>
+              <span class="stade-name">Niveau difficile</span>
               <span class="stade-desc">Forte dépendance, aide continue nécessaire</span>
               <span class="stade-params">Plateau 2×2 · Aide immédiate · Très grande police · Son</span>
             </div>
           </label>
         </div>
       </div>
-      <button class="btn-primary" (click)="creerProfilMalade()">Créer le profil ✓</button>
-      <button class="btn-secondary" (click)="ecran.set('dashboardAidant')">← Retour</button>
+      <button class="btn-primary" (click)="creerProfilMalade()">Créer le profil</button>
+      <button class="btn-secondary" (click)="ecran.set('dashboardAidant')">
+        <span class="material-symbols-rounded">arrow_back</span> Retour
+      </button>
     </div>
   </div>
 }
 
-<!-- ═══════════════════════════════════════════════
-     CONNEXION MALADE
-════════════════════════════════════════════════ -->
+<!--CONNEXION MALAD  -->
+
 @if (ecran() === 'connexionMalade') {
   <div class="screen active">
     <div class="card">
-      <span class="card-icon">🧓</span>
+      <span class="card-icon material-symbols-rounded">waving_hand</span>
       <h1>Qui joue ?</h1>
       <p class="sous-titre">Cliquez sur votre prénom pour commencer à jouer.</p>
       <div class="profils-liste">
@@ -277,8 +277,10 @@
               <span class="profil-nom">{{ patient.prenom }}</span>
               <span class="profil-stade">{{ niveauLabel(patient.niveau) }}</span>
             </div>
-            <span style="cursor:pointer" (click)="lancerJeu(patient.id)">▶</span>
-            <button class="btn-supprimer" (click)="supprimerPatient(patient.id)">🗑️</button>
+            <span class="material-symbols-rounded" style="cursor:pointer;color:var(--gris)" (click)="lancerJeu(patient.id)">play_arrow</span>
+            <button class="btn-supprimer" (click)="supprimerPatient(patient.id)">
+              <span class="material-symbols-rounded">delete</span>
+            </button>
           </div>
         }
         @if (patients$().length === 0) {
@@ -287,7 +289,9 @@
           </div>
         }
       </div>
-      <button class="btn-secondary" (click)="auth.aidantConnecte() ? ecran.set('dashboardAidant') : ecran.set('accueil')">← Retour</button>
+      <button class="btn-secondary" (click)="auth.aidantConnecte() ? ecran.set('dashboardAidant') : ecran.set('accueil')">
+        <span class="material-symbols-rounded">arrow_back</span> Retour
+      </button>
     </div>
   </div>
 }

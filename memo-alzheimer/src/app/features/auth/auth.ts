@@ -36,7 +36,7 @@ export class Auth {
     return this.data.getPatientsParAidant(aidant.id);
   });
 
-  // Computed : si un aidant est déjà connecté, on atterrit directement sur le dashboard
+  // Si une session est active (localStorage), on atterrit directement sur le dashboard
   constructor() {
     if (this.auth.aidantConnecte()) {
       this.ecran.set('dashboardAidant');
@@ -55,15 +55,15 @@ export class Auth {
       this.auth.connecterAidant(aidant);
       this.ecran.set('dashboardAidant');
     } else {
-      alert('❌ Mot de passe incorrect.');
+      alert('Mot de passe incorrect.');
     }
   }
 
   creerCompteAidant(): void {
     const { prenom, mdp } = this.formAidant;
-    if (this.data.aidant$())     { this.erreur.set('⚠️ Un compte administrateur existe déjà.'); return; }
-    if (!prenom)                 { this.erreur.set('⚠️ Veuillez entrer votre prénom.'); return; }
-    if (!mdp || mdp.length < 4)  { this.erreur.set('⚠️ Le mot de passe doit faire au moins 4 caractères.'); return; }
+    if (this.data.aidant$())     { this.erreur.set(' Un compte administrateur existe déjà.'); return; }
+    if (!prenom)                 { this.erreur.set(' Veuillez entrer votre prénom.'); return; }
+    if (!mdp || mdp.length < 4)  { this.erreur.set(' Le mot de passe doit faire au moins 4 caractères.'); return; }
     this.erreur.set('');
     this.data.creerAidant(prenom, mdp);
     this.auth.connecterAidant(this.data.aidant$()!);
@@ -89,7 +89,7 @@ export class Auth {
 
   creerProfilMalade(): void {
     const { prenom, niveau } = this.formPatient;
-    if (!prenom) { this.erreur.set('⚠️ Veuillez entrer le prénom du patient.'); return; }
+    if (!prenom) { this.erreur.set(' Veuillez entrer le prénom du patient.'); return; }
     this.erreur.set('');
     this.data.creerPatient(prenom, niveau);
     this.formPatient = { prenom: '', niveau: 'facile' };
@@ -122,9 +122,9 @@ export class Auth {
 
   niveauLabel(niveau: string): string {
     const labels: Record<string, string> = {
-      facile:    '🌱 Niveau facile',
-      moyen:     '🌿 Niveau moyen',
-      difficile: '🍂 Niveau difficile'
+      facile:    ' Niveau facile',
+      moyen:     ' Niveau moyen',
+      difficile: ' Niveau difficile'
     };
     return labels[niveau] || niveau;
   }
