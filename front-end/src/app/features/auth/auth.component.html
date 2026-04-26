@@ -13,7 +13,7 @@
         </button>
         <button class="role-btn" (click)="ecran.set('connexionMalade')">
           <span class="r-icon material-symbols-rounded">person</span>
-          <span class="r-label">Je suis patient</span>
+          <span class="r-label">Je suis accueilli</span>
           <span class="r-desc">Jouer à mon rythme</span>
         </button>
       </div>
@@ -66,7 +66,7 @@
       </div>
       <span class="card-icon material-symbols-rounded">edit</span>
       <h1>Créer mon compte</h1>
-      <p class="sous-titre">Votre compte vous permet de gérer les profils des patients et de suivre leur progression.</p>
+      <p class="sous-titre">Votre compte vous permet de gérer les profils des accueillis et de suivre leur progression.</p>
       @if (erreur()) {
         <div class="msg-erreur visible">{{ erreur() }}</div>
       }
@@ -110,10 +110,10 @@
           <span class="nav-icon material-symbols-rounded">home</span> Tableau de bord
         </button>
         <button class="nav-item" (click)="ecran.set('creerMalade')">
-          <span class="nav-icon material-symbols-rounded">person_add</span> Nouveau patient
+          <span class="nav-icon material-symbols-rounded">person_add</span> Nouveau accueilli
         </button>
         <button class="nav-item" (click)="ecran.set('connexionMalade')">
-          <span class="nav-icon material-symbols-rounded">groups</span> Espace patients
+          <span class="nav-icon material-symbols-rounded">groups</span> Espace accueillis
         </button>
       </nav>
 
@@ -129,10 +129,10 @@
       <header class="dash-header">
         <div>
           <h2 class="dash-title">Bonjour, {{ actuelAidant()?.prenom }}</h2>
-          <p class="dash-subtitle">Voici un aperçu de vos patients aujourd'hui.</p>
+          <p class="dash-subtitle">Voici un aperçu de vos accueillis aujourd'hui.</p>
         </div>
         <button class="btn-add-patient" (click)="ecran.set('creerMalade')">
-          <span class="material-symbols-rounded">person_add</span> Ajouter un patient
+          <span class="material-symbols-rounded">person_add</span> Ajouter un accueilli
         </button>
       </header>
 
@@ -140,7 +140,7 @@
       <div class="stats-row">
         <div class="stat-card stat-total">
           <span class="stat-value">{{ totalPatients }}</span>
-          <span class="stat-label">Patient{{ totalPatients > 1 ? 's' : '' }} suivis</span>
+          <span class="stat-label">Accueilli{{ totalPatients > 1 ? 's' : '' }} suivis</span>
         </div>
         <div class="stat-card stat-facile">
           <span class="stat-value">{{ repartitionNiveaux.facile }}</span>
@@ -157,14 +157,14 @@
       </div>
     <!-- Liste patients -->
       <section class="patients-section">
-        <h3 class="section-title">Mes patients</h3>
+        <h3 class="section-title">Mes accueillis</h3>
 
         @if (mesPatientsAidant$().length === 0) {
           <div class="empty-state">
             <span class="empty-icon material-symbols-rounded">group</span>
-            <p>Aucun patient pour le moment.</p>
+            <p>Aucun accueilli pour le moment.</p>
             <button class="btn-primary" style="max-width:240px;margin-top:16px" (click)="ecran.set('creerMalade')">
-              Ajouter un premier patient
+              Ajouter un premier accueilli
             </button>
           </div>
         }
@@ -189,8 +189,8 @@
                   <button class="patient-btn-stats" (click)="voirStats(patient.id)">
                     <span class="material-symbols-rounded">bar_chart</span> Stats
                   </button>
-                  <button class="patient-btn-play" (click)="lancerJeu(patient.id)">
-                    <span class="material-symbols-rounded">play_arrow</span> Jouer
+                  <button class="patient-btn-params" (click)="voirParams(patient.id)">
+                    <span class="material-symbols-rounded">settings</span> settings
                   </button>
                 </div>
               </div>
@@ -212,13 +212,13 @@
         <div class="etape active"></div>
       </div>
       <span class="card-icon material-symbols-rounded">person_add</span>
-      <h1>Nouveau patient</h1>
+      <h1>Nouveau accueilli</h1>
       <p class="sous-titre">Créez un profil adapté à la personne atteinte d'Alzheimer.</p>
       @if (erreur()) {
         <div class="msg-erreur visible">{{ erreur() }}</div>
       }
       <div class="form-group">
-        <label>Prénom du patient</label>
+        <label>Prénom de l'accueilli</label>
         <input type="text" [(ngModel)]="formPatient.prenom" placeholder="Ex : Jean" maxlength="30" />
       </div>
       <div class="form-group">

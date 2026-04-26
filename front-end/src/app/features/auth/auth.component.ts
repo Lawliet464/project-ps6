@@ -127,6 +127,11 @@ export class AuthComponent implements OnInit {
     this.router.navigate(['/statistiques']);
   }
 
+  voirParams(patientId: string): void {
+    this.identifierPatient(patientId);
+    this.router.navigate(['/parameters']);
+  }
+
   lancerJeu(patientId: string): void {
     this.identifierPatient(patientId);
     this.router.navigate(['/jeu']);

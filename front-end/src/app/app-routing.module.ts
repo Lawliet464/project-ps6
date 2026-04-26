@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: 'statistiques', component: StatistiquesComponent },
   { path: 'parametres', component: ParametresComponent },
   { path: 'jeu', component: JeuComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' }
+  { path: 'accueil', component: AuthComponent },
+  { path: '', redirectTo: 'accueil', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -788,7 +788,7 @@ header {
 }
 
 .patient-btn-stats,
-.patient-btn-play {
+.patient-btn-play,.patient-btn-params  {
   flex: 1;
   padding: 9px 8px;
   border-radius: 10px;
@@ -816,6 +816,12 @@ header {
 .patient-btn-play:hover {
   background: var(--rose);
   border-color: var(--rose);
+}
+
+
+.patient-btn-params:hover {
+  border-color: var(--rose);
+  background: var(--rose-l);
 }
 
 /*  Empty state */
