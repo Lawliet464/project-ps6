@@ -1,3 +1,6 @@
+<!-- ═══════════════════════════════════════════════
+     LANDING — écran d'accueil (non connecté)
+════════════════════════════════════════════════ -->
 @if (ecran() === 'accueil') {
   <div class="screen active">
     <div class="card">
@@ -20,6 +23,9 @@
   </div>
 }
 
+<!-- ═══════════════════════════════════════════════
+     CONNEXION AIDANT
+════════════════════════════════════════════════ -->
 @if (ecran() === 'connexionAidant') {
   <div class="screen active">
     <div class="card">
@@ -48,6 +54,9 @@
   </div>
 }
 
+<!-- ═══════════════════════════════════════════════
+     CRÉER AIDANT
+════════════════════════════════════════════════ -->
 @if (ecran() === 'creerAidant') {
   <div class="screen active">
     <div class="card">
@@ -75,34 +84,127 @@
   </div>
 }
 
+<!-- ═══════════════════════════════════════════════
+     DASHBOARD AIDANT — vraie app connectée
+════════════════════════════════════════════════ -->
 @if (ecran() === 'dashboardAidant') {
-  <div class="screen active">
-    <div class="card" style="max-width:600px">
-      <span class="card-icon">🤝</span>
-      <h1>Bonjour, {{ auth.aidantConnecte()?.prenom }} 👋</h1>
-      <p class="sous-titre">Gérez les profils des patients et suivez leur progression.</p>
-      <div style="margin-bottom:20px">
-        @for (patient of mesPatientsAidant$(); track patient.id) {
-          <div class="profil-item">
-            <div class="profil-avatar" (click)="voirStats(patient.id)">{{ patient.prenom[0].toUpperCase() }}</div>
-            <div style="flex:1;cursor:pointer" (click)="voirStats(patient.id)">
-              <span class="profil-nom">{{ patient.prenom }}</span>
-              <span class="profil-stade">{{ niveauLabel(patient.niveau) }}</span>
-            </div>
-            <span style="cursor:pointer;color:var(--beige);font-size:1.3rem" (click)="voirStats(patient.id)">→</span>
-            <button class="btn-supprimer" (click)="supprimerPatient(patient.id)">🗑️</button>
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">Memo<em>Link</em></span>
+      </div>
+
+      <div class="sidebar-avatar">
+        <div class="avatar-circle">{{ auth.aidantConnecte()?.prenom?.[0]?.toUpperCase() }}</div>
+        <div>
+          <div class="avatar-name">{{ auth.aidantConnecte()?.prenom }}</div>
+          <div class="avatar-role">Administrateur</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active">
+          <span class="nav-icon">🏠</span> Tableau de bord
+        </button>
+        <button class="nav-item" (click)="ecran.set('creerMalade')">
+          <span class="nav-icon">➕</span> Nouveau patient
+        </button>
+        <button class="nav-item" (click)="ecran.set('connexionMalade')">
+          <span class="nav-icon">🧓</span> Espace patients
+        </button>
+      </nav>
+
+      <button class="sidebar-logout" (click)="deconnecterAidant()">
+        <span>⎋</span> Se déconnecter
+      </button>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="dashboard-main">
+
+      <!-- Header -->
+      <header class="dash-header">
+        <div>
+          <h2 class="dash-title">Bonjour, {{ auth.aidantConnecte()?.prenom }} 👋</h2>
+          <p class="dash-subtitle">Voici un aperçu de vos patients aujourd'hui.</p>
+        </div>
+        <button class="btn-add-patient" (click)="ecran.set('creerMalade')">
+          + Ajouter un patient
+        </button>
+      </header>
+
+      <!-- Cartes statistiques -->
+      <div class="stats-row">
+        <div class="stat-card stat-total">
+          <span class="stat-value">{{ totalPatients }}</span>
+          <span class="stat-label">Patient{{ totalPatients > 1 ? 's' : '' }} suivis</span>
+        </div>
+        <div class="stat-card stat-facile">
+          <span class="stat-value">{{ repartitionNiveaux.facile }}</span>
+          <span class="stat-label">🌱 Niveau facile</span>
+        </div>
+        <div class="stat-card stat-moyen">
+          <span class="stat-value">{{ repartitionNiveaux.moyen }}</span>
+          <span class="stat-label">🌿 Niveau moyen</span>
+        </div>
+        <div class="stat-card stat-difficile">
+          <span class="stat-value">{{ repartitionNiveaux.difficile }}</span>
+          <span class="stat-label">🍂 Niveau difficile</span>
+        </div>
+      </div>
+
+      <!-- Liste patients -->
+      <section class="patients-section">
+        <h3 class="section-title">Mes patients</h3>
+
+        @if (mesPatientsAidant$().length === 0) {
+          <div class="empty-state">
+            <span class="empty-icon">🧓</span>
+            <p>Aucun patient pour le moment.</p>
+            <button class="btn-primary" style="max-width:240px;margin-top:16px" (click)="ecran.set('creerMalade')">
+              + Ajouter un premier patient
+            </button>
           </div>
         }
-        @if (mesPatientsAidant$().length === 0) {
-          <p style="color:var(--gris);font-size:0.9rem;text-align:center;padding:16px 0">Aucun patient créé. Commencez par en ajouter un !</p>
-        }
-      </div>
-      <button class="btn-primary" (click)="ecran.set('creerMalade')">+ Ajouter un patient</button>
-      <button class="btn-secondary" (click)="deconnecterAidant()">Se déconnecter</button>
-    </div>
+
+        <div class="patients-grid">
+          @for (patient of mesPatientsAidant$(); track patient.id) {
+            <div class="patient-card">
+              <div class="patient-card-top" [style.background]="niveauColor(patient.niveau) + '18'">
+                <div class="patient-big-avatar" [style.background]="niveauColor(patient.niveau) + '33'">
+                  {{ patient.prenom[0].toUpperCase() }}
+                </div>
+                <button class="btn-supprimer patient-delete" (click)="supprimerPatient(patient.id)">🗑️</button>
+              </div>
+              <div class="patient-card-body">
+                <span class="patient-name">{{ patient.prenom }}</span>
+                <span class="patient-niveau" [style.color]="niveauColor(patient.niveau)">
+                  {{ niveauLabel(patient.niveau) }}
+                </span>
+                <div class="patient-actions">
+                  <button class="patient-btn-stats" (click)="voirStats(patient.id)">
+                    📊 Stats
+                  </button>
+                  <button class="patient-btn-play" (click)="lancerJeu(patient.id)">
+                    ▶ Jouer
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
+    </main>
   </div>
 }
 
+<!-- ═══════════════════════════════════════════════
+     CRÉER PATIENT
+════════════════════════════════════════════════ -->
 @if (ecran() === 'creerMalade') {
   <div class="screen active">
     <div class="card">
@@ -158,6 +260,9 @@
   </div>
 }
 
+<!-- ═══════════════════════════════════════════════
+     CONNEXION MALADE
+════════════════════════════════════════════════ -->
 @if (ecran() === 'connexionMalade') {
   <div class="screen active">
     <div class="card">
@@ -182,7 +287,7 @@
           </div>
         }
       </div>
-      <button class="btn-secondary" (click)="ecran.set('accueil')">← Retour</button>
+      <button class="btn-secondary" (click)="auth.aidantConnecte() ? ecran.set('dashboardAidant') : ecran.set('accueil')">← Retour</button>
     </div>
   </div>
 }

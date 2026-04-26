@@ -21,22 +21,27 @@ type Ecran =
 export class Auth {
 
   readonly router = inject(Router);
-  readonly auth   = inject(AuthService);   // gère la session
-  readonly data   = inject(DataService);   // gère les données
+  readonly auth   = inject(AuthService);
+  readonly data   = inject(DataService);
 
   ecran  = signal<Ecran>('accueil');
   erreur = signal('');
 
-  // Lecture directe depuis les services — le component ne stocke rien
   readonly aidant$   = this.data.aidant$;
   readonly patients$ = this.data.patients$;
 
-  // Patients filtrés par l'aidant connecté
   readonly mesPatientsAidant$ = computed(() => {
     const aidant = this.auth.aidantConnecte();
     if (!aidant) return [];
     return this.data.getPatientsParAidant(aidant.id);
   });
+
+  // Computed : si un aidant est déjà connecté, on atterrit directement sur le dashboard
+  constructor() {
+    if (this.auth.aidantConnecte()) {
+      this.ecran.set('dashboardAidant');
+    }
+  }
 
   formAidant  = { prenom: '', mdp: '' };
   formPatient = { prenom: '', niveau: 'facile' as 'facile' | 'moyen' | 'difficile' };
@@ -45,7 +50,7 @@ export class Auth {
 
   ouvrirConnexionAidant(aidant: { id: string; prenom: string; mdp: string }): void {
     const mdp = prompt(`Mot de passe pour ${aidant.prenom} :`);
-    if (mdp === null) return;   // l'utilisateur a annulé
+    if (mdp === null) return;
     if (this.auth.verifierMotDePasse(aidant, mdp)) {
       this.auth.connecterAidant(aidant);
       this.ecran.set('dashboardAidant');
@@ -56,9 +61,9 @@ export class Auth {
 
   creerCompteAidant(): void {
     const { prenom, mdp } = this.formAidant;
-    if (this.data.aidant$())      { this.erreur.set('⚠️ Un compte administrateur existe déjà.'); return; }
-    if (!prenom)                  { this.erreur.set('⚠️ Veuillez entrer votre prénom.'); return; }
-    if (!mdp || mdp.length < 4)   { this.erreur.set('⚠️ Le mot de passe doit faire au moins 4 caractères.'); return; }
+    if (this.data.aidant$())     { this.erreur.set('⚠️ Un compte administrateur existe déjà.'); return; }
+    if (!prenom)                 { this.erreur.set('⚠️ Veuillez entrer votre prénom.'); return; }
+    if (!mdp || mdp.length < 4)  { this.erreur.set('⚠️ Le mot de passe doit faire au moins 4 caractères.'); return; }
     this.erreur.set('');
     this.data.creerAidant(prenom, mdp);
     this.auth.connecterAidant(this.data.aidant$()!);
@@ -72,11 +77,12 @@ export class Auth {
     if (!confirm(`Supprimer le compte de "${aidant.prenom}" ?\nSes patients associés seront aussi supprimés.`)) return;
     this.data.supprimerAidant();
     this.auth.deconnecterAidant();
+    this.ecran.set('accueil');
   }
 
   deconnecterAidant(): void {
     this.auth.deconnecterAidant();
-    this.ecran.set('accueil');
+    this.ecran.set('accueil');   // retour à la landing
   }
 
   // - Patients -
@@ -90,12 +96,10 @@ export class Auth {
     this.ecran.set('dashboardAidant');
   }
 
-  // Une seule méthode pour les deux écrans — plus de duplication
   supprimerPatient(id: string): void {
     const patient = this.data.supprimerPatient(id);
     if (!patient) return;
     if (!confirm(`Supprimer le profil de "${patient.prenom}" ?`)) {
-      // l'utilisateur a annulé — on remet le patient
       this.data.creerPatient(patient.prenom, patient.niveau);
     }
   }
@@ -123,5 +127,27 @@ export class Auth {
       difficile: '🍂 Niveau difficile'
     };
     return labels[niveau] || niveau;
+  }
+
+  niveauColor(niveau: string): string {
+    const colors: Record<string, string> = {
+      facile:    '#4caf86',
+      moyen:     '#e8a44a',
+      difficile: '#c97b84'
+    };
+    return colors[niveau] || 'var(--gris)';
+  }
+
+  get totalPatients(): number {
+    return this.mesPatientsAidant$().length;
+  }
+
+  get repartitionNiveaux(): { facile: number; moyen: number; difficile: number } {
+    const list = this.mesPatientsAidant$();
+    return {
+      facile:    list.filter(p => p.niveau === 'facile').length,
+      moyen:     list.filter(p => p.niveau === 'moyen').length,
+      difficile: list.filter(p => p.niveau === 'difficile').length,
+    };
   }
 }
