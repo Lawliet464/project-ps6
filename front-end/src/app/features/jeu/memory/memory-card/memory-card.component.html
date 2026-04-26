@@ -1,0 +1,13 @@
+<div class="carte"
+     [class.retournee]="carte.retournee"
+     [class.surbrillance]="carte.surbrillance"
+     (click)="onClick()">
+
+  <div class="dos"></div>
+
+  <div class="face">
+    <img [src]="carte.elemTheme.image" [alt]="carte.elemTheme.nom">
+    <p>{{ carte.elemTheme.nom }}</p>
+  </div>
+
+</div>

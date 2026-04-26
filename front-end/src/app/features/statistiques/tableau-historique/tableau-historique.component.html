@@ -1,0 +1,77 @@
+<div class="stat-card">
+    <span class="stat-label">Historique des configurations</span>
+    <div class="table-responsive">
+        <table class="stats-table config-table">
+            <thead>
+                <tr>
+                    <th>Partie</th>
+                    <th>Format Jeu</th>
+                    <th>Plateau</th>
+                    <th>Police</th>
+                    <th>Aides Mémo (Type / Fréq.)</th>
+                    <th>Aides Assoc. (Type)</th>
+                    <th>Temps Ret. (en sec.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let partie of historiqueParties">
+                    <td>{{ partie.id }}</td>
+                    <td>{{ partie.configuration.formatJeu }}</td>
+                    <td>{{ partie.configuration.plateau }}</td>
+                    <td>{{ partie.configuration.taillePolice }}</td>
+                    <td>{{ partie.configuration.aideMemo }}</td>
+                    <td>{{ partie.configuration.aideAssoc }}</td>
+                    <td>{{ partie.configuration.tempsRetenue }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="stat-card">
+    <span class="stat-label">Détails des dernières parties</span>
+    <div class="table-responsive">
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Partie</th>
+                    <th>Date</th>
+                    <th>Taux de bonnes réponses Memory</th>
+                    <th>Durée</th>
+                    <th>Indices utilisées</th>
+                    <th>Erreur ordre</th>
+                    <th>Erreur incohérence</th>
+                    <th>Thème de la partie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let partie of historiqueParties">
+                    <td>{{ partie.id }}</td>
+                    <td>{{ partie.date }}</td>
+                    <td><strong>{{ partie.resultats.tauxReussiteMemory }}%</strong></td>
+                    <td>{{ partie.resultats.duree }}</td>
+                    <td>{{ partie.resultats.indicesUtilises }}</td>
+                    <td>{{ partie.resultats.erreurOrdre }}%</td>
+                    <td>{{ partie.resultats.erreurIncoherence }}%</td>
+                    <td>{{ partie.theme }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="stat-card">
+    <span class="stat-label">Statistiques globales</span>
+    <div class="chart-container">
+        <div class="usage-stats">
+            <div class="usage-item">
+                <span class="usage-label">Taux de parties terminées :</span>
+                <span class="usage-value">85%</span>
+            </div>
+            <div class="usage-item">
+                <span class="usage-label">Taux de réussite moyen :</span>
+                <span class="usage-value">42,2%</span>
+            </div>
+        </div>
+    </div>
+</div>

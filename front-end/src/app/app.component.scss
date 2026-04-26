@@ -1,0 +1,17 @@
+.btn-retour {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  
+  &:hover {
+    opacity: 1;
+  }
+}

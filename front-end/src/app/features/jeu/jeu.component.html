@@ -1,0 +1,71 @@
+<button class="btn-retour" (click)="retour()">← Retour</button>
+<div class="jeu-container">
+
+  @if (phase === 'role') {
+    <div id="choixRole" class="fade-in">
+      <div class="role-card">
+        <div class="role-emoji">🧓</div>
+        <h2>Qui joue aujourd'hui ?</h2>
+        <p>Choisissez votre profil pour adapter les aides durant la partie.</p>
+
+        <div class="role-boutons">
+          <button class="role-btn btn-accueilli" (click)="choisirRole('accueilli')">
+            <span class="role-icon">🧓</span>
+            <div class="role-text">
+              <span class="role-label">Je joue tout seul</span>
+              <span class="role-desc">Aides visuelles automatiques et messages simples.</span>
+            </div>
+          </button>
+
+          <button class="role-btn btn-aidant" (click)="choisirRole('aidant')">
+            <span class="role-icon">🤝</span>
+            <div class="role-text">
+              <span class="role-label">Je joue avec mon aidant</span>
+              <span class="role-desc">Plus de détails sur les erreurs et suivi technique.</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (phase === 'accueil') {
+    <div id="accueil" class="fade-in">
+      <div class="welcome-box">
+        <h1>Prêt pour une petite séance ?</h1>
+        <p>Prenez votre temps, faites de votre mieux !</p>
+        <button class="btn-start" (click)="commencer()">
+          <span class="icon">▶</span> Commencer le jeu
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (phase === 'memory') {
+    <div class="game-wrapper fade-in">
+      <div class="game-header">
+        <span class="badge">Étape 1 / 2</span>
+        <h2>Le jeu des paires</h2>
+      </div>
+      <app-memory></app-memory>
+    </div>
+  }
+
+  @if (phase === 'association') {
+    <div class="game-wrapper fade-in">
+      <div class="game-header">
+        <span class="badge">Étape 2 / 2</span>
+        <h2>Remettre dans l'ordre</h2>
+      </div>
+      <app-association></app-association>
+    </div>
+  }
+
+  @if (phase === 'fin') {
+    <div id="fin" class="fade-in">
+      <app-fin-jeu
+        (rejouer)="rejouer()">
+      </app-fin-jeu>
+    </div>
+  }
+</div>

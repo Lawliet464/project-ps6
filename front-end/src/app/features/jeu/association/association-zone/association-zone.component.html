@@ -1,0 +1,22 @@
+<div class="cellule"
+     [draggable]="cell.value !== null"
+     (dragstart)="cell.value && dragStartCell.emit(index)"
+     [class.remplie]="cell.value"
+     [class.correcte]="cell.state === 'correcte'"
+     [class.incorrecte-ordre]="cell.state === 'incorrecte-ordre'"
+     [class.incorrecte-theme]="cell.state === 'incorrecte-theme'"
+     [class.survol]="survol"
+     [class.indice-surbrillance]="cell.highlight"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave()"
+     (drop)="onDrop($event)"
+     (click)="clickCell.emit(index)">
+
+  <div class="cellule-num">{{ index + 1 }}</div>
+  <div class="cellule-contenu">
+    @if (cell.value) {
+      <img [src]="cell.value.elemTheme.image" [alt]="cell.value.elemTheme.nom">
+      <p>{{ cell.value.elemTheme.nom }}</p>
+    }
+  </div>
+</div>

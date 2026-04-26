@@ -1,0 +1,10 @@
+<div class="plateau" [ngStyle]="gridMemory">
+  @for (carte of cartes; track $index) {
+    <app-memory-card 
+      [carte]="carte" 
+      [bloquee]="estBloque"
+      (click)="clickCarte(carte)">
+    </app-memory-card>
+  }
+</div>
+<button class="btn-aide" [disabled]="estBloque" (click)="utiliserAide()">Aide</button>
