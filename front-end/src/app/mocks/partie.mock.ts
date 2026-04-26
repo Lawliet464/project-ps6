@@ -12,7 +12,8 @@ export const MOCK_PARTIES: Partie[] = [
             taillePolice: '24px',
             aideMemo: 'Surbrillance / 3 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '5s'
+            tempsRetenue: 5, 
+            frequenceAide: 3
         },
         resultats: {
             tauxReussiteMemory: 52,
@@ -33,7 +34,8 @@ export const MOCK_PARTIES: Partie[] = [
             taillePolice: '20px',
             aideMemo: 'Surbrillance / 5 err.',
             aideAssoc: 'Réordonner les cartes',
-            tempsRetenue: '3s'
+            tempsRetenue: 3, 
+            frequenceAide: 8
         },
         resultats: {
             tauxReussiteMemory: 32,
@@ -54,7 +56,8 @@ export const MOCK_PARTIES: Partie[] = [
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 8 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '1s'
+            tempsRetenue: 1, 
+            frequenceAide: 6
         },
         resultats: {
             tauxReussiteMemory: 45,
@@ -75,7 +78,8 @@ export const MOCK_PARTIES: Partie[] = [
             taillePolice: '16px',
             aideMemo: 'Cartes visibles / 8 err.',
             aideAssoc: 'Réordonner les cartes',
-            tempsRetenue: '2s'
+            tempsRetenue: 2, 
+            frequenceAide: 6 
         },
         resultats: {
             tauxReussiteMemory: 40,
@@ -94,9 +98,10 @@ export const MOCK_PARTIES: Partie[] = [
             formatPartie: 'Memory',
             plateau: '4 × 2',
             taillePolice: '24px',
-            aideMemo: 'Aucune',
-            aideAssoc: 'Aucune',
-            tempsRetenue: '4s'
+            aideMemo: 'Surbrillance / 5 err.',
+            aideAssoc: 'Surbrillance case',
+            tempsRetenue: 4, 
+            frequenceAide: 3
         },
         resultats: {
             tauxReussiteMemory: 36,
@@ -117,7 +122,8 @@ export const MOCK_PARTIES: Partie[] = [
             taillePolice: '16px',
             aideMemo: 'Surbrillance / 5 err.',
             aideAssoc: 'Surbrillance case',
-            tempsRetenue: '3s'
+            tempsRetenue: 3, 
+            frequenceAide: 4
         },
         resultats: {
             tauxReussiteMemory: 42,

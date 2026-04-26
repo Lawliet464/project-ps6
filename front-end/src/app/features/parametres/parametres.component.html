@@ -4,14 +4,14 @@
   <app-param-level
     label="Paramètres par défaut selon le niveau de difficulté"
     description="Les différents paramètres seront automatiquement adaptés"
-    [value]="settings.niveau"
-    (valueChange)="updateSetting('niveau', $event)">
+    (valueChange)="onNiveauChange($event)">
   </app-param-level>
 
   <app-param-qcm 
     label="Format du jeu"
-    [options]="['Images avec du texte', 'Images avec du son']"
-    [checked]="['Images avec du texte']">
+    [options]="['Images uniquement', 'Images + Texte', 'Texte uniquement']"
+    [checked]="[configLocale.formatJeu]"
+    (selectionChange)="updateSetting('formatJeu', $event[0])">
   </app-param-qcm>
 
   <app-param-slider 
@@ -23,53 +23,42 @@
 
   <app-param-slider 
     label="Taille de la police"
-    [min]="16" [max]="24" [value]="settings.fontSize" [step]="1" unit="px"
+    [min]="16" [max]="32" [value]="settings.fontSize" [step]="1" unit="px"
     iconMin="A" iconMax="A"
-    (valueChange)="updateSetting('fontSize', $event)">
+    (valueChange)="updateSetting('taillePolice', $event)">
   </app-param-slider>
-
-  <app-param-qcm 
-    label="Format d'une partie"
-    [options]="['Memory', 'Association']"
-    [checked]="['Memory', 'Association']">
-  </app-param-qcm>
-
-  <app-param-qcm 
-    label="Thèmes du jeu"
-    [options]="['Habillement selon la météo', 'Saisons', 'Brossage de dents', 'Se laver', 'Repas', 'Prise de médicament', 'Objets du quotidien']"
-    [checked]="settings.themes">
-  </app-param-qcm>
 
   <app-param-plateau 
     label="Taille du plateau"
-    [value]="settings.plateau"
-    (valueChange)="updateSetting('plateau', $event)">
+    [(value)]="configLocale.plateau">
   </app-param-plateau>
 
   <app-param-counter 
     label="Temps de retournement"
     description="En cas d'erreur les cartes restent face visible {value}s avant de se retourner."
-    [min]="1" [max]="5" [value]="settings.tempsRetournement"
-    (valueChange)="updateSetting('tempsRetournement', $event)">
+    [min]="1" [max]="5" [value]="configLocale.tempsRetenue"
+    (valueChange)="updateSetting('tempsRetenue', $event)">
   </app-param-counter>
 
   <app-param-counter 
     label="Fréquence d'aide"
     description="Recevoir une aide toutes les {value} erreurs."
-    [min]="3" [max]="15" [value]="settings.frequenceAide"
+    [min]="3" [max]="15" [value]="configLocale.frequenceAide"
     (valueChange)="updateSetting('frequenceAide', $event)">
   </app-param-counter>
 
   <app-param-qcm 
     label="Type d'aide pour le memory"
-    [options]="['Garder quelques cartes face visible', 'Retourner brièvement l\'intégralité du jeu', 'Mise en surbrillance d\'une paire']"
-    [checked]="['Mise en surbrillance d\'une paire']">
+    [options]="['Surbrillance paire', 'Partiel visible', 'Flash intégral']"
+    [checked]="[configLocale.aideMemo]"
+    (selectionChange)="updateSetting('aideMemo', $event[0])">
   </app-param-qcm>
 
   <app-param-qcm 
     label="Type d'aide pour la partie association"
-    [options]="['Mise en surbrillance d\'une carte du thème et de sa case associée', 'Réordonner les cartes du thème mal placées']"
-    [checked]="['Mise en surbrillance d\'une carte du thème et de sa case associée']">
+    [options]="['Surbrillance couple', 'Réordonner']"
+    [checked]="[configLocale.aideAssoc]"
+    (selectionChange)="updateSetting('aideAssoc', $event[0])">
   </app-param-qcm>
 
   <button class="btn-save" (click)="sauvegarder()">

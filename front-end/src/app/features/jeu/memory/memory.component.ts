@@ -32,14 +32,40 @@ export class MemoryComponent implements OnInit {
   }
 
   init(): void {
-    // On double les cartes pour faire des paires et on mélange
-    this.cartes = [...this.baseCartes, ...this.baseCartes]
+    // 1. On détermine combien de paires on doit prendre selon le plateau (ex: 2x2 = 2 paires)
+    const nbPaires = this.nbPairesAMontrer; 
+
+    // 2. On mélange la base de données et on ne garde que le nombre de paires requis
+    const selection = [...this.baseCartes]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, nbPaires);
+
+    // 3. On double la sélection pour créer les paires et on mélange le tout
+    this.cartes = [...selection, ...selection]
       .sort(() => Math.random() - 0.5)
       .map(c => ({ ...c, retournee: false, surbrillance: false }));
     
     this.premiere = null;
     this.deuxieme = null;
     this.estBloque = false;
+  }
+
+  // 1. Calcul du nombre de paires nécessaire
+  get nbPairesAMontrer(): number {
+    const [cols, rows] = this.game.configActive.plateau.split('x').map(Number);
+    return (cols * rows) / 2;
+  }
+
+  // 2. Style dynamique pour la grille de cartes
+  get gridMemory() {
+    const [cols, rows] = this.game.configActive.plateau.split('x');
+    return {
+      'display': 'grid',
+      'grid-template-columns': `repeat(${cols}, 1fr)`, 
+      'gap': '15px',
+      'margin': '20px auto',
+      'max-width': '600px'
+    };
   }
 
   clickCarte(carte: Carte): void {
@@ -85,7 +111,7 @@ export class MemoryComponent implements OnInit {
       this.deuxieme = null;
       this.estBloque = false;
       this.cdr.detectChanges();
-    }, this.game.tempsRetournement); 
+    }, this.game.configActive.tempsRetenue * 1000); 
   }
 
   surbrillanceUnePaire(): void {

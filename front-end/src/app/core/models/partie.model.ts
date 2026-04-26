@@ -6,10 +6,11 @@ export interface ConfigurationPartie {
     taillePolice: string;
     aideMemo: string;
     aideAssoc: string;
-    tempsRetenue: string;
+    tempsRetenue: number;
+    frequenceAide: number;
 }
 
-// Interface définissant les résultats obtenus par le patient
+// Interface définissant les résultats obtenus par l'accueilli'
 export interface ResultatPartie {
     tauxReussiteMemory: number; 
     duree: string;              
