@@ -39,6 +39,49 @@ export class JeuService {
     this.reset();
   }
 
+  configurerDepuisConfig(): void {
+    const config = this.configActive;
+    const theme = this.themeChoisi ?? THEMES[0];
+
+    this.configurerJeu(
+      config.frequenceAide,
+      config.tempsRetenue,
+      this.convertirPlateau(config.plateau),
+      theme,
+      this.convertirAideMemo(config.aideMemo),
+      this.convertirAideAssoc(config.aideAssoc)
+    );
+  }
+
+  private convertirAideMemo(aide: string): number {
+    const map: Record<string, number> = {
+      'Surbrillance paire': 3,
+      'Partiel visible': 1,
+      'Flash intégral': 2
+    };
+    return map[aide] ?? 1;
+  }
+
+  private convertirAideAssoc(aide: string): number {
+    const map: Record<string, number> = {
+      'Surbrillance couple': 1,
+      'Réordonner': 2
+    };
+    return map[aide] ?? 1;
+  }
+
+  private convertirPlateau(plateau: string): number {
+    const parts = plateau.replace(' ', '').split('x');
+    const cols = Number(parts[0]);
+    const rows = Number(parts[1]);
+    return (cols * rows) / 2;
+  }
+
+  setTheme(theme: Theme): void {
+    this.themeChoisi = theme;
+  }
+
+
   // Pour modifier un seul paramètre
   setTempsRetenue(secondes: number): void {
     this.configActive.tempsRetenue = secondes;

@@ -4,6 +4,7 @@ import { JeuService } from '../../core/services/jeu-communication.service';
 import { AuthService, Patient } from '../../core/services/auth.service';
 import { ConfigurationPartie } from '../../core/models/partie.model';
 import { CONFIG_PAR_DEFAUT } from '../../core/constants/game-config.constants';
+import { THEMES } from '../../mocks/themes.mock';
 
 @Component({
   selector: 'app-parametres',
@@ -21,7 +22,7 @@ export class ParametresComponent implements OnInit {
     fontSize: 16,
     tempsRetournement: 1,
     frequenceAide: 8,
-    themes: ['Saisons', 'Habillement selon la météo']
+    themes: ['Faire les courses', 'S\'habiller selon la météo']
   };
 
   constructor(
@@ -55,6 +56,9 @@ export class ParametresComponent implements OnInit {
 
   sauvegarder(): void {
     this.jeuService.configActive = { ...this.configLocale };
+    const nomTheme = this.settings.themes[Math.floor(Math.random() * this.settings.themes.length)];
+    const theme = THEMES.find(t => t.nom === nomTheme) ?? THEMES[0];
+    this.jeuService.setTheme(theme);
   }
 
   updateSetting(key: string, value: any): void {

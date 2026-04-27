@@ -12,7 +12,7 @@ export const THEMES: Theme[] = [
   },
   {
     id: 'habillage',
-    nom: 's\'habiller selon la météo',
+    nom: 'S\'habiller selon la météo',
     elementsAssoc: [
       { id: 1, nom: 'Regarder la météo',     image: 'assets/images/pluie.png',     themeId: 'habillage' },
       { id: 2, nom: 'Choisir ses vêtements', image: 'assets/images/vetement_pluie.png', themeId: 'habillage' },

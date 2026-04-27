@@ -1,0 +1,103 @@
+<header>
+  <div class="logo">Memo<span>Link</span></div>
+</header>
+
+<div class="screen">
+  <div class="card">
+    <h1>Créer un thème</h1>
+    <p class="sous-titre">Créez vos propres éléments et définissez leurs associations.</p>
+
+    <div class="form-group">
+      <label>Nom du thème</label>
+      <input
+        type="text"
+        [value]="nomTheme"
+        (input)="nomTheme = $any($event.target).value"
+        placeholder="Ex : Famille, Vacances...">
+    </div>
+
+    <div class="elements-list">
+      @for (el of elements; track el.id) {
+        <div class="element">
+
+          @if (el.valide) {
+            <div class="carte-preview">
+              <div class="card-buttons">
+                <button class="btn-secondary" (click)="modifierElement(el.id)">Modifier</button>
+                <button class="btn-remove" (click)="supprimerElement(el.id)">Supprimer</button>
+              </div>
+              <img [src]="el.image" class="preview-img">
+              <div class="mot">{{ el.mot }}</div>
+
+              @if (el.audio) {
+                <audio controls [src]="el.audio"></audio>
+              }
+
+              <div class="ordre-badge">#{{ el.ordre }}</div>
+            </div>
+
+          } @else {
+
+            <label>Description (3 mots max)</label>
+            <input
+              type="text"
+              [value]="el.mot"
+              (input)="el.mot = $any($event.target).value"
+              placeholder="Ex : Mettre du dentifrice">
+
+            <label>Image</label>
+            <input type="file" accept="image/*" (change)="onImageChange(el.id, $event)">
+            @if (el.image) {
+              <img [src]="el.image" class="preview-img">
+            }
+
+            <label>Audio (optionnel)</label>
+            <input type="file" accept="audio/*" (change)="onAudioChange(el.id, $event)">
+            @if (el.audio) {
+              <audio controls [src]="el.audio"></audio>
+            }
+
+            <label>Ordre</label>
+            <input
+              type="number"
+              min="1"
+              [value]="el.ordre"
+              (input)="el.ordre = +$any($event.target).value">
+
+            @if (el.messageErreur) {
+              <div class="msg-erreur visible">{{ el.messageErreur }}</div>
+            }
+
+            <button class="btn-primary" (click)="validerElement(el.id)">
+              Valider cet élément
+            </button>
+          }
+
+        </div>
+      }
+    </div>
+
+    <button class="btn-secondary" (click)="ajouterElement()">+ Ajouter un élément</button>
+
+    <div class="explication">
+      <h3>Comment créer un thème ?</h3>
+      <p>Créez au moins 2 éléments pour pouvoir faire une association fonctionnelle.</p>
+      <p>Chaque élément représente une carte.</p>
+      <p>Indiquez sa position dans l'association en remplissant la zone "Ordre".</p>
+      <p>Les ordres doivent être consécutifs de 1 à N.</p>
+    </div>
+
+    @if (message) {
+      <div
+        class="visible"
+        [class.msg-erreur]="messageType === 'erreur'"
+        [class.msg-success]="messageType === 'success'">
+        {{ message }}
+      </div>
+    }
+
+    <button class="btn-primary" (click)="sauvegarderTheme()">
+      Enregistrer le thème
+    </button>
+  </div>
+</div>

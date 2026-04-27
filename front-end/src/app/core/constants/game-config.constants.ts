@@ -1,4 +1,5 @@
 import { ConfigurationPartie } from '../models/partie.model';
+import { THEMES } from '../../mocks/themes.mock';
 
 export const CONFIG_PAR_DEFAUT: Record<string, ConfigurationPartie> = {
     'facile': {
@@ -7,25 +8,25 @@ export const CONFIG_PAR_DEFAUT: Record<string, ConfigurationPartie> = {
         taillePolice: 'Grande',
         aideMemo: 'Surbrillance paire',
         aideAssoc: 'Surbrillance couple',
-        tempsRetenue: 4, 
-        frequenceAide: 3
+        tempsRetenue: 4,
+        frequenceAide: 3,
     },
     'moyen': {
         formatJeu: 'Association + Memory',
-        plateau: '3x2', 
+        plateau: '3x2',
         taillePolice: 'Moyenne',
         aideMemo: 'Partiel visible',
         aideAssoc: 'Réordonner',
         tempsRetenue: 2,
-        frequenceAide: 6
+        frequenceAide: 6,
     },
     'difficile': {
         formatJeu: 'Association + Memory',
-        plateau: '4x3', 
+        plateau: '4x3',
         taillePolice: 'Petite',
         aideMemo: 'Flash intégral',
         aideAssoc: 'Réordonner',
-        tempsRetenue: 1, 
-        frequenceAide: 10
+        tempsRetenue: 1,
+        frequenceAide: 10,
     }
 };

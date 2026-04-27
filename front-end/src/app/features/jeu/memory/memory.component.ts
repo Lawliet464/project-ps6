@@ -160,8 +160,9 @@ export class MemoryComponent implements OnInit {
   }
 
   retournerToutesCartes(): void {
-    const cachees: Carte[] = [];
+    const premiereConservee = this.premiere;
 
+    const cachees: Carte[] = [];
     for (const c of this.cartes) {
       if (!c.retournee) {
         c.retournee = true;
@@ -178,6 +179,7 @@ export class MemoryComponent implements OnInit {
         c.retournee = false;
       }
       this.estBloque = false;
+      this.premiere = premiereConservee;
     }, this.game.temps);
   }
 
