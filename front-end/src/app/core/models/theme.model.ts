@@ -9,6 +9,5 @@ export interface ElemTheme {
 export interface Theme {
   id: string;
   nom: string;
-  type: "texte+image" | "texte+image+audio"
   elementsAssoc: ElemTheme[];
 }

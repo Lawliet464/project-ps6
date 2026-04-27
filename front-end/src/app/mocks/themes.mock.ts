@@ -4,7 +4,6 @@ export const THEMES: Theme[] = [
   {
     id: 'Brossage',
     nom: 'Se brosser les dents',
-    type: 'texte+image',
     elementsAssoc: [
       { id: 1, nom: 'Mettre du dentifrice', image: 'assets/images/dentifrice_brosse.png', themeId: 'Brossage' },
       { id: 2, nom: 'Brosser les dents',    image: 'assets/images/brosser_dents.png',   themeId: 'Brossage' },
@@ -14,7 +13,6 @@ export const THEMES: Theme[] = [
   {
     id: 'habillage',
     nom: 's\'habiller selon la météo',
-    type: 'texte+image',
     elementsAssoc: [
       { id: 1, nom: 'Regarder la météo',     image: 'assets/images/pluie.png',     themeId: 'habillage' },
       { id: 2, nom: 'Choisir ses vêtements', image: 'assets/images/vetement_pluie.png', themeId: 'habillage' },
@@ -24,7 +22,6 @@ export const THEMES: Theme[] = [
   {
     id: 'courses',
     nom: 'Faire les courses',
-    type: 'texte+image',
     elementsAssoc: [
       { id: 1, nom: 'faire une liste', image: 'assets/images/liste.png', themeId: 'courses' },
       { id: 2, nom: 'remplir le caddie',   image: 'assets/images/caddie.png',    themeId: 'courses' },
@@ -34,7 +31,6 @@ export const THEMES: Theme[] = [
   {
     id: 'cuisiner',
     nom: 'Faire la cuisine et la vaisselle',
-    type: 'texte+image',
     elementsAssoc: [
       { id: 1, nom: 'cuisiner', image: 'assets/images/cuisiner.png', themeId: 'cuisiner' },
       { id: 2, nom: 'laver la vaisselle',   image: 'assets/images/laver_vaisselle.png',    themeId: 'cuisiner' },
@@ -44,7 +40,6 @@ export const THEMES: Theme[] = [
   {
     id: 'thé',
     nom: 'Faire du thé',
-    type: 'texte+image',
     elementsAssoc: [
       { id: 1, nom: 'faire chauffer l\'eau', image: 'assets/images/bouilloire.png', themeId: 'thé' },
       { id: 2, nom: 'mettre le sachet',   image: 'assets/images/sachet_tasse.png',    themeId: 'thé' },

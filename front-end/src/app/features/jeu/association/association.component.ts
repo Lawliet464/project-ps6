@@ -15,8 +15,7 @@ export class AssociationComponent implements OnInit {
   selection: ElemAssoc | null = null;
   tentativesParElem: Map<string, number> = new Map();
 
-  message: string = '';
-  messageType: 'info' | 'erreur' | 'ordre' | 'theme' | 'mixte' = 'info';
+  messages: string[] = [];
 
   constructor(public game: JeuService) {}
 
@@ -42,8 +41,7 @@ export class AssociationComponent implements OnInit {
       });
     }
 
-    this.message = "Glissez les images dans l'ordre de l'action.";
-    this.messageType = 'info';
+    this.messages = ["Glissez les images dans l'ordre de l'action."];
   }
 
   private estHorsTheme(elem: ElemAssoc): boolean {
@@ -157,24 +155,6 @@ export class AssociationComponent implements OnInit {
     return true;
   }
 
-  verifier(): void {
-    let erreurs = 0;
-
-    for (let i = 0; i < this.cellules.length; i++) {
-      const cell = this.cellules[i];
-
-      if (this.estCorrect(cell, i)) {
-        cell.state = 'correcte';
-      } else if (this.estMauvaisTheme(cell)) {
-        erreurs += this.gererErreurTheme(cell, i);
-      } else {
-        erreurs += this.gererErreurOrdre(i);
-      }
-    }
-
-    this.gererResultat(erreurs);
-  }
-
   private estCorrect(cell: Cellule, index: number): boolean {
     const ordreCible = index + 1;
 
@@ -192,34 +172,58 @@ export class AssociationComponent implements OnInit {
     );
   }
 
-  private gererErreurTheme(cell: Cellule, index: number): number {
-    cell.state = 'incorrecte-theme';
+  verifier(): void {
+    const nomsTheme: string[] = [];
+    const nomsOrdre: string[] = [];
 
-    if (cell.value) {
-      this.incrementerTentative(cell.value);
+    for (let i = 0; i < this.cellules.length; i++) {
+      const cell = this.cellules[i];
+
+      if (this.estCorrect(cell, i)) {
+        cell.state = 'correcte';
+      } else if (this.estMauvaisTheme(cell)) {
+        const nom = this.gererErreurTheme(cell, i);
+        nomsTheme.push(nom);
+      } else {
+        const nom = this.gererErreurOrdre(cell, i);
+        nomsOrdre.push(nom);
+      }
     }
 
-    setTimeout(() => this.retirer(index), 1500);
-    return 1;
+    this.gererResultat(nomsTheme, nomsOrdre);
   }
 
-  private gererErreurOrdre(index: number): number {
-    this.cellules[index].state = 'incorrecte-ordre';
-    setTimeout(() => this.retirer(index), 1500);
-    return 1;
-  }
+  private gererResultat(nomsTheme: string[], nomsOrdre: string[]): void {
+    this.messages = [];
 
-  private gererResultat(erreurs: number): void {
-    if (erreurs === 0) {
-      this.message = "Bravo ! C'est le bon ordre.";
-      this.messageType = 'info';
+    if (nomsTheme.length === 0 && nomsOrdre.length === 0) {
+      this.messages.push('Parfait !');
       setTimeout(() => this.game.terminerEtape(), 2000);
     } else {
-      this.message = "Ce n'est pas tout à fait ça, réessayez !";
-      this.messageType = 'erreur';
+      for (const nom of nomsTheme) {
+        this.messages.push(nom + ' n\'appartient pas à cette association.');
+      }
+      for (const nom of nomsOrdre) {
+        this.messages.push(nom + ' est au bon thème, mais pas à la bonne place.');
+      }
       const aide = this.game.incrementErreurAssociation();
       if (aide) this.utiliserAide();
     }
+  }
+
+  private gererErreurTheme(cell: Cellule, index: number): string {
+    cell.state = 'incorrecte-theme';
+    const nom = cell.value?.elemTheme.nom ?? '';
+    if (cell.value) this.incrementerTentative(cell.value);
+    setTimeout(() => this.retirer(index), 1500);
+    return nom;
+  }
+
+  private gererErreurOrdre(cell: Cellule, index: number): string {
+    cell.state = 'incorrecte-ordre';
+    const nom = cell.value?.elemTheme.nom ?? '';
+    setTimeout(() => this.retirer(index), 1500);
+    return nom;
   }
 
   private incrementerTentative(elem: ElemAssoc): void {
@@ -295,42 +299,23 @@ export class AssociationComponent implements OnInit {
   private reorganiserOrdre(): void {
     if (!this.game.themeChoisi) return;
 
-    const temp: (ElemAssoc | null)[] = new Array(this.cellules.length).fill(null);
-
+    const elemsEnCellule: ElemAssoc[] = [];
     for (const cell of this.cellules) {
-      if (!cell.value) continue;
-
-      const id = cell.value.elemTheme.id - 1;
-
-      if (id >= 0 && id < temp.length) {
-        temp[id] = cell.value;
+      if (cell.value) {
+        elemsEnCellule.push(cell.value);
+        cell.value = null;
+        cell.state = '';
       }
     }
 
-    for (let i = 0; i < this.cellules.length; i++) {
-      const current = this.cellules[i].value;
-      const correct = temp[i];
-
-      if (correct) {
-        this.cellules[i].value = correct;
-
-        if (current && current !== correct) {
-          let exists = false;
-
-          for (const e of this.elementsDispo) {
-            if (
-              e.elemTheme.id === current.elemTheme.id &&
-              e.elemTheme.themeId === current.elemTheme.themeId
-            ) {
-              exists = true;
-              break;
-            }
-          }
-
-          if (!exists) {
-            this.ajouterDansDispo(current);
-          }
+    for (const elem of elemsEnCellule) {
+      if (elem.elemTheme.themeId === this.game.themeChoisi.id) {
+        const index = elem.elemTheme.id - 1;
+        if (index >= 0 && index < this.cellules.length) {
+          this.cellules[index].value = elem;
         }
+      } else {
+        this.ajouterDansDispo(elem);
       }
     }
   }

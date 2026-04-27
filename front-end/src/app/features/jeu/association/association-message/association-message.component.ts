@@ -5,8 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './association-message.component.html'
 })
 export class AssociationMessageComponent implements OnInit {
-  @Input() text: string = '';
-  @Input() type: 'info' | 'erreur' | 'ordre' | 'theme' | 'mixte' = 'info';
+  @Input() messages: string[] = [];
 
   constructor() { }
 
