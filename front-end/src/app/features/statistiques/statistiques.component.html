@@ -1,20 +1,39 @@
 <main>
-    <h1>Vos Statistiques</h1>
-    
-    <div class="accueilli-selector-container">
-        <div class="selector-group">
-            <label for="accueilli-select">Dossier accueilli :</label>
-            <select id="accueilli-select" class="accueilli-select" (change)="changerAccueilli($any($event.target).value)">
-                <option *ngFor="let personne of listeAccueillis" [value]="personne.id">
-                    {{ personne.nom }}
-                </option>
-            </select>
+  <button class="btn-retour" (click)="retour()">← Retour</button>
+  <h1>Statistiques</h1>
+
+  <ng-container *ngIf="patientActif; else aucunPatient">
+
+    <div class="patient-header">
+      <div class="patient-avatar">{{ patientActif.prenom[0] }}</div>
+      <div class="patient-info">
+        <h2>{{ patientActif.prenom }}</h2>
+        <span class="badge-niveau" [style.background]="niveauColor(patientActif.niveau)">
+          {{ niveauLabel(patientActif.niveau) }}
+        </span>
+      </div>
+      <div class="patient-kpi">
+        <div class="kpi">
+          <span class="kpi-value">{{ historiqueParties.length }}</span>
+          <span class="kpi-label">parties</span>
         </div>
+        <div class="kpi">
+          <span class="kpi-value">{{ tauxMoyen }}%</span>
+          <span class="kpi-label">taux moyen</span>
+        </div>
+        <div class="kpi">
+          <span class="kpi-value">{{ totalIndices }}</span>
+          <span class="kpi-label">indices utilisés</span>
+        </div>
+      </div>
     </div>
 
-    <ng-container *ngIf="accueilliActuel">
-        <app-profil-accueilli [accueilli]="accueilliActuel"></app-profil-accueilli>
-        <app-graphique-courbe></app-graphique-courbe>
-        <app-tableau-historique></app-tableau-historique>
-    </ng-container>
+    <app-graphique-courbe [parties]="historiqueParties"></app-graphique-courbe>
+    <app-tableau-historique [parties]="historiqueParties"></app-tableau-historique>
+
+  </ng-container>
+
+  <ng-template #aucunPatient>
+    <p class="no-patient">Aucun accueilli sélectionné. Retournez au tableau de bord et choisissez un profil.</p>
+  </ng-template>
 </main>

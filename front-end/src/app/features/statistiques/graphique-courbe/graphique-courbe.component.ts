@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Partie } from '../../../core/models/partie.model';
 
 @Component({
   selector: 'app-graphique-courbe',
   templateUrl: './graphique-courbe.component.html',
-  styleUrls: ['./graphique-courbe.component.scss'] 
+  styleUrls: ['./graphique-courbe.component.scss']
 })
-export class GraphiqueCourbeComponent implements OnInit {
+export class GraphiqueCourbeComponent implements OnChanges {
 
-  constructor() { }
+  @Input() parties: Partie[] = [];
+  public pointsGraphique: { label: string; taux: number }[] = [];
 
-  ngOnInit(): void {}
-
-  updateChart(theme: string): void {
-    console.log("Thème sélectionné :", theme);
-  }
-
-  updatePlateau(taille: string): void {
-    console.log("Plateau sélectionné :", taille);
+  ngOnChanges(): void {
+    this.pointsGraphique = [...this.parties]
+      .reverse()
+      .map(p => ({ label: p.theme, taux: p.resultats.tauxReussiteMemory }));
   }
 }

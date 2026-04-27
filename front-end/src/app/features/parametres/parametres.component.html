@@ -1,5 +1,21 @@
 <main>
+  <button class="btn-retour" (click)="retour()">← Retour</button>
   <h1>Paramètres</h1>
+
+  <ng-container *ngIf="patientActif; else aucunPatient">
+    <div class="patient-header">
+      <div class="patient-avatar">{{ patientActif.prenom[0] }}</div>
+      <div class="patient-info">
+        <h2>{{ patientActif.prenom }}</h2>
+        <span class="badge-niveau" [style.background]="niveauColor(patientActif.niveau)">
+          {{ niveauLabel(patientActif.niveau) }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #aucunPatient>
+    <p class="no-patient">Aucun accueilli sélectionné. Retournez au tableau de bord et choisissez un profil.</p>
+  </ng-template>
 
   <app-param-level
     label="Paramètres par défaut selon le niveau de difficulté"
@@ -7,53 +23,53 @@
     (valueChange)="onNiveauChange($event)">
   </app-param-level>
 
-  <app-param-qcm 
+  <app-param-qcm
     label="Format du jeu"
     [options]="['Memory', 'Association']"
     [checked]="[configLocale.formatJeu]"
     (selectionChange)="updateSetting('formatJeu', $event[0])">
   </app-param-qcm>
 
-  <app-param-qcm 
+  <app-param-qcm
     label="Thèmes du jeu"
     [options]="['Habillement selon la météo', 'Faire du thé', 'Brossage de dents', 'Faire la cuisine et la vaisselle', 'Faire les courses']"
     [checked]="settings.themes">
   </app-param-qcm>
 
-  <app-param-slider 
+  <app-param-slider
     label="Taille de la police"
     [min]="16" [max]="32" [value]="settings.fontSize" [step]="1" unit="px"
     iconMin="A" iconMax="A"
     (valueChange)="updateSetting('taillePolice', $event)">
   </app-param-slider>
 
-  <app-param-plateau 
+  <app-param-plateau
     label="Taille du plateau"
     [(value)]="configLocale.plateau">
   </app-param-plateau>
 
-  <app-param-counter 
+  <app-param-counter
     label="Temps de retournement"
     description="En cas d'erreur les cartes restent face visible {value}s avant de se retourner."
     [min]="1" [max]="5" [value]="configLocale.tempsRetenue"
     (valueChange)="updateSetting('tempsRetenue', $event)">
   </app-param-counter>
 
-  <app-param-counter 
+  <app-param-counter
     label="Fréquence d'aide"
     description="Recevoir une aide toutes les {value} erreurs."
     [min]="3" [max]="15" [value]="configLocale.frequenceAide"
     (valueChange)="updateSetting('frequenceAide', $event)">
   </app-param-counter>
 
-  <app-param-qcm 
+  <app-param-qcm
     label="Type d'aide pour le memory"
     [options]="['Surbrillance paire', 'Partiel visible', 'Flash intégral']"
     [checked]="[configLocale.aideMemo]"
     (selectionChange)="updateSetting('aideMemo', $event[0])">
   </app-param-qcm>
 
-  <app-param-qcm 
+  <app-param-qcm
     label="Type d'aide pour la partie association"
     [options]="['Surbrillance couple', 'Réordonner']"
     [checked]="[configLocale.aideAssoc]"
